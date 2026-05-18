@@ -1,3 +1,575 @@
-h1 {
-    color: red;
+/* ==========================================================================
+   1. IMPORTACIÓN DE FUENTES INSTITUCIONALES (Google Fonts)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700;800&family=Open+Sans:wght@300;400;600;700&display=swap');
+
+/* ==========================================================================
+   2. VARIABLES DE DISEÑO CORPORATIVO (Paleta de Colores Oficial)
+   ========================================================================== */
+:root {
+    /* Colores de la empresa */
+    --verde-jade: #4B9F86;        /* Organic Emerald */
+    --gris-carbono: #4A4D50;     /* Clinical Graphite */
+    --gris-niebla: #6C757D;      /* Data Slate */
+    --blanco-puro: #FFFFFF;      /* Sanitary White */
+    
+    /* Variaciones funcionales basadas en la paleta */
+    --color-fondo-claro: #F8FAFC;
+    --color-borde-suave: #E2E8F0;
+    --sombra-tarjeta: 0 4px 15px rgba(74, 77, 80, 0.06);
+    --sombra-header: 0 2px 10px rgba(74, 77, 80, 0.04);
+
+    /* Reglas Tipográficas */
+    --fuente-principal: 'Montserrat', sans-serif;
+    --fuente-secundaria: 'Lato', sans-serif;
+    --fuente-lectura: 'Open Sans', sans-serif;
+}
+
+/* ==========================================================================
+   3. REGLAS GENERALES Y RESETEO
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--fuente-lectura);
+    font-weight: 300; /* Open Sans Light para párrafos extensos */
+    color: var(--gris-carbono);
+    background-color: var(--blanco-puro);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    display: block;
+    width: 100%;
+}
+
+a {
+    text-align: inherit;
+    text-decoration: none;
+    color: var(--verde-jade);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--gris-carbono);
+}
+
+button, .btn-cta {
+    font-family: var(--fuente-secundaria);
+    font-weight: 700;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   4. MENU BAR (Sticky Header)
+   ========================================================================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background-color: var(--blanco-puro);
+    box-shadow: var(--sombra-header);
+    border-bottom: 1px solid var(--color-borde-suave);
+    z-index: 1000;
+    display: table;
+    padding: 0 5%;
+}
+
+.logo-container, header nav {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* Aplicación de Montserrat Bold en Mayúsculas para el Logo */
+.logo-container h1 {
+    font-family: var(--fuente-principal);
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    color: var(--gris-carbono);
+    line-height: 1;
+}
+
+/* Simulación del descriptor "TECNOLOGIA & SALUD" con tracking +200 */
+.logo-container::after {
+    content: "TECNOLOGIA & SALUD";
+    display: block;
+    font-family: var(--fuente-secundaria);
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.2em; /* Tracking +200 aprox */
+    color: var(--gris-niebla);
+    margin-top: 4px;
+}
+
+header nav {
+    text-align: right;
+}
+
+header nav ul {
+    list-style: none;
+    display: inline-block;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+header nav ul li a {
+    font-family: var(--fuente-principal);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--gris-niebla);
+    letter-spacing: 0.5px;
+    padding-bottom: 5px;
+}
+
+header nav ul li a:hover, 
+header nav ul li.active a {
+    color: var(--verde-jade);
+    border-bottom: 2px solid var(--verde-jade);
+}
+
+body {
+    padding-top: 90px;
+}
+
+/* ==========================================================================
+   5. HERO BANNER PRINCIPAL
+   ========================================================================== */
+#hero-banner {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background-color: var(--color-fondo-claro);
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-borde-suave);
+}
+
+.banner-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, rgba(255,255,255,0.95) 45%, rgba(255,255,255,0.1) 100%), url('assets/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 50%;
+    margin-left: 8%;
+    padding-top: 120px;
+}
+
+/* Titulares con pesos altos para jerarquizar de manera inmediata */
+.banner-content h2 {
+    font-family: var(--fuente-principal);
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 1.25;
+    color: var(--gris-carbono);
+    margin-bottom: 30px;
+}
+
+.banner-content button {
+    background-color: var(--verde-jade);
+    color: var(--blanco-puro);
+    padding: 14px 35px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(75, 159, 134, 0.3);
+}
+
+.banner-content button:hover {
+    background-color: #3d856f; /* Variación oscura controlada del Jade */
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   6. SECCIÓN DE RESÚMENES (Tres Columnas)
+   ========================================================================== */
+#resumenes-areas {
+    width: 90%;
+    max-width: 1200px;
+    margin: 60px auto 30px auto;
+    display: table;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 25px 0;
+}
+
+.columna-resumen {
+    display: table-cell;
+    background-color: var(--blanco-puro);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--color-borde-suave);
+    box-shadow: var(--sombra-tarjeta);
+    vertical-align: top;
+}
+
+.columna-resumen::before {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(75, 159, 134, 0.1);
+    margin-bottom: 20px;
+}
+
+.columna-resumen h3 {
+    font-family: var(--fuente-principal);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--gris-carbono);
+    margin-bottom: 15px;
+    letter-spacing: 0.3px;
+}
+
+.columna-resumen p {
+    font-family: var(--fuente-lectura);
+    font-weight: 300; /* Open Sans Light */
+    font-size: 14px;
+    color: var(--gris-niebla);
+}
+
+/* ==========================================================================
+   7. SECCIÓN DE BLOQUES DE INFORMACIÓN CLAVE
+   ========================================================================== */
+#informacion-clave {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+    display: table;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 25px 0;
+}
+
+#informacion-clave > article {
+    display: table-cell;
+    background-color: var(--blanco-puro);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--color-borde-suave);
+    box-shadow: var(--sombra-tarjeta);
+    vertical-align: top;
+}
+
+#informacion-clave h3 {
+    font-family: var(--fuente-principal);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--gris-carbono);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-borde-suave);
+    padding-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* Indicadores */
+.grafico-placeholder {
+    width: 100%;
+    height: 120px;
+    background-color: var(--color-fondo-claro);
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px dashed var(--gris-niebla);
+}
+
+.bloque-indicadores ul li {
+    font-family: var(--fuente-lectura);
+    font-size: 13.5px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-borde-suave);
+}
+
+/* Uso de Open Sans Bold para destacar valores críticos si aplica */
+.bloque-indicadores ul li strong {
+    font-weight: 700;
+    color: var(--verde-jade);
+}
+
+/* Casos de Éxito */
+.bloque-casos p {
+    font-family: var(--fuente-lectura);
+    font-weight: 300;
+    font-size: 13.5px;
+    color: var(--gris-niebla);
+    margin-bottom: 15px;
+}
+
+.caso-imagen-placeholder {
+    width: 45%;
+    height: 90px;
+    background-color: var(--color-fondo-claro);
+    border-radius: 6px;
+    float: left;
+    margin-right: 15px;
+    border: 1px solid var(--color-borde-suave);
+}
+
+.bloque-casos a {
+    font-family: var(--fuente-secundaria);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+/* Recursos Destacados */
+.bloque-recursos ul li {
+    margin-bottom: 12px;
+    padding: 12px;
+    background-color: var(--color-fondo-claro);
+    border-radius: 6px;
+    border-left: 3px solid var(--verde-jade);
+}
+
+.bloque-recursos ul li label {
+    font-family: var(--fuente-secundaria);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--gris-carbono);
+    padding-left: 35px;
+    position: relative;
+    display: block;
+}
+
+.bloque-recursos ul li label::before {
+    content: "PDF";
+    position: absolute;
+    left: 0;
+    top: -1px;
+    background-color: var(--gris-carbono); /* Integrado a la paleta */
+    color: var(--blanco-puro);
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   8. SECCIÓN TESTIMONIOS (Gris Carbono de fondo - Estilo Clinical Graphite)
+   ========================================================================== */
+#testimonios {
+    background-color: var(--gris-carbono);
+    padding: 70px 0;
+    text-align: center;
+    color: var(--blanco-puro);
+}
+
+#testimonios h2 {
+    font-family: var(--fuente-principal);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 45px;
+}
+
+#testimonios blockquote {
+    width: 85%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: table;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 30px 0;
+}
+
+#testimonios blockquote p {
+    display: table-cell;
+    background-color: var(--blanco-puro);
+    color: var(--gris-carbono);
+    padding: 35px 25px;
+    border-radius: 12px;
+    font-family: var(--fuente-lectura);
+    font-weight: 300;
+    font-size: 13.5px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    vertical-align: top;
+}
+
+#testimonios blockquote p::before {
+    content: "";
+    display: block;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-color: var(--color-fondo-claro);
+    margin: 0 auto 20px auto;
+    border: 2px solid var(--verde-jade);
+}
+
+/* ==========================================================================
+   9. SECCIÓN FORMULARIO DE CONTACTO
+   ========================================================================== */
+#contacto-formulario {
+    width: 90%;
+    max-width: 650px;
+    margin: 70px auto;
+    background-color: var(--color-fondo-claro);
+    padding: 45px;
+    border-radius: 14px;
+    border: 1px solid var(--color-borde-suave);
+}
+
+#contacto-formulario h2 {
+    font-family: var(--fuente-principal);
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 35px;
+    color: var(--gris-carbono);
+    letter-spacing: 0.5px;
+}
+
+#contacto-formulario form label {
+    font-family: var(--fuente-secundaria);
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: var(--gris-carbono);
+    display: block;
+}
+
+#contacto-formulario form input[type="text"],
+#contacto-formulario form input[type="email"],
+#contacto-formulario form select,
+#contacto-formulario form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    font-family: var(--fuente-lectura);
+    font-size: 14px;
+    border: 1px solid var(--gris-niebla);
+    border-radius: 6px;
+    background-color: var(--blanco-puro);
+    color: var(--gris-carbono);
+}
+
+#contacto-formulario form input:focus,
+#contacto-formulario form select:focus,
+#contacto-formulario form textarea:focus {
+    outline: none;
+    border-color: var(--verde-jade);
+    box-shadow: 0 0 0 3px rgba(75, 159, 134, 0.15);
+}
+
+#contacto-formulario form button[type="submit"] {
+    width: 100%;
+    background-color: var(--verde-jade);
+    color: var(--blanco-puro);
+    padding: 15px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 15px;
+}
+
+#contacto-formulario form button[type="submit"]:hover {
+    background-color: #3d856f;
+}
+
+/* ==========================================================================
+   10. FOOTER CORPORATIVO
+   ========================================================================== */
+footer {
+    background-color: var(--blanco-puro);
+    border-top: 1px solid var(--color-borde-suave);
+    padding: 60px 5% 40px 5%;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+footer > div {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0 20px;
+}
+
+footer h4 {
+    font-family: var(--fuente-principal);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--gris-carbono);
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+footer ul li {
+    list-style: none;
+    margin-bottom: 12px;
+}
+
+footer ul li a {
+    font-family: var(--fuente-lectura);
+    font-weight: 300;
+    font-size: 13.5px;
+    color: var(--gris-niebla);
+}
+
+footer ul li a:hover {
+    color: var(--verde-jade);
+}
+
+/* Columna de Marca */
+.footer-logo p:first-child {
+    font-family: var(--fuente-principal);
+    font-weight: 800;
+    font-size: 26px;
+    color: var(--verde-jade);
+    line-height: 1;
+}
+
+.footer-logo p:last-child {
+    font-family: var(--fuente-secundaria);
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--gris-niebla);
+    letter-spacing: 2px;
+    margin-top: 6px;
+}
+
+.footer-social ul li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+/* Columna Legal y Copyright */
+.footer-legal {
+    text-align: right;
+}
+
+.footer-legal .copyright {
+    font-family: var(--fuente-lectura);
+    font-size: 12px;
+    color: var(--gris-niebla);
+    margin-top: 30px;
+    border-top: 1px solid var(--color-borde-suave);
+    padding-top: 15px;
 }
