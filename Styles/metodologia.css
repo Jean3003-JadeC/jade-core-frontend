@@ -1,6 +1,6 @@
 /* ==========================================================================
    JADE CORE - MÓDULO 4: METODOLOGÍA Y TECNOLOGÍA
-   Manual de Identidad Visual e Interfaz Clínica
+   Manual de Identidad Visual e Interfaz Clínica (Refactorizado)
    ========================================================================== */
 
 :root {
@@ -16,8 +16,11 @@
     --font-secondary: 'Lato', sans-serif;
     --font-reading: 'Open Sans', sans-serif;
     
-    /* Transiciones y Bordes */
-    --transition-smooth: background-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    /* Transiciones y Bordes de Alto Rendimiento (Capa 2) */
+    --transition-smooth: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --border-clinical: 1px solid rgba(74, 77, 80, 0.1);
     --radius-sm: 4px;
 }
@@ -29,7 +32,7 @@ body {
     background-color: var(--clinical-bg);
     color: var(--clinical-graphite);
     font-family: var(--font-reading);
-    font-weight: 300; /* Open Sans Light para párrafos extensos */
+    font-weight: 300; /* Open Sans Light */
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -64,8 +67,109 @@ body {
 }
 
 /* ==========================================================================
+   Capa 2: Componente Header Global y Navbar Completo
+   ========================================================================== */
+.main-header {
+    background-color: var(--sanitary-white);
+    border-bottom: var(--border-clinical);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+}
+
+.logo-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-title {
+    font-family: var(--font-primary);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--clinical-graphite);
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.logo-descriptor {
+    font-family: var(--font-secondary);
+    font-size: 0.65rem;
+    color: var(--organic-emerald);
+    font-weight: 700;
+    letter-spacing: 0.2em; /* Tracking +200 unificado */
+    margin-top: 0.25rem;
+}
+
+/* Navegación Tradicional (Desktop) */
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem;
+}
+
+.main-nav a {
+    font-family: var(--font-secondary);
+    text-decoration: none;
+    color: var(--clinical-graphite);
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding: 0.5rem 0;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--organic-emerald);
+}
+
+/* Botón Hamburguesa Nativo */
+.mobile-nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1100;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.hamburger-line {
+    width: 24px;
+    height: 2px;
+    background-color: var(--clinical-graphite);
+    transition: var(--transition-smooth);
+}
+
+/* Interfaz Sticky Header (Inyectado por JS) */
+.header--sticky {
+    padding: 0.75rem 0;
+    box-shadow: 0 4px 20px rgba(74, 77, 80, 0.05);
+}
+
+/* ==========================================================================
    Hero Section
    ========================================================================== */
+.methodology-page {
+    padding-top: 5rem; /* Evita solapamiento con fixed header */
+}
+
 .methodology-hero {
     background-color: var(--sanitary-white);
     border-bottom: var(--border-clinical);
@@ -132,12 +236,6 @@ body {
     transition: var(--transition-smooth);
 }
 
-.ecosystem-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(74, 77, 80, 0.05);
-    border-color: rgba(75, 159, 134, 0.3); /* Soft emerald highlight */
-}
-
 .card-icon {
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -159,7 +257,6 @@ body {
     flex-grow: 1;
 }
 
-/* Flujo de interacción interna del ecosistema */
 .interaction-flow {
     border-top: 1px inset rgba(74, 77, 80, 0.08);
     padding-top: 1.5rem;
@@ -200,7 +297,7 @@ body {
 
 .interaction-flow li strong {
     font-family: var(--font-reading);
-    font-weight: 700; /* Open Sans Bold para valores y énfasis críticos */
+    font-weight: 700; /* Open Sans Bold */
 }
 
 /* ==========================================================================
@@ -229,6 +326,7 @@ body {
     border-radius: var(--radius-sm);
     background-color: var(--clinical-bg);
     gap: 3rem;
+    transition: var(--transition-smooth);
 }
 
 .feature-text {
@@ -269,34 +367,155 @@ body {
     white-space: nowrap;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    transition: var(--transition-smooth);
 }
 
-/* Resaltado específico para destacar infraestructura tecnológica */
 .feature-block:hover .tech-tag {
     border-color: var(--organic-emerald);
     color: var(--organic-emerald);
+}
+
+/* ==========================================================================
+   Capa 2: Componente Footer Institucional Completo (Grid 4 Colunas)
+   ========================================================================== */
+.main-footer {
+    background-color: var(--clinical-graphite);
+    color: var(--sanitary-white);
+    padding: 4rem 0 0 0;
+    border-top: 4px solid var(--organic-emerald);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-brand .logo-title {
+    color: var(--sanitary-white);
+    font-size: 1.6rem;
+}
+
+.footer-brand-text {
+    color: #CED4DA;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    font-weight: 300;
+}
+
+.footer-grid h4 {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 1.25rem 0;
+    color: var(--organic-emerald);
+}
+
+.footer-grid ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-grid li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-grid a {
+    color: #E9ECEF;
+    text-decoration: none;
+    font-size: 0.9rem;
     transition: var(--transition-smooth);
+    font-weight: 300;
+}
+
+.footer-grid a:hover {
+    color: var(--organic-emerald);
+    padding-left: 4px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.5rem 0;
+    background-color: #3A3D40;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #ADB5BD;
+    text-align: center;
+    font-weight: 300;
 }
 
 /* ==========================================================================
    Responsividad y Adaptación Móvil (Media Queries)
    ========================================================================== */
-@media (max-width: 992px) {
-    .feature-block {
-        flex-direction: column;
-        gap: 1.5rem;
+@media (max-width: 1024px) {
+    .header-container {
+        padding: 1rem 2rem;
     }
     
-    .feature-badge {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        min-width: auto;
-        width: 100%;
+    .main-nav ul {
+        gap: 1rem;
+    }
+    
+    .main-nav a {
+        font-size: 0.85rem;
     }
 }
 
 @media (max-width: 768px) {
+    /* Interfaz Menú Hamburguesa Activa */
+    .mobile-nav-toggle {
+        display: flex;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 4.5rem; /* Justo debajo del header base */
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 4.5rem);
+        background-color: var(--sanitary-white);
+        border-top: var(--border-clinical);
+        transition: cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+        z-index: 999;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        padding: 3rem 2rem;
+        gap: 2rem;
+        width: 100%;
+    }
+
+    .main-nav a {
+        font-size: 1.1rem;
+        display: block;
+        width: 100%;
+    }
+
+    /* Estado Desplegado (Controlado por JavaScript Capa 3) */
+    .nav-active {
+        left: 0;
+    }
+
+    /* Transformación de Hamburguesa a X */
+    .toggle-active .hamburger-line:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+    .toggle-active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+    .toggle-active .hamburger-line:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+
+    /* Ajustes de Elementos del Contenido */
     .methodology-hero h1 {
         font-size: 2.25rem;
     }
@@ -313,6 +532,19 @@ body {
         grid-template-columns: 1fr;
     }
     
+    .feature-block {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .feature-badge {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        min-width: auto;
+        width: 100%;
+    }
+    
     .container {
         padding: 0 1.25rem;
     }
@@ -320,7 +552,13 @@ body {
     .ecosystem-card, .feature-block {
         padding: 1.75rem;
     }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
+
 /* ==========================================================================
    Integración Dinámica y Estados de Control (JS States)
    ========================================================================== */

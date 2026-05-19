@@ -8,32 +8,50 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300&family=Montserrat:wght@400;600;700;800&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
-    <!-- Estilos Globales y Modulares -->
-    <link rel="stylesheet" href="../Styles/global.css"> <!-- Suponiendo un core/global css existente -->
+    <!-- Estilos Globales y Modulares Simétricos -->
+    <link rel="stylesheet" href="../Styles/global.css">
     <link rel="stylesheet" href="../Styles/metodologia.css">
 </head>
 <body>
 
-    <!-- Header simétrico con los módulos anteriores -->
+    <!-- Capa 1: Header e Integración del Ecosistema Global (8 Módulos) -->
     <header class="main-header" id="mainHeader">
         <div class="header-container">
             <div class="logo-container">
-                <span class="logo-title">JADE CORE</span>
-                <span class="logo-descriptor">TECNOLOGÍA & SALUD</span>
+                <!-- Ruta unificada a nivel de vecinos de carpeta -->
+                <a href="home.html" class="logo-link">
+                    <span class="logo-title">JADE CORE</span>
+                    <span class="logo-descriptor">CLINICAL NUTRITION</span>
+                </a>
             </div>
-            <nav class="main-nav" aria-label="Navegación principal">
+            
+            <!-- Botón de Activación del Menú Móvil (Requerido por Capa 2 y 3) -->
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mainNav">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <!-- Navbar Completo Refactorizado -->
+            <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
                 <ul>
+                    <!-- CORREGIDO: Eliminado el '../' para que apunte directamente al archivo vecino -->
                     <li><a href="home.html">Inicio</a></li>
                     <li><a href="nosotros.html">Nosotros</a></li>
                     <li><a href="servicios.html">Servicios</a></li>
                     <li><a href="metodologia.html" class="active" aria-current="page">Metodología</a></li>
+                    <li><a href="recursos.html">Recursos</a></li>
+                    <li><a href="portal.html">Portal del Paciente</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- Contenedor Principal Semántico -->
     <main class="methodology-page">
-        <!-- Hero Section del Módulo -->
+        
+        <!-- Hero Section Invariante -->
         <section class="methodology-hero" aria-labelledby="heroTitle">
             <div class="hero-content">
                 <span class="section-subtitle">Nuestro Enfoque</span>
@@ -46,11 +64,11 @@
         <section class="ecosystem-section" aria-labelledby="ecosystemTitle">
             <div class="container">
                 <header class="section-header">
-                    <h2>Ecosistema Jade Core</h2>
+                    <h2 id="ecosystemTitle">Ecosistema Jade Core</h2>
                     <p>Interconexión analítica y clínica para una toma de decisiones sin fisuras.</p>
                 </header>
 
-                <!-- Grid de Comunicación de las 3 Áreas -->
+                <!-- Grid de Comunicación de las 3 Áreas Core -->
                 <div class="ecosystem-grid">
                     <article class="ecosystem-card" id="areaData">
                         <div class="card-icon" aria-hidden="true">📊</div>
@@ -143,14 +161,59 @@
         </section>
     </main>
 
-    <!-- Footer simétrico -->
+    <!-- Footer Corporativo Clínico Global Unificado -->
     <footer class="main-footer">
-        <div class="footer-container">
-            <p>&copy; 2026 Jade Core. Todos los derechos reservados. | Tecnología & Salud</p>
+        <div class="container footer-grid">
+            
+            <!-- Columna 1: Brand Identidad -->
+            <div class="footer-brand">
+                <span class="logo-title">JADE CORE</span>
+                <p class="footer-brand-text">Ecosistema de salud avanzado y analítica de alta precisión clínica.</p>
+            </div>
+
+            <!-- Columna 2: Mapa del Ecosistema de Navegación -->
+            <div class="footer-links">
+                <h4>Ecosistema</h4>
+                <ul>
+                    <!-- CORREGIDO: Eliminado el '../' para simetría total con el Navbar superior -->
+                    <li><a href="home.html">Inicio</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="metodologia.html">Metodología</a></li>
+                    <li><a href="recursos.html">Recursos y Evidencias</a></li>
+                    <li><a href="portal.html">Portal del Paciente</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Canales de Atención e IPRESS -->
+            <div class="footer-contact">
+                <h4>Canales de Atención</h4>
+                <ul>
+                    <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn Institucional</a></li>
+                    <li><a href="https://wa.me/tu-numero" target="_blank" rel="noopener noreferrer">Enlace Clínico WhatsApp</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Soporte Regulatorio y Legal -->
+            <div class="footer-legal-links">
+                <h4>Marco Regulatorio</h4>
+                <ul>
+                    <li><a href="legal.html">Términos y Condiciones</a></li>
+                    <li><a href="legal.html#privacidad">Políticas de Privacidad RIS / IPRESS</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Cierre de Derechos -->
+        <div class="footer-bottom">
+            <div class="container footer-bottom-content">
+                <p>&copy; 2026 Jade Core. Todos los derechos reservados. | Infraestructura Tecnológica & Gestión de Salud</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Script del Módulo -->
+    <!-- Capa 3: Lógica de Interacción del Módulo mediante Namespace -->
     <script src="../Scripts/metodologia.js"></script>
 </body>
 </html>

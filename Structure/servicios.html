@@ -3,51 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Módulo de Servicios de Jade Core: Integración de Nutrición Clínica/Renal, Data Analytics, Inteligencia Artificial y Gestión Estratégica en Salud.">
-    <title>Servicios | Jade Core - Tecnología & Salud</title>
+    <meta name="description" content="Módulo de Servicios de Jade Core: Integración avanzada de Nutrición Clínica y Renal, Analítica de Datos con IA y Consultoría Estratégica en Gestión de Salud para IPRESS y RIS.">
+    <title>Servicios | Jade Core - TECNOLOGIA & SALUD</title>
     <!-- Tipografías: Montserrat, Lato y Open Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Estilos Módulo Servicios -->
+    <link href="https://fonts.googleapis.com/css2 family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Estilos de la Capa de Interfaz -->
     <link rel="stylesheet" href="../Styles/servicios.css">
 </head>
 <body>
 
-    <!-- Encabezado Corporativo (Simétrico con Home/Nosotros) -->
+    <!-- CAPA 1: HEADER & NAVEGACIÓN GLOBAL (Conectando los 8 Módulos) -->
     <header class="main-header" id="mainHeader">
         <div class="header-container">
             <div class="brand-logo">
                 <span class="logo-title">JADE CORE</span>
-                <span class="logo-descriptor">TECNOLOGÍA & SALUD</span>
+                <span class="logo-descriptor">TECNOLOGIA & SALUD</span>
             </div>
-            <nav class="main-nav">
+            
+            <!-- Botón de Control para el Menú Móvil -->
+            <button class="mobile-nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <nav class="main-nav" id="mainNav">
                 <ul>
                     <li><a href="home.html">Inicio</a></li>
                     <li><a href="nosotros.html">Nosotros</a></li>
                     <li><a href="servicios.html" class="active">Servicios</a></li>
+                    <li><a href="metodologia.html">Metodología</a></li>
+                    <li><a href="recursos.html">Recursos</a></li>
+                    <li><a href="portal.html">Portal del Paciente</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- CUERPO PRINCIPAL DEL MÓDULO -->
     <main class="services-main">
-        <!-- Hero Section del Módulo -->
+        
+        <!-- Hero Section Institucional -->
         <section class="services-hero">
             <div class="hero-content">
                 <h1>NUESTROS SERVICIOS</h1>
-                <p class="hero-subtitle">Soluciones de alta precisión que convergen la ciencia clínica, analítica avanzada y optimización de sistemas de salud.</p>
+                <p class="hero-subtitle">Soluciones de alta precisión que convergen la ciencia clínica, la analítica predictiva y la optimización de sistemas sanitarios.</p>
             </div>
         </section>
 
-        <!-- Sección Principal de Servicios (Grid/Flexbox Ready) -->
-        <section class="services-grid-container">
+        <!-- Sección Principal de Servicios (Estructura Grid Bidimensional) -->
+        <section class="services-grid-container" aria-label="Portafolio de Especialidades">
             
-            <!-- 3.1. Nutrición Clínica y Renal -->
+            <!-- Módulo 3.1: Nutrición Clínica y Renal -->
             <article class="service-card" id="srv-nutrition">
                 <div class="service-header">
                     <div class="service-icon" aria-hidden="true">
-                        <!-- Icono representativo de Nefrología / Datos Clínicos -->
+                        <!-- Marcador para icono clínico de nefrología / datos biomédicos -->
                         <span class="icon-placeholder">■</span>
                     </div>
                     <h2>Nutrición Clínica y Renal</h2>
@@ -59,16 +73,16 @@
                     <ul class="service-spec-list">
                         <li>Intervención nutricional en enfermedad renal crónica (ERC) prediálisis y diálisis.</li>
                         <li>Soporte metabólico-nutricional en terapias de reemplazo renal continuo (TRRC) y terapias convectivas.</li>
-                        <li>Diseño de planes alimentarios de precisión basados en biomarcadores y analítica de datos.</li>
+                        <li>Diseño de planes alimentarios de precisión basados en <strong>biomarcadores</strong> y analítica de datos.</li>
                     </ul>
                 </div>
             </article>
 
-            <!-- 3.2. Data Analytics & Inteligencia Artificial -->
+            <!-- Módulo 3.2: Data Analytics & Inteligencia Artificial -->
             <article class="service-card" id="srv-analytics">
                 <div class="service-header">
                     <div class="service-icon" aria-hidden="true">
-                        <!-- Icono representativo de IA / Algoritmos -->
+                        <!-- Marcador para icono algorítmico / epidemiológico -->
                         <span class="icon-placeholder">▲</span>
                     </div>
                     <h2>Data Analytics & Inteligencia Artificial</h2>
@@ -85,11 +99,11 @@
                 </div>
             </article>
 
-            <!-- 3.3. Gestión en Salud -->
+            <!-- Módulo 3.3: Gestión en Salud -->
             <article class="service-card" id="srv-management">
                 <div class="service-header">
                     <div class="service-icon" aria-hidden="true">
-                        <!-- Icono representativo de Auditoría / Gestión Gerencial -->
+                        <!-- Marcador para icono de gestión gerencial / auditoría RIS -->
                         <span class="icon-placeholder">◆</span>
                     </div>
                     <h2>Gestión en Salud</h2>
@@ -100,7 +114,7 @@
                     </p>
                     <ul class="service-spec-list">
                         <li>Consultoría y alineamiento estratégico para IPRESS y Redes Integradas de Salud (RIS).</li>
-                        <li>Diseño y optimización de la Hoja Gerencial, control de procesos y KPI sanitarios.</li>
+                        <li>Diseño y optimización de la <strong>Hoja Gerencial</strong>, control de procesos y KPI sanitarios.</li>
                         <li>Auditoría de calidad asistencial y reportes analíticos de productividad.</li>
                     </ul>
                 </div>
@@ -109,14 +123,52 @@
         </section>
     </main>
 
-    <!-- Footer Corporativo (Simétrico) -->
+    <!-- CAPA 1: FOOTER CORPORATIVO (Mapa de Ecosistema Completo) -->
     <footer class="main-footer">
         <div class="footer-container">
-            <p>&copy; 2026 Jade Core. Todos los derechos reservados.</p>
+            <div class="footer-grid">
+                
+                <!-- Columna de Identidad Directa -->
+                <div class="footer-brand-info">
+                    <span class="footer-logo-title">JADE CORE</span>
+                    <p class="footer-tagline">Tecnología e Inteligencia aplicada a la alta precisión clínica y gestión sanitaria.</p>
+                </div>
+
+                <!-- Columna Mapa del Ecosistema (Modular) -->
+                <div class="footer-nav-map">
+                    <h3>Ecosistema</h3>
+                    <ul class="footer-links">
+                        <li><a href="home.html">Inicio</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="metodologia.html">Metodología</a></li>
+                        <li><a href="recursos.html">Recursos e Historial</a></li>
+                        <li><a href="portal.html">Portal del Paciente</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna Canales de Atención & Redes -->
+                <div class="footer-channels">
+                    <h3>Canales Profesionales</h3>
+                    <ul class="footer-social-links">
+                        <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="https://wa.me/tu-numero" target="_blank" rel="noopener noreferrer">Consultas WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Fila Inferior Legal / Regulatoria -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 Jade Core. Todos los derechos reservados.</p>
+                <div class="footer-legal-links">
+                    <a href="legal.html">Términos, Privacidad y Marco Regulatorio Legal</a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Scripts del Módulo Servicios (Namespace Pattern) -->
+    <!-- CAPA 3: LÓGICA DE COMPORTAMIENTO (Namespace Pattern) -->
     <script src="../Scripts/servicios.js"></script>
 </body>
 </html>

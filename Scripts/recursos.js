@@ -1,22 +1,25 @@
 /**
  * ==========================================================================
  * COMPONENTE JAVASCRIPT: RECURSOS Y EVIDENCIA - JADE CORE
- * Patrón de Diseño: Namespace Computacional Seguro
- * Alcance: Control de renderizado, filtrado reactivo y estados de la UI.
+ * Patrón de Diseño: Namespace Computacional Seguro (Aislado)
+ * Alcance: Control de renderizado, filtrado reactivo, transiciones analíticas 
+ *          y gestión del menú adaptativo (UI/UX).
  * ==========================================================================
  */
 
-// Declaración del Namespace Institucional si no existe en el ecosistema global
+// Declaración del Namespace Institucional unificado
 var JadeCore = JadeCore || {};
 
 JadeCore.ResourcesModule = (function () {
     'use strict';
 
-    // --- CONTEXTO Y SELECTORES PRIVADOS DEL MÓDULO ---
+    // --- CONTEXTO Y SELECTORES PRIVADOS DEL MÓDULO (AUDITADOS) ---
     const DOM = {
         filters: document.querySelectorAll('.filter-btn'),
         cards: document.querySelectorAll('.resource-card'),
-        grid: document.querySelector('.resources-grid')
+        grid: document.querySelector('.resources-grid'),
+        navToggle: document.querySelector('.mobile-nav-toggle'),
+        navigation: document.querySelector('.main-navigation')
     };
 
     /**
@@ -58,16 +61,15 @@ JadeCore.ResourcesModule = (function () {
         DOM.cards.forEach(card => {
             const cardCategory = card.getAttribute('data-category');
 
-            // Lógica de visualización adaptativa
+            // Lógica de visualización adaptativa y síncrona
             if (targetCategory === 'all' || cardCategory === targetCategory) {
-                // Restauramos la visibilidad estructural y aplicamos transición suave
                 card.style.display = 'flex';
+                // Retardo forzado para inyectar la animación CSS de forma fluida
                 setTimeout(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
                 }, 10);
             } else {
-                // Desvanecimiento y remoción del flujo del DOM
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(10px)';
                 card.style.display = 'none';
@@ -76,14 +78,46 @@ JadeCore.ResourcesModule = (function () {
     };
 
     /**
+     * Controla el despliegue del menú de navegación en dispositivos móviles
+     * y actualiza de forma síncrona los estados de accesibilidad ARIA.
+     */
+    const _toggleMobileNavigation = function () {
+        if (!DOM.navToggle || !DOM.navigation) return;
+
+        const isExpanded = DOM.navToggle.getAttribute('aria-expanded') === 'true';
+        
+        // Mutación de estados semánticos y visuales
+        DOM.navToggle.setAttribute('aria-expanded', !isExpanded);
+        DOM.navigation.classList.toggle('nav-active');
+    };
+
+    /**
      * Orquesta y vincula los manejadores de eventos funcionales en la UI.
      */
     const _bindEvents = function () {
+        // Evento 1: Control de Menú de Navegación Móvil
+        if (DOM.navToggle) {
+            DOM.navToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                _toggleMobileNavigation();
+            });
+        }
+
+        // Cierre automático del menú móvil al hacer clic fuera del contenedor (UX)
+        document.addEventListener('click', function (e) {
+            if (DOM.navigation && DOM.navigation.classList.contains('nav-active')) {
+                if (!DOM.navigation.contains(e.target) && !DOM.navToggle.contains(e.target)) {
+                    _toggleMobileNavigation();
+                }
+            }
+        });
+
+        // Evento 2: Control de Filtros del Repositorio Clínico
         DOM.filters.forEach(button => {
             button.addEventListener('click', function (e) {
                 e.preventDefault();
 
-                // Validación de redundancia (Evita re-filtrar si ya está activo)
+                // Validación de redundancia operativa
                 if (this.classList.contains('active')) return;
 
                 // Actualización semántica del estado de los botones (Accesibilidad ARIA)
@@ -95,7 +129,7 @@ JadeCore.ResourcesModule = (function () {
                 this.classList.add('active');
                 this.setAttribute('aria-selected', 'true');
 
-                // Ejecución del algoritmo de filtrado
+                // Ejecución del algoritmo de filtrado analítico
                 const selectedFilter = this.getAttribute('data-filter');
                 _filterRepository(selectedFilter);
             });
@@ -105,7 +139,6 @@ JadeCore.ResourcesModule = (function () {
     // --- INTERFAZ PÚBLICA EXCLUSIVA (API DEL MÓDULO) ---
     return {
         init: function () {
-            // Inicialización de componentes internos blindados
             _initScrollAnimations();
             _bindEvents();
         }
@@ -113,7 +146,7 @@ JadeCore.ResourcesModule = (function () {
 
 })();
 
-// Ejecución segura una vez que la estructura del DOM está completamente parseada
+// Inicialización controlada una vez que la estructura del DOM está completamente parseada
 document.addEventListener('DOMContentLoaded', function () {
     JadeCore.ResourcesModule.init();
 });

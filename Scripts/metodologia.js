@@ -1,6 +1,7 @@
 /**
  * JADE CORE - MÓDULO 4: METODOLOGÍA Y TECNOLOGÍA
- * Arquitectura de Scripts Modulares (Pattern: Namespace)
+ * Arquitectura de Scripts Modulares (Pattern: Namespace - Refactorizado)
+ * Auditoría Técnica: Capa 3 - Control de Scope e Interacción Móvil Global
  * © 2026 Jade Core. Todos los derechos reservados.
  */
 
@@ -10,17 +11,20 @@ JadeCore.MethodologyModule = (function () {
     'use strict';
 
     // ==========================================================================
-    // Constantes y Selectores del DOM (Mapeo Clínico)
+    // Centralización de Selectores y Clases de Control (DOM Mapping)
     // ==========================================================================
-    const SELECTORS = {
+    const DOM = {
         header: '#mainHeader',
+        nav: '#mainNav',
+        navToggle: '#mobileNavToggle',
         ecosystemCards: '.ecosystem-card',
-        featureBlocks: '.feature-block',
-        interactionFlows: '.interaction-flow'
+        featureBlocks: '.feature-block'
     };
 
     const CLASSES = {
         headerSticky: 'header--sticky',
+        navActive: 'nav-active',
+        toggleActive: 'toggle-active',
         elementVisible: 'is-visible',
         cardHighlight: 'card-highlighted'
     };
@@ -30,10 +34,10 @@ JadeCore.MethodologyModule = (function () {
     // ==========================================================================
 
     /**
-     * Controla el comportamiento Sticky del Header simétricamente con otros módulos
+     * Controla el comportamiento Sticky del Header síncronamente con el viewport
      */
     const handleStickyHeader = function () {
-        const header = document.querySelector(SELECTORS.header);
+        const header = document.querySelector(DOM.header);
         if (!header) return;
 
         if (window.scrollY > 50) {
@@ -44,14 +48,45 @@ JadeCore.MethodologyModule = (function () {
     };
 
     /**
-     * Inicializa las interacciones cruzadas en el Ecosistema.
-     * Al hacer hover o focus en un área, resalta sutilmente su flujo relacional.
+     * Gestiona la apertura, cierre y accesibilidad del Menú Responsive Móvil
+     */
+    const initMobileMenu = function () {
+        const toggle = document.querySelector(DOM.navToggle);
+        const nav = document.querySelector(DOM.nav);
+
+        if (!toggle || !nav) return;
+
+        toggle.addEventListener('click', function () {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            
+            // Mutación de clases controladas por la Capa 2 (CSS)
+            toggle.classList.toggle(CLASSES.toggleActive);
+            nav.classList.toggle(CLASSES.navActive);
+            
+            // Actualización de estado semántico para lectores de pantalla
+            toggle.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Cierre automático si se hace click en un enlace interno (Navegación Intrapágina)
+        const navLinks = nav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggle.classList.remove(CLASSES.toggleActive);
+                nav.classList.remove(CLASSES.navActive);
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    };
+
+    /**
+     * Inicializa las interacciones cruzadas en la matriz del Ecosistema.
+     * Habilita el soporte WCAG para navegación fluida por teclado.
      */
     const initEcosystemInteractions = function () {
-        const cards = document.querySelectorAll(SELECTORS.ecosystemCards);
+        const cards = document.querySelectorAll(DOM.ecosystemCards);
+        if (!cards.length) return;
         
         cards.forEach(card => {
-            // Soporte para accesibilidad y navegación por teclado (Focus)
             card.setAttribute('tabindex', '0');
 
             const triggerHighlight = () => card.classList.add(CLASSES.cardHighlight);
@@ -65,14 +100,15 @@ JadeCore.MethodologyModule = (function () {
     };
 
     /**
-     * Implementa Intersection Observer para transiciones de carga asíncronas y limpias.
-     * Mantiene la sobriedad y la estética corporativa sin recurrir a librerías pesadas.
+     * Implementa Intersection Observer para efectos de carga asíncronos nativos
      */
     const initScrollAnimations = function () {
-        // Validación de soporte del navegador
+        const elementsToAnimate = document.querySelectorAll(`${DOM.ecosystemCards}, ${DOM.featureBlocks}`);
+        if (!elementsToAnimate.length) return;
+
         if (!('IntersectionObserver' in window)) {
-            // Degradación aceptable: si el navegador es antiguo, muestra todo inmediatamente
-            document.querySelectorAll(`${SELECTORS.ecosystemCards}, ${SELECTORS.featureBlocks}`).forEach(el => {
+            // Degradación aceptable para navegadores sin soporte legacy
+            elementsToAnimate.forEach(el => {
                 el.style.opacity = '1';
                 el.style.transform = 'none';
             });
@@ -80,54 +116,55 @@ JadeCore.MethodologyModule = (function () {
         }
 
         const observerOptions = {
-            root: null, // Viewport
+            root: null,
             rootMargin: '0px',
-            threshold: 0.15 // Se activa cuando el 15% del elemento es visible
+            threshold: 0.15
         };
 
         const appearanceObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add(CLASSES.elementVisible);
-                    observer.unobserve(entry.target); // Dejar de observar una vez ejecutado
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        // Registrar elementos a observar
-        const elementsToAnimate = document.querySelectorAll(`${SELECTORS.ecosystemCards}, ${SELECTORS.featureBlocks}`);
         elementsToAnimate.forEach(element => {
-            // Preparación de estilos base inline previos a la inyección del CSS (opcional/seguridad)
             element.style.opacity = '0';
             element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+            element.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
             
             appearanceObserver.observe(element);
         });
     };
 
+    /**
+     * Centralización de Listeners y Vinculación de Eventos Globales
+     */
+    const bindEvents = function () {
+        window.addEventListener('scroll', handleStickyHeader);
+        // Ejecución inmediata preventiva por si el viewport inicia con scroll activo
+        handleStickyHeader();
+    };
+
     // ==========================================================================
-    // Métodos Públicos (Interfaz de Configuración del Namespace)
+    // Métodos Públicos (Exposición del Contenedor del Módulo)
     // ==========================================================================
     return {
         init: function () {
-            // Ejecución segura de listeners globales
-            window.addEventListener('scroll', handleStickyHeader);
-            
-            // Inicialización de componentes internos
+            bindEvents();
+            initMobileMenu();
             initEcosystemInteractions();
             initScrollAnimations();
             
-            // Primera ejecución de verificación del header por si recargan a mitad de página
-            handleStickyHeader();
-            
-            console.log('Jade Core: Módulo de Metodología y Tecnología inicializado exitosamente.');
+            console.log('Jade Core [Módulo Metodología]: Auditoría técnica aplicada. Ciclo de vida activo.');
         }
     };
 
 })();
 
-// Inicialización segura una vez el DOM esté completamente estructurado y listo
+// Inicialización controlada una vez confirmada la construcción del DOM árbol
 document.addEventListener('DOMContentLoaded', function () {
     JadeCore.MethodologyModule.init();
 });

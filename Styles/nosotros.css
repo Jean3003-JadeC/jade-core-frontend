@@ -12,6 +12,9 @@
     --font-primary: 'Montserrat', sans-serif;
     --font-secondary: 'Lato', sans-serif;
     --font-reading: 'Open Sans', sans-serif;
+
+    /* Curvas de Transición Estándar de la Plataforma */
+    --transition-precision: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ==========================================================================
@@ -19,7 +22,7 @@
    ========================================================================== */
 body {
     font-family: var(--font-reading);
-    font-weight: 300; /* Open Sans Light por defecto para textos extensos */
+    font-weight: 300; /* Open Sans Light por defecto */
     color: var(--clinical-graphite);
     line-height: 1.6;
     background-color: var(--sanitary-white);
@@ -50,8 +53,14 @@ body {
 }
 
 .section-subtitle-light {
-    composes: .section-subtitle;
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    letter-spacing: 0.2em;
     color: var(--organic-emerald);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
     opacity: 0.9;
 }
 
@@ -67,7 +76,7 @@ body {
 .section-title-dark {
     font-family: var(--font-primary);
     font-weight: 700;
-    color: #2B2D2F; /* Variante profunda para legibilidad sobre fondo claro */
+    color: #2B2D2F;
     font-size: 2.2rem;
     text-align: center;
     margin-bottom: 15px;
@@ -82,6 +91,27 @@ body {
 }
 
 /* ==========================================================================
+   INTERFAZ DE USUARIO NUCLEO: HEADER & NAVEGACIÓN MÓVIL
+   ========================================================================== */
+.mobile-nav-toggle {
+    display: none; /* Oculto en desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.mobile-nav-toggle .toggle-bar {
+    display: block;
+    width: 25px;
+    height: 2px;
+    margin: 5px 0;
+    background-color: var(--clinical-graphite);
+    transition: var(--transition-precision);
+}
+
+/* ==========================================================================
    SECCIÓN 1: HERO DE IDENTIDAD Y FILOSOFÍA
    ========================================================================== */
 .about-hero {
@@ -91,7 +121,7 @@ body {
 }
 
 .about-hero .section-container {
-    max-width: 850px; /* Contenedor óptimo para lectura de párrafos largos */
+    max-width: 850px;
     padding: 80px 20px;
 }
 
@@ -99,12 +129,12 @@ body {
     font-size: 1.15rem;
     color: var(--clinical-graphite);
     text-align: justify;
-    text-align-last: center; /* Estética clínica y centrada */
+    text-align-last: center;
 }
 
 .hero-lead strong {
     font-family: var(--font-reading);
-    font-weight: 700; /* Open Sans Bold para valores críticos y énfasis */
+    font-weight: 700; /* Open Sans Bold para valores críticos */
     color: var(--organic-emerald);
 }
 
@@ -126,7 +156,6 @@ body {
     font-size: 1rem;
 }
 
-/* Grid del Equipo */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -138,15 +167,15 @@ body {
     border: 1px solid #E2E8F0;
     border-radius: 6px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
+    transition: var(--transition-precision);
 }
 
 .team-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(74, 77, 80, 0.08); /* Sombra sutil clínica, no comercial */
+    box-shadow: 0 10px 25px rgba(74, 77, 80, 0.06); /* Sombra clínica de precisión */
 }
 
-/* Marcadores para las fotos profesionales */
 .photo-placeholder {
     height: 280px;
     background-color: #E9ECEF;
@@ -160,13 +189,13 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     border-bottom: 3px solid var(--data-slate);
-    transition: border-color 0.3s ease;
+    transition: var(--transition-precision);
 }
 
-/* Modificadores de color según especialidad en hover */
+/* Modificadores de color acentuados por especialidad clínica */
 .team-card[data-specialty="clinical"]:hover .photo-placeholder { border-color: var(--organic-emerald); }
-.team-card[data-specialty="data"]:hover .photo-placeholder { border-color: #3B82F6; } /* Azul analítico */
-.team-card[data-specialty="management"]:hover .photo-placeholder { border-color: #8B5CF6; } /* Púrpura estratégico */
+.team-card[data-specialty="data"]:hover .photo-placeholder { border-color: #3B82F6; }
+.team-card[data-specialty="management"]:hover .photo-placeholder { border-color: #8B5CF6; }
 
 .member-info {
     padding: 25px;
@@ -207,7 +236,7 @@ body {
    SECCIÓN 3: VISIÓN CORPORATIVA
    ========================================================================== */
 .about-vision {
-    background-color: var(--clinical-graphite); /* Fondo oscuro para contraste */
+    background-color: var(--clinical-graphite);
     color: var(--sanitary-white);
 }
 
@@ -223,7 +252,7 @@ body {
 }
 
 .vision-paragraph {
-    color: #DFE2E4; /* Gris ultra claro para óptima legibilidad */
+    color: #DFE2E4;
     font-size: 1.05rem;
     text-align: justify;
     margin-bottom: 30px;
@@ -239,11 +268,10 @@ body {
     color: var(--sanitary-white);
 }
 
-/* Marcador Gráfico del Ecosistema */
 .ecosystem-graphic-placeholder {
-    background: linear-gradient(135deg, rgba(75,159,134,0.1) 0%, rgba(74,77,80,0.3) 100%);
+    background: linear-gradient(135deg, rgba(75, 159, 134, 0.08) 0%, rgba(74, 77, 80, 0.4) 100%);
     border: 1px dashed var(--organic-emerald);
-    height: 350px;
+    min-height: 350px;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -264,18 +292,9 @@ body {
 /* ==========================================================================
    RESPONSIVE DESIGN (MEDIA QUERIES)
    ========================================================================== */
-@media (max-width: 992px) {
-    .grid-two-columns {
-        grid-template-columns: 1fr; /* Colapsa a una columna en tablets */
-        gap: 40px;
-    }
-    
-    .vision-text-block {
-        padding-right: 0;
-    }
-    
-    .ecosystem-graphic-placeholder {
-        height: 250px;
+@media (max-width: 1024px) {
+    .section-container {
+        padding: 40px 20px;
     }
 }
 
@@ -288,7 +307,42 @@ body {
         padding: 50px 20px;
     }
     
+    .grid-two-columns {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .vision-text-block {
+        padding-right: 0;
+    }
+    
     .team-grid {
-        grid-template-columns: 1fr; /* Tarjetas full-width en móviles */
+        grid-template-columns: 1fr;
+    }
+
+    /* Activación del Mecanismo Móvil del Header */
+    .mobile-nav-toggle {
+        display: block; /* Despliegue del trigger del menú */
+    }
+
+    .main-nav {
+        display: none; /* Por defecto colapsado en móvil */
+        width: 100%;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        background-color: var(--sanitary-white);
+        border-bottom: 1px solid #EAEAEA;
+    }
+
+    /* Clase activa inyectada mediante Namespace Pattern en JS */
+    .main-nav.nav-active {
+        display: block;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
     }
 }

@@ -17,6 +17,9 @@
     --border-color: #E2E8F0;
     --card-shadow: 0 4px 12px rgba(74, 77, 80, 0.05);
     
+    /* Curva de Transición Oficial del Proyecto (Aceleración por Hardware) */
+    --transition-clinical: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
     /* Tipografías */
     --font-primary: 'Montserrat', sans-serif;
     --font-secondary: 'Lato', sans-serif;
@@ -39,10 +42,11 @@ body.clinical-env {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 /* ==========================================================================
-   2. HEADER INSTITUCIONAL & NAVEGACIÓN (SIMULACIÓN SPA)
+   2. HEADER INSTITUCIONAL & NAV RESPONSIVE COMPLEX
    ========================================================================== */
 .portal-header {
     background-color: var(--sanitary-white);
@@ -59,7 +63,6 @@ body.clinical-env {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     gap: 1.5rem;
 }
 
@@ -86,54 +89,128 @@ body.clinical-env {
     color: var(--organic-emerald);
 }
 
-/* Selectores de Pestañas (Tabs) */
+/* Envoltura y links mixtos (Enlaces Públicos + Selectores SPA) */
 .portal-nav {
     display: flex;
-    gap: 0.5rem;
+    align-items: center;
+}
+
+.nav-links-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     background-color: var(--clinical-bg);
-    padding: 0.3rem;
-    border-radius: 8px;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
     border: 1px solid var(--border-color);
 }
 
+.nav-link-public {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--data-slate);
+    text-decoration: none;
+    padding: 0.4rem 0.6rem;
+    transition: var(--transition-clinical);
+}
+
+.nav-link-public:hover {
+    color: var(--organic-emerald);
+}
+
+.nav-divider {
+    color: var(--border-color);
+    font-weight: 300;
+    user-select: none;
+}
+
+/* Selectores de Pestañas (Tabs de Interfaz) */
 .nav-tab {
     font-family: var(--font-secondary);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--data-slate);
     background: none;
     border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
+    padding: 0.5rem 1.1rem;
+    border-radius: 20px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition-clinical);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
 .nav-tab:hover {
     color: var(--clinical-graphite);
-    background-color: rgba(75, 159, 134, 0.05);
+    background-color: rgba(75, 159, 134, 0.08);
 }
 
 .nav-tab.active {
     background-color: var(--sanitary-white);
     color: var(--organic-emerald);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Componente de Menú Móvil (Botón de Control) */
+.mobile-nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1100;
+}
+
+.hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--clinical-graphite);
+    position: relative;
+    transition: var(--transition-clinical);
+}
+
+.hamburger::before, .hamburger::after {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background-color: var(--clinical-graphite);
+    position: absolute;
+    left: 0;
+    transition: var(--transition-clinical);
+}
+
+.hamburger::before { top: -6px; }
+.hamburger::after { top: 6px; }
+
+/* Control de Estados Animados del Botón de Navegación */
+.mobile-nav-toggle[aria-expanded="true"] .hamburger {
+    background-color: transparent;
+}
+
+.mobile-nav-toggle[aria-expanded="true"] .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.mobile-nav-toggle[aria-expanded="true"] .hamburger::after {
+    transform: rotate(-45deg);
+    top: 0;
 }
 
 /* Control de Sesión */
 .user-session-control {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.2rem;
 }
 
 .user-badge {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.6rem;
 }
 
 .user-avatar {
@@ -142,8 +219,8 @@ body.clinical-env {
     font-family: var(--font-primary);
     font-weight: 700;
     font-size: 0.8rem;
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -152,20 +229,21 @@ body.clinical-env {
 
 .user-name {
     font-family: var(--font-secondary);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
+    color: var(--clinical-graphite);
 }
 
 .btn-exit {
     background: none;
     border: 1px solid var(--data-slate);
     color: var(--data-slate);
-    padding: 0.4rem 1rem;
+    padding: 0.4rem 0.9rem;
     border-radius: 4px;
     font-family: var(--font-secondary);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: var(--transition-clinical);
 }
 
 .btn-exit:hover {
@@ -182,54 +260,55 @@ body.clinical-env {
     max-width: 1400px;
     width: 100%;
     margin: 0 auto;
-    padding: 2.5rem 2rem;
+    padding: 3rem 2rem;
 }
 
 .portal-view {
     display: block;
-    animation: fadeInView 0.4s ease-out;
+    animation: fadeInView 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* Control del Estado de Visibilidad de la SPA */
+/* Control Dinámico del Motor SPA */
 .portal-view[hidden],
 .portal-view[aria-hidden="true"] {
     display: none !important;
 }
 
 @keyframes fadeInView {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .view-header {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     border-left: 4px solid var(--organic-emerald);
-    padding-left: 1rem;
+    padding-left: 1.25rem;
 }
 
 .view-header h2 {
     font-family: var(--font-primary);
     font-weight: 700;
-    font-size: 1.75rem;
+    font-size: 1.8rem;
     color: var(--clinical-graphite);
+    letter-spacing: -0.02em;
 }
 
 .view-subtitle {
     font-family: var(--font-secondary);
     color: var(--data-slate);
-    font-size: 1rem;
-    margin-top: 0.25rem;
+    font-size: 0.95rem;
+    margin-top: 0.35rem;
 }
 
 /* ==========================================================================
-   4. DASHBOARD GRIDS (Estructura de Bloques Analíticos)
+   4. DASHBOARD GRIDS (Diseño Bidimensional de Datos de Precisión)
    ========================================================================== */
 .dashboard-grid {
     display: grid;
     gap: 1.5rem;
 }
 
-/* Grid Perfil Paciente: 2 Columnas principales */
+/* Grid Perfil Paciente */
 .grid-paciente {
     grid-template-columns: repeat(2, 1fr);
 }
@@ -238,46 +317,45 @@ body.clinical-env {
     grid-column: span 2;
 }
 
-/* Grid Corporativo: Diseño asimétrico de tres bloques */
+/* Grid Corporativo Analítico */
 .grid-corporativo {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.6fr 1.4fr;
 }
 
 .kpi-summary {
     grid-column: span 2;
 }
 
-/* Estilo Base de las Tarjetas del Panel */
+/* Estilo Base de las Tarjetas Corporativas */
 .panel-card {
     background-color: var(--sanitary-white);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 1.5rem;
+    padding: 1.75rem;
     box-shadow: var(--card-shadow);
 }
 
 .panel-card h3 {
     font-family: var(--font-primary);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--clinical-graphite);
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.05em;
 }
 
 /* ==========================================================================
    5. COMPONENTES CLÍNICOS E INDICADORES (Métricas)
    ========================================================================== */
-/* Bloques de Métricas Metabólicas */
 .metrics-subgrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
 }
 
 .metric-box {
-    padding: 1.25rem;
+    padding: 1.5rem;
     border-radius: 6px;
     border-left: 4px solid var(--data-slate);
     background-color: var(--clinical-bg);
@@ -291,37 +369,38 @@ body.clinical-env {
     font-family: var(--font-secondary);
     font-size: 0.85rem;
     color: var(--data-slate);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.4rem;
 }
 
 .metric-value {
     display: block;
-    font-size: 1.6rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--clinical-graphite);
+    line-height: 1.2;
 }
 
 .metric-status {
     font-size: 0.8rem;
     font-weight: 700;
     display: block;
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
 }
 
 .metric-box.alert .metric-status { color: var(--alert-red); }
 .metric-box.stable .metric-status { color: var(--organic-emerald); }
 
-/* Tablas de Datos Clínicos */
+/* Tablas Clínicas Estructuradas */
 .clinical-data-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
+    margin-top: 1.25rem;
     font-size: 0.9rem;
 }
 
 .clinical-data-table th, 
 .clinical-data-table td {
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1.1rem;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
 }
@@ -331,35 +410,40 @@ body.clinical-env {
     font-weight: 700;
     background-color: var(--clinical-bg);
     color: var(--clinical-graphite);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
 }
 
 .plan-summary {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--clinical-graphite);
-    background-color: rgba(75, 159, 134, 0.05);
-    padding: 1rem;
+    background-color: rgba(75, 159, 134, 0.04);
+    padding: 1.1rem;
     border-radius: 6px;
-    border: 1px solid rgba(75, 159, 134, 0.2);
+    border: 1px solid rgba(75, 159, 134, 0.15);
 }
 
 /* Badges Clínicos */
 .badge {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    padding: 0.25rem 0.6rem;
+    padding: 0.3rem 0.7rem;
     border-radius: 4px;
     text-transform: uppercase;
+    letter-spacing: 0.02em;
+    display: inline-block;
 }
 
-.badge.success { background-color: rgba(75, 159, 134, 0.15); color: var(--organic-emerald); }
-.badge.warning { background-color: rgba(217, 83, 79, 0.15); color: var(--alert-red); }
+.badge.success { background-color: rgba(75, 159, 134, 0.12); color: var(--organic-emerald); }
+.badge.warning { background-color: rgba(217, 83, 79, 0.12); color: var(--alert-red); }
 
-/* Placeholders para Gráficos Semánticos (Canvas/SVG de Datos) */
+/* Gráficos Marcadores */
 .clinical-chart-placeholder {
     background-color: var(--clinical-bg);
     border: 2px dashed var(--border-color);
     border-radius: 6px;
-    height: 260px;
+    height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -368,7 +452,7 @@ body.clinical-env {
 
 .chart-fallback-text {
     font-family: var(--font-secondary);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--data-slate);
     text-align: center;
 }
@@ -378,13 +462,13 @@ body.clinical-env {
    ========================================================================== */
 .kpi-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
 }
 
 .kpi-card {
     background-color: var(--clinical-bg);
-    padding: 1.25rem;
+    padding: 1.5rem;
     border-radius: 6px;
     border: 1px solid var(--border-color);
 }
@@ -397,10 +481,11 @@ body.clinical-env {
 
 .kpi-value {
     display: block;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--clinical-graphite);
-    line-height: 1.2;
+    line-height: 1.1;
+    margin: 0.25rem 0;
 }
 
 .kpi-trend {
@@ -411,7 +496,13 @@ body.clinical-env {
 .kpi-trend.positive { color: var(--organic-emerald); }
 .kpi-trend.stable { color: var(--data-slate); }
 
-/* Repositorio Documental Gerencial (Hoja Gerencial) */
+.section-desc {
+    font-size: 0.9rem;
+    color: var(--data-slate);
+    margin-bottom: 1.25rem;
+}
+
+/* Gestión Documental (Hoja Gerencial) */
 .report-list {
     list-style: none;
     display: flex;
@@ -423,7 +514,7 @@ body.clinical-env {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 1rem;
+    padding: 1rem;
     background-color: var(--clinical-bg);
     border-radius: 6px;
     border: 1px solid var(--border-color);
@@ -440,19 +531,20 @@ body.clinical-env {
     display: block;
     font-size: 0.75rem;
     color: var(--data-slate);
+    margin-top: 0.1rem;
 }
 
 .btn-download {
     background-color: var(--sanitary-white);
     border: 1px solid var(--organic-emerald);
     color: var(--organic-emerald);
-    padding: 0.5rem 0.9rem;
+    padding: 0.5rem 1rem;
     font-family: var(--font-secondary);
     font-size: 0.8rem;
     font-weight: 700;
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: var(--transition-clinical);
     white-space: nowrap;
 }
 
@@ -462,20 +554,115 @@ body.clinical-env {
 }
 
 /* ==========================================================================
-   7. FOOTER DE CONTROL & RESPONSIVE DESIGN (MEDIA QUERIES)
+   7. FOOTER INSTITUCIONAL COMPLETO & SYSTEM RESPONSIVE
    ========================================================================== */
 .portal-footer {
     background-color: var(--clinical-graphite);
-    color: rgba(255, 255, 255, 0.6);
-    text-align: center;
-    padding: 1.5rem 2rem;
-    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 4rem 2rem 2rem 2rem;
     margin-top: auto;
-    border-top: 3px solid var(--organic-emerald);
+    border-top: 4px solid var(--organic-emerald);
 }
 
-/* Adaptabilidad para Dispositivos Móviles y Tablets */
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-brand-col .footer-logo {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--sanitary-white);
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.footer-tagline {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.55);
+    max-width: 320px;
+}
+
+.footer-grid h4 {
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    color: var(--sanitary-white);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.25rem;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: var(--transition-clinical);
+}
+
+.footer-links a:hover, .footer-links a.active {
+    color: var(--organic-emerald);
+    padding-left: 4px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.footer-socials a {
+    font-family: var(--font-secondary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--organic-emerald);
+    text-decoration: none;
+    border: 1px solid rgba(75, 159, 134, 0.3);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: var(--transition-clinical);
+}
+
+.footer-socials a:hover {
+    background-color: var(--organic-emerald);
+    color: var(--sanitary-white);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================================================
+   8. MEDIA QUERIES (Ecosistema Responsive Control)
+   ========================================================================== */
 @media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
     .grid-corporativo {
         grid-template-columns: 1fr;
     }
@@ -485,19 +672,62 @@ body.clinical-env {
 }
 
 @media (max-width: 768px) {
-    .header-container {
+    .mobile-nav-toggle {
+        display: block; /* Despliegue del disparador del menú */
+    }
+
+    .portal-nav {
+        position: fixed;
+        top: 66px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 66px);
+        background-color: var(--sanitary-white);
+        z-index: 1050;
+        transition: var(--transition-clinical);
+        align-items: flex-start;
+        padding: 2rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    /* Estado Activo Inyectado por Javascript Namespace */
+    .portal-nav.nav-active {
+        left: 0;
+    }
+
+    .nav-links-wrapper {
         flex-direction: column;
+        width: 100%;
+        background: none;
+        border: none;
+        padding: 0;
+        gap: 1.5rem;
         align-items: flex-start;
     }
-    
-    .portal-nav {
+
+    .nav-link-public, .nav-tab {
         width: 100%;
-        flex-direction: column;
+        font-size: 1.1rem;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
     }
-    
+
+    .nav-tab.active {
+        background-color: var(--clinical-bg);
+        border-left: 4px solid var(--organic-emerald);
+        border-radius: 0 6px 6px 0;
+    }
+
+    .nav-divider {
+        display: none;
+    }
+
+    .header-container {
+        padding: 1rem;
+    }
+
     .user-session-control {
-        width: 100%;
-        justify-content: space-between;
+        display: none; /* Se oculta o compacta para proteger el espacio del viewport crítico */
     }
 
     .grid-paciente {
@@ -506,5 +736,9 @@ body.clinical-env {
 
     .critical-indicators {
         grid-column: span 1;
+    }
+    
+    .portal-main {
+        padding: 2rem 1rem;
     }
 }

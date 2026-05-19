@@ -1,8 +1,8 @@
 /**
  * ==========================================================================
  * JADE CORE - MÓDULO 8: LEGAL Y PRIVACIDAD
- * Patrón de Arquitectura: Namespace Pattern
- * Componentes: Sistema de ScrollSpy Autónomo, Gestión de Consentimiento Informado
+ * Patrón de Arquitectura: Namespace Pattern (Producción Core)
+ * Componentes: Menú Responsive UI, ScrollSpy Autónomo, Consentimiento Informado
  * ==========================================================================
  */
 
@@ -15,10 +15,15 @@ const JadeCoreLegal = {
         lastUpdate: '2026-05-18'
     },
 
-    // 2. CACHE DEL DOM
+    // 2. CACHE DEL DOM (DOM SELECTORS)
     dom: {},
 
     initSelectors: function() {
+        // Selectores de Infraestructura Global (Navbar Móvil)
+        this.dom.navToggle = document.querySelector('.mobile-nav-toggle');
+        this.dom.navMenu = document.querySelector('.nav-menu');
+
+        // Selectores del Formulario Regulatorio
         this.dom.form = document.getElementById('legalForm');
         this.dom.chkTerms = document.getElementById('chkTerms');
         this.dom.chkData = document.getElementById('chkData');
@@ -33,31 +38,58 @@ const JadeCoreLegal = {
     // 3. PUNTO DE ENTRADA (ENTRY POINT)
     init: function() {
         this.initSelectors();
-        if (this.dom.form) {
-            this.loadStoredConsent();
-            this.registerEvents();
-            this.initScrollSpy();
-        }
+        this.loadStoredConsent();
+        this.registerEvents();
+        this.initScrollSpy();
     },
 
     // 4. REGISTRO DE EVENTOS (EVENT BINDING)
     registerEvents: function() {
-        this.dom.form.addEventListener('submit', (e) => this.handleConsentSubmit(e));
-        this.dom.btnRevoke.addEventListener('click', () => this.handleConsentRevocation());
+        // Evento de Interfaz: Menú Adaptativo
+        if (this.dom.navToggle && this.dom.navMenu) {
+            this.dom.navToggle.addEventListener('click', () => this.handleMenuToggle());
+        }
+
+        // Eventos del Formulario de Consentimiento
+        if (this.dom.form) {
+            this.dom.form.addEventListener('submit', (e) => this.handleConsentSubmit(e));
+        }
+        if (this.dom.btnRevoke) {
+            this.dom.btnRevoke.addEventListener('click', () => this.handleConsentRevocation());
+        }
         
         // Limpieza de estados de error dinámicos
-        [this.dom.chkTerms, this.dom.chkData].forEach(checkbox => {
-            checkbox.addEventListener('change', (e) => this.clearFieldError(e.target));
+        const checkboxes = [this.dom.chkTerms, this.dom.chkData];
+        checkboxes.forEach(checkbox => {
+            if (checkbox) {
+                checkbox.addEventListener('change', (e) => this.clearFieldError(e.target));
+            }
         });
 
-        // Sincronización nativa de ScrollSpy en el evento de scroll general
+        // Sincronización de ScrollSpy en tiempo de ejecución
         window.addEventListener('scroll', () => this.runScrollSpy());
     },
 
-    // 5. MOTOR SCROLLSPY (DETECCIÓN DE SECCIÓN ACTIVA)
+    // 5. CONTROLADOR DEL MENÚ RESPONSIVE INTERACTIVO
+    handleMenuToggle: function() {
+        const isOpen = this.dom.navMenu.classList.contains('nav-active');
+        
+        if (isOpen) {
+            this.dom.navMenu.classList.remove('nav-active');
+            this.dom.navToggle.classList.remove('nav-active');
+            this.dom.navToggle.setAttribute('aria-expanded', 'false');
+        } else {
+            this.dom.navMenu.classList.add('nav-active');
+            this.dom.navToggle.classList.add('nav-active');
+            this.dom.navToggle.setAttribute('aria-expanded', 'true');
+        }
+    },
+
+    // 6. MOTOR SCROLLSPY (DETECCIÓN DE SECCIÓN ACTIVA EN LECTURA)
     runScrollSpy: function() {
         let currentSectionId = '';
-        const scrollPosition = window.scrollY + 100; // Offset para mejorar la precisión del trigger visual
+        // Offset de precisión compensatorio por la altura del Navbar Fijo (80px) + margen prudencial
+        const scrollPosition = window.scrollY + 120; 
 
         this.dom.sections.forEach(section => {
             const sectionTop = section.offsetTop;
@@ -78,12 +110,11 @@ const JadeCoreLegal = {
         }
     },
 
-    // Ejecución inicial preventiva por si el usuario recarga la página en una sección intermedia
     initScrollSpy: function() {
         this.runScrollSpy();
     },
 
-    // 6. LOGICA DE PERSISTENCIA (LOCALSTORAGE SANITIZADO)
+    // 7. LÓGICA DE PERSISTENCIA (LOCALSTORAGE SANITIZADO)
     loadStoredConsent: function() {
         const localData = localStorage.getItem('JadeCore_Consent_Manifest');
         if (localData) {
@@ -91,17 +122,17 @@ const JadeCoreLegal = {
                 const parsed = JSON.parse(localData);
                 this.state = { ...this.state, ...parsed };
                 
-                // Reflejar estado persistido directamente en los elementos del DOM
-                this.dom.chkTerms.checked = this.state.hasAcceptedTerms;
-                this.dom.chkData.checked = this.state.hasAcceptedDataProcessing;
-                this.dom.chkAI.checked = this.state.hasAcceptedAIModelTraining;
+                // Sincronizar UI con el estado recuperado
+                if (this.dom.chkTerms) this.dom.chkTerms.checked = this.state.hasAcceptedTerms;
+                if (this.dom.chkData) this.dom.chkData.checked = this.state.hasAcceptedDataProcessing;
+                if (this.dom.chkAI) this.dom.chkAI.checked = this.state.hasAcceptedAIModelTraining;
             } catch (error) {
                 console.error("Error en la lectura del manifiesto de consentimiento seguro:", error);
             }
         }
     },
 
-    // 7. CONTROLADOR DE ENVÍO Y VALIDACIÓN REGULATORIA
+    // 8. CONTROLADOR DE ENVÍO Y VALIDACIÓN REGULATORIA
     handleConsentSubmit: function(event) {
         event.preventDefault();
         let isFormValid = true;
@@ -127,11 +158,11 @@ const JadeCoreLegal = {
             // Almacenamiento seguro del manifiesto normativo
             localStorage.setItem('JadeCore_Consent_Manifest', JSON.stringify(this.state));
             
-            alert('Preferencias de Consentimiento Actualizadas.\nEl manifiesto legal ha sido registrado y encriptado en su sesión local.');
+            alert('Preferencias de Consentimiento Actualizadas.\nEl manifiesto legal ha sido registrado y guardado de manera segura.');
         }
     },
 
-    // 8. REVOCACIÓN TOTAL DE PERMISOS (DERECHOS ARCO)
+    // 9. REVOCACIÓN TOTAL DE PERMISOS (DERECHOS ARCO)
     handleConsentRevocation: function() {
         const confirmRevoke = confirm(
             'ADVERTENCIA DE SEGURIDAD CLÍNICA:\n\n' +
@@ -140,7 +171,6 @@ const JadeCoreLegal = {
         );
 
         if (confirmRevoke) {
-            // Reset de estados
             this.state.hasAcceptedTerms = false;
             this.state.hasAcceptedDataProcessing = false;
             this.state.hasAcceptedAIModelTraining = false;
@@ -148,12 +178,13 @@ const JadeCoreLegal = {
             localStorage.removeItem('JadeCore_Consent_Manifest');
             this.dom.form.reset();
             
-            alert('Permisos revocados con éxito. Se han purgado los registros de consentimiento del cliente.');
+            alert('Permisos revocados con éxito. Se han purgado los registros de consentimiento locales.');
         }
     },
 
-    // Manejo de Errores Visuales
+    // Manejo de Interfaces de Error
     setFieldError: function(element, message) {
+        if (!element) return;
         const errorSpan = document.getElementById(`error-${element.id}`);
         if (errorSpan) {
             errorSpan.textContent = message;
@@ -161,6 +192,7 @@ const JadeCoreLegal = {
     },
 
     clearFieldError: function(element) {
+        if (!element) return;
         const errorSpan = document.getElementById(`error-${element.id}`);
         if (errorSpan) {
             errorSpan.textContent = '';
@@ -168,7 +200,7 @@ const JadeCoreLegal = {
     }
 };
 
-// Inicialización del script cuando el DOM esté listo
+// Inicialización del módulo una vez cargado el árbol DOM
 document.addEventListener('DOMContentLoaded', () => {
     JadeCoreLegal.init();
 });

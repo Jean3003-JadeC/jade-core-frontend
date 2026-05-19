@@ -4,36 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recursos y Evidencia | Jade Core - Tecnología & Salud</title>
-    <meta name="description" content="Centro de conocimiento, artículos clínicos de nutrición renal, casos de estudio en Business Intelligence y descargas de material técnico de Jade Core.">
-    <!-- Tipografías Institucionales -->
+    <meta name="description" content="Centro de conocimiento integrado, meta-análisis de nutrición renal, casos de estudio en Business Intelligence y descargas de material clínico de Jade Core.">
+    <!-- Tipografías Institucionales Obligatorias -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700;800&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Estilos Vinculados -->
+    <!-- Enlace Simétrico a Estilos del Módulo -->
     <link rel="stylesheet" href="../Styles/recursos.css">
 </head>
 <body class="clinical-context">
 
-    <!-- Encabezado Corporativo Común -->
+    <!-- CAPA 1: ENCABEZADO CORPORATIVO UNIFICADO -->
     <header class="main-header">
         <div class="header-container">
             <div class="brand-identity">
                 <span class="logo-title">JADE CORE</span>
-                <span class="logo-descriptor">TECNOLOGÍA & SALUD</span>
+                <span class="logo-descriptor">TECNOLOGIA & SALUD</span>
             </div>
-            <nav class="main-navigation" aria-label="Navegación principal">
+            
+            <!-- Botón de Control para Dispositivos Móviles (Requerido por Arquitectura) -->
+            <button class="mobile-nav-toggle" aria-label="Abrir menú de navegación" aria-controls="primary-navigation" aria-expanded="false">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+
+            <!-- Sistema de Navegación Interconectado Completo (8 Módulos) -->
+            <nav class="main-navigation" id="primary-navigation" aria-label="Navegación principal">
                 <ul>
                     <li><a href="home.html">Home</a></li>
                     <li><a href="nosotros.html">Nosotros</a></li>
                     <li><a href="servicios.html">Servicios</a></li>
                     <li><a href="metodologia.html">Metodología</a></li>
                     <li><a href="recursos.html" class="active" aria-current="page">Recursos</a></li>
+                    <li><a href="portal.html">Portal</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="legal.html">Legal</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Héroe del Módulo / Introducción Científica -->
+    <!-- HÉROE DEL MÓDULO / INTRODUCCIÓN CIENTÍFICA -->
     <main id="main-content">
         <section class="resources-hero section-padding-lg">
             <div class="container">
@@ -44,7 +56,7 @@
                     y herramientas técnicas estructuradas para profesionales e instituciones médicas.
                 </p>
                 
-                <!-- Filtros del Repositorio para Interacción Dinámica -->
+                <!-- Filtros del Repositorio para Interacción Dinámica (Namespace Control) -->
                 <div class="repository-filters" role="tablist" aria-label="Filtrar recursos">
                     <button class="filter-btn active" role="tab" aria-selected="true" data-filter="all">Todos los Recursos</button>
                     <button class="filter-btn" role="tab" aria-selected="false" data-filter="clinical">Artículos Clínicos</button>
@@ -54,7 +66,7 @@
             </div>
         </section>
 
-        <!-- Bloque Principal de Contenidos -->
+        <!-- BLOQUE PRINCIPAL DE CONTENIDOS -->
         <section class="knowledge-grid-section section-padding-md">
             <div class="container">
                 <div class="resources-grid">
@@ -148,7 +160,7 @@
                             </p>
                             <div class="card-footer">
                                 <span class="file-info">PDF (4.2 MB)</span>
-                                <a href="#" class="btn-download" download aria-label="Descargar flujograma de operaciones RIS">
+                                <a href="../Assets/Docs/flujograma-ris.pdf" class="btn-download" download aria-label="Descargar flujograma de operaciones RIS">
                                     <span class="btn-icon">📥</span> Descargar Documento
                                 </a>
                             </div>
@@ -165,7 +177,7 @@
                             </p>
                             <div class="card-footer">
                                 <span class="file-info">PDF (2.8 MB)</span>
-                                <a href="#" class="btn-download" download aria-label="Descargar guía de prescripción de macronutrientes">
+                                <a href="../Assets/Docs/guia-macronutrientes-renal.pdf" class="btn-download" download aria-label="Descargar guía de prescripción de macronutrientes">
                                     <span class="btn-icon">📥</span> Descargar Documento
                                 </a>
                             </div>
@@ -177,20 +189,42 @@
         </section>
     </main>
 
-    <!-- Pie de Página Corporativo Común -->
+    <!-- PIE DE PÁGINA CORPORATIVO AUDITADO (Ecosistema & Marco Legal) -->
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-brand">
                 <span class="logo-title">JADE CORE</span>
                 <p class="footer-tagline">Ecosistema Clínico, Tecnológico y de Gestión de Precisión.</p>
+                <div class="footer-channels">
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="Perfil institucional de LinkedIn">LinkedIn</a>
+                    <a href="https://wa.me/XXXXXXXXX" target="_blank" rel="noopener noreferrer" aria-label="Canal de atención directa por WhatsApp">WhatsApp</a>
+                </div>
             </div>
+            
+            <div class="footer-map">
+                <span class="map-title">Ecosistema</span>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="metodologia.html">Metodología</a></li>
+                    <li><a href="recursos.html">Recursos y Evidencias</a></li>
+                </ul>
+            </div>
+
             <div class="footer-legal">
-                <p>&copy; 2026 Jade Core. Todos los derechos reservados. Tecnología & Salud.</p>
+                <span class="map-title">Regulaciones</span>
+                <ul>
+                    <li><a href="legal.html">Términos y Condiciones</a></li>
+                    <li><a href="legal.html#privacidad">Política de Privacidad</a></li>
+                    <li><a href="legal.html#cookies">Control de Cookies</a></li>
+                </ul>
+                <p class="footer-copyright">&copy; 2026 Jade Core. Todos los derechos reservados. TECNOLOGIA & SALUD.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Script de Control del Módulo -->
+    <!-- Controlador Lógico del Módulo -->
     <script src="../Scripts/recursos.js"></script>
 </body>
 </html>
