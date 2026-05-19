@@ -1,0 +1,294 @@
+/* ==========================================================================
+   VARIABLES CORPORATIVAS (JADE CORE)
+   ========================================================================== */
+:root {
+    --organic-emerald: #4B9F86;
+    --clinical-graphite: #4A4D50;
+    --data-slate: #6C757D;
+    --sanitary-white: #FFFFFF;
+    --background-light: #F8F9FA;
+    
+    /* Tipografías */
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Lato', sans-serif;
+    --font-reading: 'Open Sans', sans-serif;
+}
+
+/* ==========================================================================
+   ESTILOS GENERALES DE MAQUETACIÓN
+   ========================================================================== */
+body {
+    font-family: var(--font-reading);
+    font-weight: 300; /* Open Sans Light por defecto para textos extensos */
+    color: var(--clinical-graphite);
+    line-height: 1.6;
+    background-color: var(--sanitary-white);
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    padding-top: 80px; /* Offset de seguridad para el Sticky Header */
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* Componentes de Texto Reutilizables */
+.section-subtitle {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    letter-spacing: 0.2em; /* Tracking +200 */
+    color: var(--organic-emerald);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.section-subtitle-light {
+    composes: .section-subtitle;
+    color: var(--organic-emerald);
+    opacity: 0.9;
+}
+
+.section-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    color: var(--clinical-graphite);
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.section-title-dark {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    color: #2B2D2F; /* Variante profunda para legibilidad sobre fondo claro */
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.section-title-light {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    color: var(--sanitary-white);
+    font-size: 2.2rem;
+    margin-top: 0;
+}
+
+/* ==========================================================================
+   SECCIÓN 1: HERO DE IDENTIDAD Y FILOSOFÍA
+   ========================================================================== */
+.about-hero {
+    background-color: var(--background-light);
+    border-bottom: 1px solid #EAEAEA;
+    text-align: center;
+}
+
+.about-hero .section-container {
+    max-width: 850px; /* Contenedor óptimo para lectura de párrafos largos */
+    padding: 80px 20px;
+}
+
+.hero-lead {
+    font-size: 1.15rem;
+    color: var(--clinical-graphite);
+    text-align: justify;
+    text-align-last: center; /* Estética clínica y centrada */
+}
+
+.hero-lead strong {
+    font-family: var(--font-reading);
+    font-weight: 700; /* Open Sans Bold para valores críticos y énfasis */
+    color: var(--organic-emerald);
+}
+
+/* ==========================================================================
+   SECCIÓN 2: EL EQUIPO MULTIDISCIPLINARIO
+   ========================================================================== */
+.about-team {
+    background-color: var(--sanitary-white);
+}
+
+.team-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+}
+
+.section-description {
+    color: var(--data-slate);
+    font-size: 1rem;
+}
+
+/* Grid del Equipo */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.team-card {
+    background: var(--sanitary-white);
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(74, 77, 80, 0.08); /* Sombra sutil clínica, no comercial */
+}
+
+/* Marcadores para las fotos profesionales */
+.photo-placeholder {
+    height: 280px;
+    background-color: #E9ECEF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    color: var(--data-slate);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 3px solid var(--data-slate);
+    transition: border-color 0.3s ease;
+}
+
+/* Modificadores de color según especialidad en hover */
+.team-card[data-specialty="clinical"]:hover .photo-placeholder { border-color: var(--organic-emerald); }
+.team-card[data-specialty="data"]:hover .photo-placeholder { border-color: #3B82F6; } /* Azul analítico */
+.team-card[data-specialty="management"]:hover .photo-placeholder { border-color: #8B5CF6; } /* Púrpura estratégico */
+
+.member-info {
+    padding: 25px;
+}
+
+.member-tag {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.tag-clinical { background-color: #EBF7F4; color: var(--organic-emerald); }
+.tag-data { background-color: #EFF6FF; color: #3B82F6; }
+.tag-management { background-color: #F5F3FF; color: #8B5CF6; }
+
+.member-name {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    color: var(--clinical-graphite);
+    font-size: 1.3rem;
+    margin: 0 0 12px 0;
+}
+
+.member-bio {
+    font-size: 0.9rem;
+    color: var(--data-slate);
+    margin: 0;
+    text-align: justify;
+}
+
+/* ==========================================================================
+   SECCIÓN 3: VISIÓN CORPORATIVA
+   ========================================================================== */
+.about-vision {
+    background-color: var(--clinical-graphite); /* Fondo oscuro para contraste */
+    color: var(--sanitary-white);
+}
+
+.grid-two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.vision-text-block {
+    padding-right: 20px;
+}
+
+.vision-paragraph {
+    color: #DFE2E4; /* Gris ultra claro para óptima legibilidad */
+    font-size: 1.05rem;
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+.vision-quote {
+    border-left: 4px solid var(--organic-emerald);
+    margin: 0;
+    padding-left: 20px;
+    font-family: var(--font-secondary);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--sanitary-white);
+}
+
+/* Marcador Gráfico del Ecosistema */
+.ecosystem-graphic-placeholder {
+    background: linear-gradient(135deg, rgba(75,159,134,0.1) 0%, rgba(74,77,80,0.3) 100%);
+    border: 1px dashed var(--organic-emerald);
+    height: 350px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.ecosystem-graphic-placeholder span {
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+    color: #DFE2E4;
+    text-align: center;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .grid-two-columns {
+        grid-template-columns: 1fr; /* Colapsa a una columna en tablets */
+        gap: 40px;
+    }
+    
+    .vision-text-block {
+        padding-right: 0;
+    }
+    
+    .ecosystem-graphic-placeholder {
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title { font-size: 2rem; }
+    .section-title-dark { font-size: 1.8rem; }
+    .section-title-light { font-size: 1.8rem; }
+    
+    .about-hero .section-container {
+        padding: 50px 20px;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr; /* Tarjetas full-width en móviles */
+    }
+}

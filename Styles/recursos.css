@@ -1,0 +1,436 @@
+/* ==========================================================================
+   CSS ARQUITECTURA: RECURSOS Y EVIDENCIA - JADE CORE
+   Estilo: Estrictamente Clínico, Corporativo y de Alta Precisión.
+   ========================================================================== */
+
+/* --- TOKENS DE DISEÑO E INSTITUCIONALES --- */
+:root {
+    /* Paleta de Colores Oficial */
+    --color-jade: #4B9F86;
+    --color-graphite: #4A4D50;
+    --color-slate: #6C757D;
+    --color-white: #FFFFFF;
+    --color-bg-clinical: #F8F9FA;
+    --color-bg-white: #FFFFFF;
+    
+    /* Variaciones Clínicas Adicionales */
+    --color-border-soft: #E9ECEF;
+    --color-metric-bg: #F1F3F5;
+    --color-shadow-clinical: rgba(74, 77, 80, 0.05);
+    --color-shadow-hover: rgba(75, 159, 134, 0.12);
+
+    /* Fuentes */
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Lato', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+    
+    /* Transiciones Estándar */
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- RESET Y AJUSTES BASE DE CONTEXTO --- */
+.clinical-context {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--color-bg-clinical);
+    color: var(--color-graphite);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.clinical-context *, 
+.clinical-context *::before, 
+.clinical-context *::after {
+    box-sizing: inherit;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- ENCABEZADO CORPORATIVO (SIMETRÍA) --- */
+.main-header {
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border-soft);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px var(--color-shadow-clinical);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.brand-identity {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-title {
+    font-family: var(--font-primary);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--color-graphite);
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.logo-descriptor {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.65rem;
+    color: var(--color-jade);
+    letter-spacing: 0.2em;
+    margin-top: 0.25rem;
+}
+
+.main-navigation ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+}
+
+.main-navigation a {
+    text-decoration: none;
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--color-slate);
+    transition: var(--transition-smooth);
+}
+
+.main-navigation a:hover,
+.main-navigation a.active {
+    color: var(--color-jade);
+}
+
+/* --- SECCIÓN HÉROE / REPOSITORIO CIENTÍFICO --- */
+.resources-hero {
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border-soft);
+    padding: 4.5rem 0 3.5rem 0;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--color-jade);
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.section-title-main {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 2.4rem;
+    color: var(--color-graphite);
+    margin: 0 0 1.2rem 0;
+    letter-spacing: -0.01em;
+}
+
+.hero-lead-text {
+    font-family: var(--font-body);
+    font-weight: 300; /* Open Sans Light */
+    font-size: 1.15rem;
+    color: var(--color-slate);
+    max-width: 750px;
+    margin: 0 auto 2.5rem auto;
+}
+
+/* --- FILTROS DE INTERFAZ (TABS) --- */
+.repository-filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background-color: var(--color-bg-clinical);
+    border: 1px solid var(--color-border-soft);
+    color: var(--color-graphite);
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.filter-btn:hover {
+    background-color: var(--color-white);
+    border-color: var(--color-jade);
+    color: var(--color-jade);
+}
+
+.filter-btn.active {
+    background-color: var(--color-jade);
+    border-color: var(--color-jade);
+    color: var(--color-white);
+    box-shadow: 0 4px 12px rgba(75, 159, 134, 0.2);
+}
+
+/* --- REPOSITORIO GRID Y CARDS --- */
+.knowledge-grid-section {
+    padding: 4rem 0;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 2rem;
+}
+
+/* Tarjeta Base de Recursos */
+.resource-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border-soft);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px var(--color-shadow-clinical);
+    transition: var(--transition-smooth);
+    opacity: 0; /* Controlado por el IntersectionObserver en JS */
+    transform: translateY(20px);
+}
+
+.resource-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.resource-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(75, 159, 134, 0.4);
+    box-shadow: 0 12px 20px var(--color-shadow-hover);
+}
+
+/* Badges e Identificadores de Categoría */
+.card-badge {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    background-color: var(--color-bg-clinical);
+    border: 1px solid var(--color-border-soft);
+    color: var(--color-slate);
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+}
+
+.resource-card[data-category="clinical"] .card-badge {
+    border-left: 3px solid var(--color-jade);
+}
+
+.resource-card[data-category="bi"] .card-badge {
+    border-left: 3px solid var(--color-graphite);
+}
+
+.download-badge {
+    border-left: 3px solid var(--color-slate) !important;
+}
+
+/* Contenido Interno */
+.card-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-meta {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--color-jade);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.card-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-graphite);
+    line-height: 1.4;
+    margin: 0 0 1rem 0;
+}
+
+.card-excerpt {
+    font-family: var(--font-body);
+    font-weight: 300; /* Open Sans Light */
+    font-size: 0.95rem;
+    color: var(--color-slate);
+    margin: 0 0 1.5rem 0;
+    flex-grow: 1;
+}
+
+/* Métricas Analíticas Avanzadas (Módulo BI) */
+.card-metrics {
+    display: flex;
+    gap: 1rem;
+    background-color: var(--color-metric-bg);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    border-left: 2px solid var(--color-graphite);
+}
+
+.metric-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-value {
+    font-family: var(--font-primary);
+    font-weight: 700; /* Open Sans Bold para valores críticos */
+    font-size: 1.3rem;
+    color: var(--color-graphite);
+    line-height: 1.1;
+}
+
+.metric-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-slate);
+    margin-top: 0.15rem;
+}
+
+/* Footer de Tarjetas y Enlaces */
+.card-footer {
+    border-top: 1px solid var(--color-border-soft);
+    padding-top: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.read-time, .file-info {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-slate);
+}
+
+.btn-text-link {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--color-jade);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.btn-text-link:hover {
+    color: var(--color-graphite);
+}
+
+/* Componente de Descarga de Archivos */
+.btn-download {
+    background-color: var(--color-bg-clinical);
+    border: 1px solid var(--color-border-soft);
+    color: var(--color-graphite);
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: var(--transition-smooth);
+}
+
+.btn-download:hover {
+    background-color: var(--color-jade);
+    color: var(--color-white);
+    border-color: var(--color-jade);
+}
+
+.btn-icon {
+    font-size: 0.9rem;
+}
+
+/* --- PIE DE PÁGINA CORPORATIVO (SIMETRÍA) --- */
+.main-footer {
+    background-color: var(--color-graphite);
+    color: var(--color-white);
+    padding: 3rem 0;
+    margin-top: auto;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.footer-brand .logo-title {
+    color: var(--color-white);
+}
+
+.footer-tagline {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 0.85rem;
+    color: var(--color-bg-clinical);
+    margin: 0.25rem 0 0 0;
+}
+
+.footer-legal p {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-bg-clinical);
+    margin: 0;
+}
+
+/* --- RESPONSIVE DESIGN (MEDIA QUERIES) --- */
+@media (max-width: 992px) {
+    .section-title-main { font-size: 2rem; }
+    .header-container, .footer-container { flex-direction: column; text-align: center; }
+    .main-navigation { margin-top: 1.5rem; }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; }
+}
+
+@media (max-width: 576px) {
+    .container { padding: 0 1rem; }
+    .resources-grid { grid-template-columns: 1fr; }
+    .repository-filters { flex-direction: column; width: 100%; }
+    .filter-btn { width: 100%; text-align: center; }
+    .card-footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .btn-download { width: 100%; justify-content: center; }
+}

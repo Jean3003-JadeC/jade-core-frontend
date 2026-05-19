@@ -1,0 +1,301 @@
+/* ==========================================================================
+   CSS VARIABLES & CORE SETTINGS
+   ========================================================================== */
+:root {
+    /* Color Palette */
+    --organic-emerald: #4B9F86;   /* Verde Jade */
+    --clinical-graphite: #4A4D50; /* Gris Carbono */
+    --data-slate: #6C757D;        /* Gris Niebla */
+    --sanitary-white: #FFFFFF;    /* Blanco Puro */
+    --bg-light: #F8F9FA;          /* Fondo Clínico Suave */
+    
+    /* Typography */
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Lato', sans-serif;
+    --font-reading: 'Open Sans', sans-serif;
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-reading);
+    background-color: var(--bg-light);
+    color: var(--clinical-graphite);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   HEADER & NAVIGATION (Coherencia Estructural)
+   ========================================================================== */
+.main-header {
+    background-color: var(--sanitary-white);
+    border-bottom: 2px solid rgba(75, 159, 134, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-title {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--clinical-graphite);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.logo-descriptor {
+    font-family: var(--font-secondary);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--organic-emerald);
+    letter-spacing: 0.2em; /* Tracking +200 */
+    margin-top: 0.2rem;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--data-slate);
+    transition: var(--transition-smooth);
+}
+
+.main-nav a:hover, 
+.main-nav a.active {
+    color: var(--organic-emerald);
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   SERVICES HERO SECTION
+   ========================================================================== */
+.services-hero {
+    background: linear-gradient(135deg, rgba(74, 77, 80, 0.05) 0%, rgba(75, 159, 134, 0.05) 100%);
+    background-color: var(--sanitary-white);
+    padding: 5rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(108, 117, 125, 0.1);
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.services-hero h1 {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--clinical-graphite);
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.hero-subtitle {
+    font-family: var(--font-secondary);
+    font-size: 1.1rem;
+    color: var(--data-slate);
+    font-weight: 300;
+}
+
+/* ==========================================================================
+   SERVICES GRID CONTENT
+   ========================================================================== */
+.services-grid-container {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+}
+
+.service-card {
+    background-color: var(--sanitary-white);
+    border: 1px solid rgba(108, 117, 125, 0.15);
+    border-radius: 4px; /* Bordes sutiles, estilo clínico estructurado */
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Línea superior acentuada para denotar precisión */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--data-slate);
+    transition: var(--transition-smooth);
+}
+
+/* Hover States corporativos y limpios */
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(74, 77, 80, 0.08);
+    border-color: rgba(75, 159, 134, 0.3);
+}
+
+.service-card:hover::before {
+    background-color: var(--organic-emerald);
+}
+
+/* Card Header */
+.service-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.service-icon {
+    width: 45px;
+    height: 45px;
+    background-color: rgba(75, 159, 134, 0.1);
+    color: var(--organic-emerald);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 1.2rem;
+}
+
+.service-card h2 {
+    font-family: var(--font-primary);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--clinical-graphite);
+    line-height: 1.2;
+}
+
+/* Card Body & Technical Lists */
+.service-description {
+    font-family: var(--font-reading);
+    font-size: 0.95rem;
+    font-weight: 300; /* Open Sans Light para bloques extensos */
+    color: var(--clinical-graphite);
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.service-spec-list {
+    list-style: none;
+    margin-top: auto; /* Empuja la lista al fondo si las descripciones varían */
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    border-top: 1px solid rgba(108, 117, 125, 0.1);
+    padding-top: 1.5rem;
+}
+
+.service-spec-list li {
+    font-family: var(--font-reading);
+    font-size: 0.85rem;
+    color: var(--data-slate);
+    position: relative;
+    padding-left: 1.2rem;
+}
+
+/* Bullet personalizado clínico */
+.service-spec-list li::before {
+    content: '◦';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--organic-emerald);
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* Énfasis en valores críticos o palabras clave internas si se requiere */
+.service-spec-list strong {
+    font-weight: 700;
+    color: var(--clinical-graphite);
+}
+
+/* ==========================================================================
+   FOOTER (Coherencia Estructural)
+   ========================================================================== */
+.main-footer {
+    background-color: var(--clinical-graphite);
+    color: var(--sanitary-white);
+    padding: 2rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-container p {
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Media Queries)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .services-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .services-grid-container {
+        grid-template-columns: 1fr;
+        margin: 2rem auto;
+    }
+    
+    .services-hero {
+        padding: 3rem 1rem;
+    }
+    
+    .services-hero h1 {
+        font-size: 2rem;
+    }
+}

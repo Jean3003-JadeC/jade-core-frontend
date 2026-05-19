@@ -1,0 +1,463 @@
+/* ==========================================================================
+   VARIABLES DE NÚCLEO (MANUAL DE IDENTIDAD VISUAL - JADE CORE)
+   ========================================================================== */
+:root {
+    /* Paleta Cromática */
+    --color-jade: #4B9F86;
+    --color-jade-dark: #3a7d69;
+    --color-graphite: #4A4D50;
+    --color-slate: #6C757D;
+    --color-white: #FFFFFF;
+    --color-bg-clinical: #F8F9FA;
+    --color-border: #E2E8F0;
+    --color-error: #D9534F;
+    --color-success: #2ECC71;
+
+    /* Tipografías */
+    --font-titles: 'Montserrat', sans-serif;
+    --font-subtitles: 'Lato', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+
+    /* Estructura y Transiciones */
+    --radius-clinical: 6px;
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --shadow-subtle: 0 4px 12px rgba(74, 77, 80, 0.05);
+    --shadow-focus: 0 0 0 3px rgba(75, 159, 134, 0.2);
+}
+
+/* ==========================================================================
+   RESET & CONFIGURACIÓN BASE
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg-clinical);
+    font-family: var(--font-body);
+    color: var(--color-graphite);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   CONTENEDOR PRINCIPAL Y ENCABEZADO
+   ========================================================================== */
+.contact-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 50px;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 30px;
+}
+
+.contact-header__subtitle {
+    font-family: var(--font-subtitles);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--color-jade);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.contact-header__title {
+    font-family: var(--font-titles);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--color-graphite);
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.contact-header__description {
+    font-size: 1.05rem;
+    color: var(--color-slate);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   DISTRIBUCIÓN EN GRID DE ALTA PRECISIÓN (LAYOUT SIMÉTRICO)
+   ========================================================================== */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (min-width: 992px) {
+    .contact-grid {
+        grid-template-columns: 400px 1fr;
+    }
+}
+
+/* COMPONENTE: Tarjeta Clínica Base (BEM) */
+.contact-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-clinical);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-subtle);
+}
+
+.contact-card:last-child {
+    margin-bottom: 0;
+}
+
+.contact-card__title {
+    font-family: var(--font-titles);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-graphite);
+    border-left: 4px solid var(--color-jade);
+    padding-left: 12px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   COLUMNA IZQUIERDA: CANALES E INFORMACIÓN GEOGRÁFICA
+   ========================================================================== */
+.channel-group {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.channel-item {
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--color-border);
+}
+
+.channel-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.channel-item__area {
+    font-family: var(--font-subtitles);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-graphite);
+    margin-bottom: 5px;
+}
+
+.channel-item__info {
+    font-size: 0.9rem;
+    color: var(--color-slate);
+    margin-bottom: 10px;
+}
+
+.channel-item__link {
+    display: block;
+    color: var(--color-jade);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    transition: var(--transition-smooth);
+}
+
+.channel-item__link:hover {
+    color: var(--color-jade-dark);
+    text-decoration: underline;
+}
+
+.channel-item__whatsapp {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-bg-clinical);
+    border: 1px solid var(--color-jade);
+    color: var(--color-jade);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: var(--transition-smooth);
+}
+
+.channel-item__whatsapp:hover {
+    background-color: var(--color-jade);
+    color: var(--color-white);
+}
+
+/* Información de Ubicación y Dirección */
+.location-info {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.location-info__item {
+    font-size: 0.95rem;
+    color: var(--color-graphite);
+}
+
+.location-info__item strong {
+    color: var(--color-jade);
+    font-family: var(--font-subtitles);
+}
+
+/* ==========================================================================
+   COLUMNA DERECHA: FORMULARIO CLÍNICO INTELIGENTE
+   ========================================================================== */
+.clinical-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 576px) {
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.clinical-form__label {
+    font-family: var(--font-subtitles);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-graphite);
+}
+
+.clinical-form__input,
+.clinical-form__select,
+.clinical-form__textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-clinical);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-graphite);
+    background-color: var(--color-bg-clinical);
+    transition: var(--transition-smooth);
+}
+
+.clinical-form__input:focus,
+.clinical-form__select:focus,
+.clinical-form__textarea:focus {
+    outline: none;
+    border-color: var(--color-jade);
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-focus);
+}
+
+.clinical-form__textarea {
+    resize: vertical;
+}
+
+/* Validaciones y Errores */
+.clinical-form__error {
+    font-size: 0.8rem;
+    color: var(--color-error);
+    font-weight: 600;
+    min-height: 18px;
+    display: block;
+}
+
+.clinical-form__input.is-invalid,
+.clinical-form__select.is-invalid,
+.clinical-form__textarea.is-invalid {
+    border-color: var(--color-error);
+    background-color: rgba(217, 83, 79, 0.02);
+}
+
+/* Campos Dinámicos */
+.form-dynamic-section {
+    transition: var(--transition-smooth);
+}
+
+.clinical-form__submit {
+    background-color: var(--color-jade);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-clinical);
+    padding: 15px 30px;
+    font-family: var(--font-titles);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    margin-top: 10px;
+}
+
+.clinical-form__submit:hover {
+    background-color: var(--color-jade-dark);
+}
+
+/* ==========================================================================
+   SECCIÓN: PORTAL DE LIQUIDACIÓN Y PASARELA DE PAGOS
+   ========================================================================== */
+.contact-card--payment {
+    border-top: 4px solid var(--color-jade);
+}
+
+.payment-header {
+    margin-bottom: 20px;
+}
+
+.payment-header__description {
+    font-size: 0.9rem;
+    color: var(--color-slate);
+}
+
+/* Distintivos Visuales de Pasarelas (Yape / PagoEfectivo) */
+.payment-methods {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+@media (min-width: 576px) {
+    .payment-methods {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.payment-badge {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-clinical);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--color-bg-clinical);
+    transition: var(--transition-smooth);
+}
+
+.payment-badge__logo-placeholder {
+    font-family: var(--font-titles);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.5px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: var(--color-white);
+}
+
+/* Colores Corporativos Estrictos para las Pasarelas */
+.payment-badge[data-gateway="yape"] .payment-badge__logo-placeholder {
+    background-color: #74226C; /* Identidad Conceptual de Yape */
+}
+
+.payment-badge[data-gateway="pagoefectivo"] .payment-badge__logo-placeholder {
+    background-color: #FFC600; /* Identidad Conceptual de PagoEfectivo */
+    color: #4A4D50;
+}
+
+.payment-badge__text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-graphite);
+}
+
+/* Simulador de Aranceles */
+.payment-simulator {
+    background-color: var(--color-bg-clinical);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-clinical);
+    padding: 20px;
+}
+
+.payment-simulator__title {
+    font-family: var(--font-subtitles);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: var(--color-graphite);
+    letter-spacing: 0.5px;
+}
+
+.payment-simulator__row {
+    margin-bottom: 15px;
+}
+
+/* Resumen Dinámico */
+.payment-simulator__summary {
+    border-top: 1px solid var(--color-border);
+    padding-top: 15px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--color-slate);
+}
+
+.summary-line--total {
+    font-family: var(--font-subtitles);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-graphite);
+    border-top: 1px dashed var(--color-border);
+    padding-top: 8px;
+    margin-top: 5px;
+}
+
+.summary-line--total span:last-child {
+    color: var(--color-jade);
+}
+
+.payment-simulator__btn {
+    background-color: var(--color-graphite);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-clinical);
+    padding: 12px;
+    font-family: var(--font-titles);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    margin-top: 10px;
+}
+
+.payment-simulator__btn:hover {
+    background-color: var(--color-jade);
+}
+
+/* Animaciones Core */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

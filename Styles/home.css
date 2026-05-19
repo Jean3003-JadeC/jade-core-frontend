@@ -4,29 +4,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700;800&family=Open+Sans:wght@300;400;600;700&display=swap');
 
 /* ==========================================================================
-   2. VARIABLES DE DISEÑO CORPORATIVO (Paleta de Colores Oficial)
+   2. VARIABLES DE DISEÑO CORPORATIVO (Ecosistema de Precisión Jade Core)
    ========================================================================== */
 :root {
-    /* Colores de la empresa */
+    /* Paleta Oficial */
     --verde-jade: #4B9F86;        /* Organic Emerald */
-    --gris-carbono: #4A4D50;     /* Clinical Graphite */
-    --gris-niebla: #6C757D;      /* Data Slate */
-    --blanco-puro: #FFFFFF;      /* Sanitary White */
+    --gris-carbono: #4A4D50;      /* Clinical Graphite */
+    --gris-niebla: #6C757D;       /* Data Slate */
+    --blanco-puro: #FFFFFF;       /* Sanitary White */
+    --fondo-clinico: #F8F9FA;     /* Soft Clinical Background */
     
-    /* Variaciones funcionales basadas en la paleta */
-    --color-fondo-claro: #F8FAFC;
-    --color-borde-suave: #E2E8F0;
-    --sombra-tarjeta: 0 4px 15px rgba(74, 77, 80, 0.06);
-    --sombra-header: 0 2px 10px rgba(74, 77, 80, 0.04);
-
+    /* Variaciones de Control de UI */
+    --verde-jade-hover: #3d856f;
+    --borde-hospitalario: #E9ECEF;
+    --curva-transicion: cubic-bezier(0.4, 0, 0.2, 1);
+    
     /* Reglas Tipográficas */
     --fuente-principal: 'Montserrat', sans-serif;
     --fuente-secundaria: 'Lato', sans-serif;
     --fuente-lectura: 'Open Sans', sans-serif;
+
+    /* Sombras Analíticas */
+    --sombra-tarjeta: 0 4px 20px rgba(74, 77, 80, 0.05);
+    --sombra-header: 0 2px 15px rgba(74, 77, 80, 0.03);
 }
 
 /* ==========================================================================
-   3. REGLAS GENERALES Y RESETEO
+   3. REGLAS GENERALES Y RESETEO DE INFRAESTRUCTURA
    ========================================================================== */
 * {
     margin: 0;
@@ -41,40 +45,63 @@ html {
 
 body {
     font-family: var(--fuente-lectura);
-    font-weight: 300; /* Open Sans Light para párrafos extensos */
+    font-weight: 300; /* Open Sans Light institucional */
     color: var(--gris-carbono);
     background-color: var(--blanco-puro);
     line-height: 1.6;
+    padding-top: 90px; /* Compensación del Sticky Header */
     -webkit-font-smoothing: antialiased;
 }
 
 main {
-    display: block;
     width: 100%;
+    overflow-x: hidden;
 }
 
+/* Enlaces y Tipografías de Control */
 a {
-    text-align: inherit;
     text-decoration: none;
     color: var(--verde-jade);
-    transition: color 0.3s ease;
+    transition: color 0.3s var(--curva-transicion);
 }
 
-a:hover {
-    color: var(--gris-carbono);
+/* Títulos y Secciones Globales */
+.section-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 80px 4%;
 }
 
-button, .btn-cta {
-    font-family: var(--fuente-secundaria);
+.bg-light {
+    background-color: var(--fondo-clinico);
+    max-width: 100%;
+    padding-left: calc(50% - 640px + 4%);
+    padding-right: calc(50% - 640px + 4%);
+}
+
+.section-header {
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-family: var(--fuente-principal);
     font-weight: 700;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    font-size: 28px;
+    color: var(--gris-carbono);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.header-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--verde-jade);
+    margin-top: 12px;
 }
 
 /* ==========================================================================
-   4. MENU BAR (Sticky Header)
+   4. STICKY HEADER & RESPONSIVE NAVBAR
    ========================================================================== */
 header {
     position: fixed;
@@ -84,18 +111,26 @@ header {
     height: 90px;
     background-color: var(--blanco-puro);
     box-shadow: var(--sombra-header);
-    border-bottom: 1px solid var(--color-borde-suave);
+    border-bottom: 1px solid var(--borde-hospitalario);
     z-index: 1000;
-    display: table;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 0 5%;
+    transition: height 0.3s var(--curva-transicion), background-color 0.3s var(--curva-transicion);
 }
 
-.logo-container, header nav {
-    display: table-cell;
-    vertical-align: middle;
+/* Evento dinámico inyectado por JS Namespace */
+header.header-scrolled {
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0.98);
 }
 
-/* Aplicación de Montserrat Bold en Mayúsculas para el Logo */
+.logo-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .logo-container h1 {
     font-family: var(--fuente-principal);
     font-weight: 800;
@@ -105,30 +140,20 @@ header {
     line-height: 1;
 }
 
-/* Simulación del descriptor "TECNOLOGIA & SALUD" con tracking +200 */
-.logo-container::after {
-    content: "TECNOLOGIA & SALUD";
-    display: block;
+.brand-descriptor {
     font-family: var(--fuente-secundaria);
     font-weight: 400;
     font-size: 10px;
-    letter-spacing: 0.2em; /* Tracking +200 aprox */
+    letter-spacing: 0.2em; /* Tracking +200 */
     color: var(--gris-niebla);
-    margin-top: 4px;
+    margin-top: 5px;
 }
 
-header nav {
-    text-align: right;
-}
-
+/* Menú de Navegación */
 header nav ul {
+    display: flex;
     list-style: none;
-    display: inline-block;
-}
-
-header nav ul li {
-    display: inline-block;
-    margin-left: 30px;
+    gap: 30px;
 }
 
 header nav ul li a {
@@ -137,38 +162,55 @@ header nav ul li a {
     font-size: 13px;
     color: var(--gris-niebla);
     letter-spacing: 0.5px;
-    padding-bottom: 5px;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s var(--curva-transicion);
 }
 
 header nav ul li a:hover, 
-header nav ul li.active a {
+header nav ul li a.active {
     color: var(--verde-jade);
-    border-bottom: 2px solid var(--verde-jade);
+    border-bottom-color: var(--verde-jade);
 }
 
-body {
-    padding-top: 90px;
+/* Botón de Hamburguesa Móvil (Oculto por defecto en Desktop) */
+.mobile-nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-nav-toggle .bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--gris-carbono);
+    transition: all 0.3s var(--curva-transicion);
 }
 
 /* ==========================================================================
-   5. HERO BANNER PRINCIPAL
+   5. HERO BANNER DE ALTA PRECISIÓN
    ========================================================================== */
-#hero-banner {
+.hero-section {
     position: relative;
     width: 100%;
-    height: 500px;
-    background-color: var(--color-fondo-claro);
-    overflow: hidden;
-    border-bottom: 1px solid var(--color-borde-suave);
+    height: 550px;
+    display: flex;
+    align-items: center;
+    background-color: var(--fondo-clinico);
 }
 
 .banner-media {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: 55%;
     height: 100%;
-    background-image: linear-gradient(to right, rgba(255,255,255,0.95) 45%, rgba(255,255,255,0.1) 100%), url('assets/hero-bg.jpg');
+    background-image: linear-gradient(to right, var(--fondo-clinico) 0%, rgba(248, 249, 250, 0.1) 100%), url('../Assets/Images/hero-bg.jpg');
     background-size: cover;
     background-position: center;
     z-index: 1;
@@ -177,339 +219,457 @@ body {
 .banner-content {
     position: relative;
     z-index: 2;
-    max-width: 50%;
-    margin-left: 8%;
-    padding-top: 120px;
+    width: 100%;
+    max-width: 600px;
+    margin-left: 5%;
+    padding: 20px;
 }
 
-/* Titulares con pesos altos para jerarquizar de manera inmediata */
 .banner-content h2 {
     font-family: var(--fuente-principal);
     font-weight: 700;
-    font-size: 38px;
-    line-height: 1.25;
+    font-size: 42px;
+    line-height: 1.2;
     color: var(--gris-carbono);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
-.banner-content button {
+.hero-subtitle {
+    font-family: var(--fuente-lectura);
+    font-size: 16px;
+    color: var(--gris-niebla);
+    margin-bottom: 35px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 20px;
+}
+
+/* CTAs Corporativos */
+.btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 4px; /* Estilo cuadrado premium/clínico */
+    font-weight: 700;
+}
+
+.btn-primary {
     background-color: var(--verde-jade);
     color: var(--blanco-puro);
-    padding: 14px 35px;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    box-shadow: 0 4px 12px rgba(75, 159, 134, 0.3);
+    box-shadow: 0 4px 14px rgba(75, 159, 134, 0.2);
 }
 
-.banner-content button:hover {
-    background-color: #3d856f; /* Variación oscura controlada del Jade */
+.btn-primary:hover {
+    background-color: var(--verde-jade-hover);
     transform: translateY(-2px);
 }
 
+.btn-secondary {
+    background-color: transparent;
+    color: var(--gris-carbono);
+    border: 2px solid var(--gris-niebla);
+}
+
+.btn-secondary:hover {
+    border-color: var(--gris-carbono);
+    background-color: rgba(74, 77, 80, 0.02);
+}
+
 /* ==========================================================================
-   6. SECCIÓN DE RESÚMENES (Tres Columnas)
+   6. SECCIÓN DE ÁREAS CORE (CSS Grid)
    ========================================================================== */
-#resumenes-areas {
-    width: 90%;
-    max-width: 1200px;
-    margin: 60px auto 30px auto;
-    display: table;
-    table-layout: fixed;
-    border-collapse: separate;
-    border-spacing: 25px 0;
+.grid-areas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
 }
 
 .columna-resumen {
-    display: table-cell;
     background-color: var(--blanco-puro);
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid var(--color-borde-suave);
+    padding: 40px 30px;
+    border-radius: 8px;
+    border: 1px solid var(--borde-hospitalario);
     box-shadow: var(--sombra-tarjeta);
-    vertical-align: top;
+    transition: transform 0.3s var(--curva-transicion), box-shadow 0.3s var(--curva-transicion);
 }
 
-.columna-resumen::before {
-    content: "";
-    display: block;
+.columna-resumen:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(74, 77, 80, 0.08);
+}
+
+.area-icon {
     width: 48px;
     height: 48px;
-    border-radius: 50%;
-    background-color: rgba(75, 159, 134, 0.1);
-    margin-bottom: 20px;
+    border-radius: 6px;
+    background-color: rgba(75, 159, 134, 0.08);
+    margin-bottom: 25px;
 }
 
 .columna-resumen h3 {
     font-family: var(--fuente-principal);
     font-weight: 700;
-    font-size: 16px;
+    font-size: 18px;
     color: var(--gris-carbono);
     margin-bottom: 15px;
-    letter-spacing: 0.3px;
 }
 
 .columna-resumen p {
-    font-family: var(--fuente-lectura);
-    font-weight: 300; /* Open Sans Light */
-    font-size: 14px;
+    font-size: 14.5px;
     color: var(--gris-niebla);
+    margin-bottom: 25px;
+}
+
+.area-link {
+    font-family: var(--fuente-secundaria);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
 }
 
 /* ==========================================================================
-   7. SECCIÓN DE BLOQUES DE INFORMACIÓN CLAVE
+   7. SECCIÓN DE INFORMACIÓN CLAVE Y CONTADORES
    ========================================================================== */
 #informacion-clave {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto 60px auto;
-    display: table;
-    table-layout: fixed;
-    border-collapse: separate;
-    border-spacing: 25px 0;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 0.9fr;
+    gap: 35px;
 }
 
 #informacion-clave > article {
-    display: table-cell;
     background-color: var(--blanco-puro);
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid var(--color-borde-suave);
+    padding: 35px;
+    border-radius: 8px;
+    border: 1px solid var(--borde-hospitalario);
     box-shadow: var(--sombra-tarjeta);
-    vertical-align: top;
 }
 
 #informacion-clave h3 {
     font-family: var(--fuente-principal);
     font-weight: 700;
-    font-size: 15px;
+    font-size: 16px;
     color: var(--gris-carbono);
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--color-borde-suave);
+    text-transform: uppercase;
+    margin-bottom: 25px;
     padding-bottom: 12px;
+    border-bottom: 2px solid var(--fondo-clinico);
     letter-spacing: 0.5px;
 }
 
-/* Indicadores */
+/* Indicadores e Inyección de datos JS */
 .grafico-placeholder {
     width: 100%;
-    height: 120px;
-    background-color: var(--color-fondo-claro);
+    height: 110px;
+    background-color: var(--fondo-clinico);
     border-radius: 6px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     border: 1px dashed var(--gris-niebla);
 }
 
-.bloque-indicadores ul li {
-    font-family: var(--fuente-lectura);
-    font-size: 13.5px;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--color-borde-suave);
+.stats-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* Uso de Open Sans Bold para destacar valores críticos si aplica */
-.bloque-indicadores ul li strong {
-    font-weight: 700;
+.stats-list li {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-family: var(--fuente-principal);
+    font-weight: 800;
+    font-size: 28px;
     color: var(--verde-jade);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: var(--gris-niebla);
+    margin-top: 4px;
 }
 
 /* Casos de Éxito */
-.bloque-casos p {
-    font-family: var(--fuente-lectura);
-    font-weight: 300;
-    font-size: 13.5px;
-    color: var(--gris-niebla);
-    margin-bottom: 15px;
+.case-study-card {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
 }
 
 .caso-imagen-placeholder {
-    width: 45%;
+    flex-shrink: 0;
+    width: 90px;
     height: 90px;
-    background-color: var(--color-fondo-claro);
+    background-color: var(--fondo-clinico);
     border-radius: 6px;
-    float: left;
-    margin-right: 15px;
-    border: 1px solid var(--color-borde-suave);
+    border: 1px solid var(--borde-hospitalario);
 }
 
-.bloque-casos a {
+.case-study-content h4 {
+    font-family: var(--fuente-principal);
+    font-size: 14px;
+    color: var(--gris-carbono);
+    margin-bottom: 6px;
+}
+
+.case-study-content p {
+    font-size: 13px;
+    color: var(--gris-niebla);
+    line-height: 1.4;
+}
+
+.btn-text {
     font-family: var(--fuente-secundaria);
     font-weight: 700;
     font-size: 13px;
     text-transform: uppercase;
-    display: inline-block;
-    margin-top: 15px;
 }
 
-/* Recursos Destacados */
-.bloque-recursos ul li {
-    margin-bottom: 12px;
-    padding: 12px;
-    background-color: var(--color-fondo-claro);
+/* Recursos Técnicos y PDF Downloader */
+.recursos-intro {
+    font-size: 13.5px;
+    color: var(--gris-niebla);
+    margin-bottom: 20px;
+}
+
+.recursos-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.recurso-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    background-color: var(--fondo-clinico);
     border-radius: 6px;
     border-left: 3px solid var(--verde-jade);
+    transition: background-color 0.2s ease;
 }
 
-.bloque-recursos ul li label {
+.recurso-item:hover {
+    background-color: #EED; /* Feedback interactivo controlado */
+    background-color: rgba(75, 159, 134, 0.05);
+}
+
+.pdf-tag {
+    background-color: var(--gris-carbono);
+    color: var(--blanco-puro);
+    font-family: var(--fuente-principal);
+    font-weight: 800;
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.recurso-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.recurso-title {
     font-family: var(--fuente-secundaria);
     font-weight: 700;
     font-size: 13px;
     color: var(--gris-carbono);
-    padding-left: 35px;
-    position: relative;
-    display: block;
 }
 
-.bloque-recursos ul li label::before {
-    content: "PDF";
-    position: absolute;
-    left: 0;
-    top: -1px;
-    background-color: var(--gris-carbono); /* Integrado a la paleta */
-    color: var(--blanco-puro);
-    font-size: 9px;
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-weight: 700;
+.recurso-meta {
+    font-size: 11px;
+    color: var(--gris-niebla);
 }
 
 /* ==========================================================================
-   8. SECCIÓN TESTIMONIOS (Gris Carbono de fondo - Estilo Clinical Graphite)
+   8. TESTIMONIOS (Clinical Graphite Immersive Block)
    ========================================================================== */
-#testimonios {
+.section-testimonials {
     background-color: var(--gris-carbono);
-    padding: 70px 0;
-    text-align: center;
+    padding: 90px 4%;
+}
+
+.section-header.inverted h2 {
     color: var(--blanco-puro);
 }
 
-#testimonios h2 {
+.testimonials-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background-color: var(--blanco-puro);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar-placeholder {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: var(--fondo-clinico);
+    border: 2px solid var(--verde-jade);
+    margin-bottom: 20px;
+}
+
+.testimonial-text {
+    font-family: var(--fuente-lectura);
+    font-style: italic;
+    font-size: 14.5px;
+    color: var(--gris-carbono);
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.testimonial-author {
     font-family: var(--fuente-principal);
     font-weight: 700;
-    font-size: 22px;
-    letter-spacing: 1px;
-    margin-bottom: 45px;
-}
-
-#testimonios blockquote {
-    width: 85%;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: table;
-    table-layout: fixed;
-    border-collapse: separate;
-    border-spacing: 30px 0;
-}
-
-#testimonios blockquote p {
-    display: table-cell;
-    background-color: var(--blanco-puro);
+    font-size: 14px;
     color: var(--gris-carbono);
-    padding: 35px 25px;
-    border-radius: 12px;
-    font-family: var(--fuente-lectura);
-    font-weight: 300;
-    font-size: 13.5px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    vertical-align: top;
 }
 
-#testimonios blockquote p::before {
-    content: "";
-    display: block;
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    background-color: var(--color-fondo-claro);
-    margin: 0 auto 20px auto;
-    border: 2px solid var(--verde-jade);
+.testimonial-institution {
+    font-size: 12px;
+    color: var(--gris-niebla);
 }
 
 /* ==========================================================================
-   9. SECCIÓN FORMULARIO DE CONTACTO
+   9. FORMULARIO DE INGESTA DE DATOS CLINICOS
    ========================================================================== */
-#contacto-formulario {
-    width: 90%;
-    max-width: 650px;
-    margin: 70px auto;
-    background-color: var(--color-fondo-claro);
-    padding: 45px;
-    border-radius: 14px;
-    border: 1px solid var(--color-borde-suave);
+.form-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: var(--fondo-clinico);
+    padding: 50px;
+    border-radius: 8px;
+    border: 1px solid var(--borde-hospitalario);
 }
 
-#contacto-formulario h2 {
+.form-wrapper h2 {
     font-family: var(--fuente-principal);
     font-weight: 700;
-    font-size: 20px;
+    font-size: 24px;
+    text-align: center;
+    color: var(--gris-carbono);
+    margin-bottom: 10px;
+}
+
+.form-description {
+    font-size: 14px;
+    color: var(--gris-niebla);
     text-align: center;
     margin-bottom: 35px;
-    color: var(--gris-carbono);
-    letter-spacing: 0.5px;
 }
 
-#contacto-formulario form label {
+.campo {
+    margin-bottom: 25px;
+}
+
+.campo label {
+    display: block;
     font-family: var(--fuente-secundaria);
     font-weight: 700;
     font-size: 13px;
-    margin-bottom: 8px;
     color: var(--gris-carbono);
-    display: block;
+    margin-bottom: 8px;
 }
 
-#contacto-formulario form input[type="text"],
-#contacto-formulario form input[type="email"],
-#contacto-formulario form select,
-#contacto-formulario form textarea {
+.campo input, .campo select, .campo textarea {
     width: 100%;
-    padding: 12px 15px;
+    padding: 14px 16px;
     font-family: var(--fuente-lectura);
     font-size: 14px;
-    border: 1px solid var(--gris-niebla);
-    border-radius: 6px;
+    border: 1px solid #CBD5E1;
+    border-radius: 4px;
     background-color: var(--blanco-puro);
     color: var(--gris-carbono);
+    transition: all 0.3s var(--curva-transicion);
 }
 
-#contacto-formulario form input:focus,
-#contacto-formulario form select:focus,
-#contacto-formulario form textarea:focus {
+.campo input:focus, .campo select:focus, .campo textarea:focus {
     outline: none;
     border-color: var(--verde-jade);
-    box-shadow: 0 0 0 3px rgba(75, 159, 134, 0.15);
+    box-shadow: 0 0 0 3px rgba(75, 159, 134, 0.12);
 }
 
-#contacto-formulario form button[type="submit"] {
+.btn-submit {
     width: 100%;
     background-color: var(--verde-jade);
     color: var(--blanco-puro);
-    padding: 15px;
+    border: none;
+    padding: 16px;
+    font-family: var(--fuente-secundaria);
+    font-weight: 700;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-top: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(75, 159, 134, 0.2);
+    transition: all 0.3s var(--curva-transicion);
 }
 
-#contacto-formulario form button[type="submit"]:hover {
-    background-color: #3d856f;
+.btn-submit:hover {
+    background-color: var(--verde-jade-hover);
 }
 
 /* ==========================================================================
-   10. FOOTER CORPORATIVO
+   10. INTEGRATED CORPORATE FOOTER
    ========================================================================== */
 footer {
     background-color: var(--blanco-puro);
-    border-top: 1px solid var(--color-borde-suave);
-    padding: 60px 5% 40px 5%;
-    display: table;
-    width: 100%;
-    table-layout: fixed;
+    border-top: 1px solid var(--borde-hospitalario);
+    padding: 70px 5% 30px 5%;
 }
 
-footer > div {
-    display: table-cell;
-    vertical-align: top;
-    padding: 0 20px;
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.9fr 0.9fr 1fr;
+    gap: 40px;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.footer-brand .footer-logo-text {
+    font-family: var(--fuente-principal);
+    font-weight: 800;
+    font-size: 26px;
+    color: var(--verde-jade);
+    line-height: 1;
+}
+
+.footer-brand .footer-logo-sub {
+    font-family: var(--fuente-secundaria);
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--gris-niebla);
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+.brand-legal-summary {
+    font-size: 13px;
+    color: var(--gris-niebla);
+    margin-top: 20px;
+    line-height: 1.5;
 }
 
 footer h4 {
@@ -517,18 +677,21 @@ footer h4 {
     font-weight: 700;
     font-size: 13px;
     color: var(--gris-carbono);
-    margin-bottom: 25px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
     letter-spacing: 0.5px;
 }
 
-footer ul li {
+footer ul {
     list-style: none;
-    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 footer ul li a {
     font-family: var(--fuente-lectura);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 13.5px;
     color: var(--gris-niebla);
 }
@@ -537,39 +700,83 @@ footer ul li a:hover {
     color: var(--verde-jade);
 }
 
-/* Columna de Marca */
-.footer-logo p:first-child {
-    font-family: var(--fuente-principal);
-    font-weight: 800;
-    font-size: 26px;
-    color: var(--verde-jade);
-    line-height: 1;
-}
-
-.footer-logo p:last-child {
-    font-family: var(--fuente-secundaria);
-    font-weight: 700;
-    font-size: 11px;
-    color: var(--gris-niebla);
-    letter-spacing: 2px;
-    margin-top: 6px;
-}
-
-.footer-social ul li {
-    display: inline-block;
-    margin-right: 15px;
-}
-
-/* Columna Legal y Copyright */
 .footer-legal {
-    text-align: right;
+    text-align: left;
 }
 
-.footer-legal .copyright {
-    font-family: var(--fuente-lectura);
+.footer-bottom {
+    max-width: 1280px;
+    margin: 50px auto 0 auto;
+    padding-top: 25px;
+    border-top: 1px solid var(--borde-hospitalario);
+    text-align: center;
+}
+
+.copyright {
     font-size: 12px;
     color: var(--gris-niebla);
-    margin-top: 30px;
-    border-top: 1px solid var(--color-borde-suave);
-    padding-top: 15px;
+}
+
+/* ==========================================================================
+   11. SISTEMA RESPONSIVE MEDIA QUERIES (Total Adaptability)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    #informacion-clave {
+        grid-template-columns: 1fr 1fr;
+    }
+    #informacion-clave > article:last-child {
+        grid-column: span 2;
+    }
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    body { padding-top: 80px; }
+    header { height: 80px; }
+    
+    /* Activación de menú móvil */
+    .mobile-nav-toggle { display: flex; z-index: 1010; }
+    
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 400px;
+        height: 100vh;
+        background-color: var(--blanco-puro);
+        box-shadow: -5px 0 25px rgba(0,0,0,0.05);
+        z-index: 1005;
+        padding: 120px 40px;
+        transition: right 0.4s var(--curva-transicion);
+    }
+    
+    /* Clase activa para el Namespace de JS */
+    .nav-menu.nav-active { right: 0; }
+    
+    header nav ul {
+        flex-direction: column;
+        gap: 25px;
+    }
+    
+    /* Transformación de hamburguesa a cruz al abrir */
+    .mobile-nav-toggle.open .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .mobile-nav-toggle.open .bar:nth-child(2) { opacity: 0; }
+    .mobile-nav-toggle.open .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    .hero-section { height: auto; padding: 60px 0; }
+    .banner-media { display: none; }
+    .banner-content { max-width: 100%; margin: 0 5%; }
+    .banner-content h2 { font-size: 32px; }
+    
+    .grid-areas, .testimonials-container, #informacion-clave {
+        grid-template-columns: 1fr;
+    }
+    #informacion-clave > article:last-child { grid-column: span 1; }
+    
+    .form-wrapper { padding: 30px 20px; }
+    .footer-grid { grid-template-columns: 1fr; }
 }

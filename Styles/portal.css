@@ -1,0 +1,510 @@
+/* 📁 Styles/portal.css */
+
+/* ==========================================================================
+   1. VARIABLES DE ENTORNO & DISEÑO (SISTEMA DE DISEÑO JADE CORE)
+   ========================================================================== */
+:root {
+    /* Paleta Cromática Oficial */
+    --organic-emerald: #4B9F86;
+    --clinical-graphite: #4A4D50;
+    --data-slate: #6C757D;
+    --sanitary-white: #FFFFFF;
+    --clinical-bg: #F8F9FA;
+    
+    /* Variaciones Clínicas del Ecosistema */
+    --alert-red: #D9534F;
+    --stable-blue: #2F80ED;
+    --border-color: #E2E8F0;
+    --card-shadow: 0 4px 12px rgba(74, 77, 80, 0.05);
+    
+    /* Tipografías */
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Lato', sans-serif;
+    --font-reading: 'Open Sans', sans-serif;
+}
+
+/* Reset Técnico Inicial */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body.clinical-env {
+    background-color: var(--clinical-bg);
+    color: var(--clinical-graphite);
+    font-family: var(--font-reading);
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   2. HEADER INSTITUCIONAL & NAVEGACIÓN (SIMULACIÓN SPA)
+   ========================================================================== */
+.portal-header {
+    background-color: var(--sanitary-white);
+    border-bottom: 2px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+/* Identidad Visual Corporativa */
+.brand-identity {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--clinical-graphite);
+    line-height: 1.1;
+}
+
+.logo-descriptor {
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--organic-emerald);
+}
+
+/* Selectores de Pestañas (Tabs) */
+.portal-nav {
+    display: flex;
+    gap: 0.5rem;
+    background-color: var(--clinical-bg);
+    padding: 0.3rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.nav-tab {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--data-slate);
+    background: none;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-tab:hover {
+    color: var(--clinical-graphite);
+    background-color: rgba(75, 159, 134, 0.05);
+}
+
+.nav-tab.active {
+    background-color: var(--sanitary-white);
+    color: var(--organic-emerald);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Control de Sesión */
+.user-session-control {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.user-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.user-avatar {
+    background-color: var(--organic-emerald);
+    color: var(--sanitary-white);
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 0.8rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.user-name {
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.btn-exit {
+    background: none;
+    border: 1px solid var(--data-slate);
+    color: var(--data-slate);
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-exit:hover {
+    background-color: var(--clinical-graphite);
+    color: var(--sanitary-white);
+    border-color: var(--clinical-graphite);
+}
+
+/* ==========================================================================
+   3. ARQUITECTURA DE CONTENEDORES Y CONTROL SPA
+   ========================================================================== */
+.portal-main {
+    flex: 1;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+}
+
+.portal-view {
+    display: block;
+    animation: fadeInView 0.4s ease-out;
+}
+
+/* Control del Estado de Visibilidad de la SPA */
+.portal-view[hidden],
+.portal-view[aria-hidden="true"] {
+    display: none !important;
+}
+
+@keyframes fadeInView {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.view-header {
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--organic-emerald);
+    padding-left: 1rem;
+}
+
+.view-header h2 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: var(--clinical-graphite);
+}
+
+.view-subtitle {
+    font-family: var(--font-secondary);
+    color: var(--data-slate);
+    font-size: 1rem;
+    margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   4. DASHBOARD GRIDS (Estructura de Bloques Analíticos)
+   ========================================================================== */
+.dashboard-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+/* Grid Perfil Paciente: 2 Columnas principales */
+.grid-paciente {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.critical-indicators {
+    grid-column: span 2;
+}
+
+/* Grid Corporativo: Diseño asimétrico de tres bloques */
+.grid-corporativo {
+    grid-template-columns: 2fr 1fr;
+}
+
+.kpi-summary {
+    grid-column: span 2;
+}
+
+/* Estilo Base de las Tarjetas del Panel */
+.panel-card {
+    background-color: var(--sanitary-white);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+}
+
+.panel-card h3 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--clinical-graphite);
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* ==========================================================================
+   5. COMPONENTES CLÍNICOS E INDICADORES (Métricas)
+   ========================================================================== */
+/* Bloques de Métricas Metabólicas */
+.metrics-subgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.metric-box {
+    padding: 1.25rem;
+    border-radius: 6px;
+    border-left: 4px solid var(--data-slate);
+    background-color: var(--clinical-bg);
+}
+
+.metric-box.alert { border-left-color: var(--alert-red); }
+.metric-box.stable { border-left-color: var(--organic-emerald); }
+
+.metric-label {
+    display: block;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    color: var(--data-slate);
+    margin-bottom: 0.25rem;
+}
+
+.metric-value {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--clinical-graphite);
+}
+
+.metric-status {
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+.metric-box.alert .metric-status { color: var(--alert-red); }
+.metric-box.stable .metric-status { color: var(--organic-emerald); }
+
+/* Tablas de Datos Clínicos */
+.clinical-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.clinical-data-table th, 
+.clinical-data-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.clinical-data-table th {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    background-color: var(--clinical-bg);
+    color: var(--clinical-graphite);
+}
+
+.plan-summary {
+    font-size: 0.95rem;
+    color: var(--clinical-graphite);
+    background-color: rgba(75, 159, 134, 0.05);
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid rgba(75, 159, 134, 0.2);
+}
+
+/* Badges Clínicos */
+.badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.badge.success { background-color: rgba(75, 159, 134, 0.15); color: var(--organic-emerald); }
+.badge.warning { background-color: rgba(217, 83, 79, 0.15); color: var(--alert-red); }
+
+/* Placeholders para Gráficos Semánticos (Canvas/SVG de Datos) */
+.clinical-chart-placeholder {
+    background-color: var(--clinical-bg);
+    border: 2px dashed var(--border-color);
+    border-radius: 6px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.chart-fallback-text {
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    color: var(--data-slate);
+    text-align: center;
+}
+
+/* ==========================================================================
+   6. COMPONENTES DE BUSINESS INTELLIGENCE (Corporativo/RIS)
+   ========================================================================== */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+}
+
+.kpi-card {
+    background-color: var(--clinical-bg);
+    padding: 1.25rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.kpi-title {
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    color: var(--data-slate);
+}
+
+.kpi-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--clinical-graphite);
+    line-height: 1.2;
+}
+
+.kpi-trend {
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.kpi-trend.positive { color: var(--organic-emerald); }
+.kpi-trend.stable { color: var(--data-slate); }
+
+/* Repositorio Documental Gerencial (Hoja Gerencial) */
+.report-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.report-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: var(--clinical-bg);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    gap: 1rem;
+}
+
+.report-info strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--clinical-graphite);
+}
+
+.report-info small {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--data-slate);
+}
+
+.btn-download {
+    background-color: var(--sanitary-white);
+    border: 1px solid var(--organic-emerald);
+    color: var(--organic-emerald);
+    padding: 0.5rem 0.9rem;
+    font-family: var(--font-secondary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-download:hover {
+    background-color: var(--organic-emerald);
+    color: var(--sanitary-white);
+}
+
+/* ==========================================================================
+   7. FOOTER DE CONTROL & RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+.portal-footer {
+    background-color: var(--clinical-graphite);
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    padding: 1.5rem 2rem;
+    font-size: 0.8rem;
+    margin-top: auto;
+    border-top: 3px solid var(--organic-emerald);
+}
+
+/* Adaptabilidad para Dispositivos Móviles y Tablets */
+@media (max-width: 1024px) {
+    .grid-corporativo {
+        grid-template-columns: 1fr;
+    }
+    .kpi-summary {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .portal-nav {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .user-session-control {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .grid-paciente {
+        grid-template-columns: 1fr;
+    }
+
+    .critical-indicators {
+        grid-column: span 1;
+    }
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto e Integración de Servicios | Jade Core</title>
+    <!-- Tipografías Institucionales -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Estilos Nucleares y de Módulo -->
+    <link rel="stylesheet" href="../Styles/contacto.css">
+</head>
+<body>
+
+    <main class="contact-container">
+        <!-- Encabezado del Módulo -->
+        <header class="contact-header">
+            <span class="contact-header__subtitle">MÓDULO DE ATENCIÓN E INTEGRACIÓN</span>
+            <h1 class="contact-header__title">CANALES DE COMUNICACIÓN Y PORTAL DE PAGOS</h1>
+            <p class="contact-header__description">
+                Conecte con nuestras divisiones especializadas en Nutrición Clínica, Ingeniería de Datos y Gestión Sanitaria. 
+                Gestione solicitudes de auditoría, telemedicina o soporte técnico transaccional.
+            </p>
+        </header>
+
+        <div class="contact-grid">
+            
+            <!-- COLUMNA IZQUIERDA: Canales de Atención e Información Geográfica -->
+            <div class="contact-sidebar">
+                
+                <!-- Canales Segmentados por Área Core -->
+                <section class="contact-card" aria-labelledby="channels-title">
+                    <h2 id="channels-title" class="contact-card__title">Canales Institucionales</h2>
+                    
+                    <div class="channel-group">
+                        <div class="channel-item">
+                            <h3 class="channel-item__area">Nutrición Clínica y Renal</h3>
+                            <p class="channel-item__info">Soporte nutricional avanzado y terapias de reemplazo.</p>
+                            <a href="mailto:clinica@jadecore.com" class="channel-item__link">clinica@jadecore.com</a>
+                            <a href="https://wa.me/51951000000?text=Consulta%20Nutrición%20Clínica" class="channel-item__whatsapp" target="_blank" rel="noopener">
+                                <span>WhatsApp Área Clínica</span>
+                            </a>
+                        </div>
+
+                        <div class="channel-item">
+                            <h3 class="channel-item__area">Data Analytics e Inteligencia Artificial</h3>
+                            <p class="channel-item__info">Modelos predictivos, integración de algoritmos y analítica epidemiológica.</p>
+                            <a href="mailto:analytics@jadecore.com" class="channel-item__link">analytics@jadecore.com</a>
+                        </div>
+
+                        <div class="channel-item">
+                            <h3 class="channel-item__area">Gestión en Salud y Consultoría</h3>
+                            <p class="channel-item__info">Optimización de IPRESS/RIS, auditorías y reportes de Hoja Gerencial.</p>
+                            <a href="mailto:gestion@jadecore.com" class="channel-item__link">gestion@jadecore.com</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ubicación, Horarios y Sede Arequipa -->
+                <section class="contact-card" aria-labelledby="location-title">
+                    <h2 id="location-title" class="contact-card__title">Sede Central y Cobertura</h2>
+                    <address class="location-info">
+                        <p class="location-info__item">
+                            <strong>Ubicación Física:</strong> Región Arequipa, Perú (Sede Central de Operaciones y Soporte Tecnológico).
+                        </p>
+                        <p class="location-info__item">
+                            <strong>Entorno Digital:</strong> Plataforma de Telemedicina y Servidores de Datos con disponibilidad global.
+                        </p>
+                        <p class="location-info__item">
+                            <strong>Horario Clínico-Administrativo:</strong> Lunes a Viernes de 08:00 a 17:00 hrs.
+                        </p>
+                    </address>
+                </section>
+            </div>
+
+            <!-- COLUMNA DERECHA: Formulario Inteligente y Pasarela de Pagos -->
+            <div class="contact-main-content">
+                
+                <!-- Formulario de Solicitudes Clínico/Corporativo -->
+                <section class="contact-card" aria-labelledby="form-title">
+                    <h2 id="form-title" class="contact-card__title">Formulario de Solicitudes Estructuradas</h2>
+                    
+                    <form id="contactForm" class="clinical-form" novalidate>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="userName" class="clinical-form__label">Nombre Completo o Razón Social</label>
+                                <input type="text" id="userName" name="userName" class="clinical-form__input" required>
+                                <span class="clinical-form__error" id="error-userName"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userEmail" class="clinical-form__label">Correo Electrónico Institucional</label>
+                                <input type="email" id="userEmail" name="userEmail" class="clinical-form__input" required>
+                                <span class="clinical-form__error" id="error-userEmail"></span>
+                            </div>
+                        </div>
+
+                        <!-- Select Condicional Segmentado por Requerimiento Core -->
+                        <div class="form-group">
+                            <label for="requirementType" class="clinical-form__label">Tipo de Requerimiento Especializado</label>
+                            <select id="requirementType" name="requirementType" class="clinical-form__select" required>
+                                <option value="" disabled selected>Seleccione la naturaleza de su requerimiento...</option>
+                                <option value="nutricion_renal">Consulta Nutricional Avanzada / Renal</option>
+                                <option value="auditoria_gestion">Auditoría de Gestión Sanitaria / IPRESS-RIS</option>
+                                <option value="integracion_ia">Integración de IA, Analítica o Modelos Predictivos</option>
+                            </select>
+                            <span class="clinical-form__error" id="error-requirementType"></span>
+                        </div>
+
+                        <!-- Campos Dinámicos Controlados por JS -->
+                        <div id="dynamicFieldsContainer" class="form-dynamic-section">
+                            <!-- Se inyectarán inputs específicos mediante JS según la opción elegida -->
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="clinical-form__label">Descripción Detallada del Caso</label>
+                            <textarea id="message" name="message" rows="5" class="clinical-form__textarea" required></textarea>
+                            <span class="clinical-form__error" id="error-message"></span>
+                        </div>
+
+                        <button type="submit" class="clinical-form__submit">Procesar e Iniciar Solicitud</button>
+                    </form>
+                </section>
+
+                <!-- Pasarela de Facturación y Portal de Pagos (Simulación de Transacciones) -->
+                <section class="contact-card contact-card--payment" aria-labelledby="payment-title">
+                    <div class="payment-header">
+                        <h2 id="payment-title" class="contact-card__title">Portal de Liquidación y Transacciones Digitales</h2>
+                        <p class="payment-header__description">
+                            Pasarela integrada para el abono de interconsultas especializadas, reportes de datos clínicos o matrículas académicas corporativas.
+                        </p>
+                    </div>
+
+                    <!-- Métodos de Pago Integrados Visualmente -->
+                    <div class="payment-methods">
+                        <div class="payment-badge" data-gateway="yape">
+                            <div class="payment-badge__logo-placeholder">YAPE</div>
+                            <span class="payment-badge__text">Transferencia Inmediata Móvil</span>
+                        </div>
+                        <div class="payment-badge" data-gateway="pagoefectivo">
+                            <div class="payment-badge__logo-placeholder">PagoEfectivo</div>
+                            <span class="payment-badge__text">Código de Depósito CIPO</span>
+                        </div>
+                    </div>
+
+                    <!-- Panel del Simulador Interactivo de Facturación -->
+                    <div class="payment-simulator">
+                        <h3 class="payment-simulator__title">Simulador de Aranceles</h3>
+                        
+                        <div class="payment-simulator__row">
+                            <label for="serviceSelect" class="clinical-form__label">Concepto a Liquidar:</label>
+                            <select id="serviceSelect" class="clinical-form__select">
+                                <option value="0" selected>Seleccione un concepto...</option>
+                                <option value="150">Interconsulta Nutricional Renal Especializada</option>
+                                <option value="1200">Auditoría Operativa de Hoja Gerencial / IPRESS</option>
+                                <option value="3500">Despliegue Inicial de Modelo Predictivo IA</option>
+                            </select>
+                        </div>
+
+                        <div class="payment-simulator__summary" id="paymentSummary" style="display: none;">
+                            <div class="summary-line">
+                                <span>Subtotal (Base Imponible):</span>
+                                <span id="summarySubtotal">S/ 0.00</span>
+                            </div>
+                            <div class="summary-line">
+                                <span>Impuestos y Tasas Clínicas (IGV):</span>
+                                <span id="summaryTax">S/ 0.00</span>
+                            </div>
+                            <div class="summary-line summary-line--total">
+                                <span>Total a Liquidar:</span>
+                                <span id="summaryTotal">S/ 0.00</span>
+                            </div>
+                            <button type="button" id="btnGeneratePayment" class="payment-simulator__btn">Generar Orden de Pago</button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!-- 📁 Structure/portal.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jade Core | Portal Privado - Tecnología & Salud</title>
+    <!-- Tipografías Oficiales -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Estilos Globales y Propios del Módulo -->
+    <link rel="stylesheet" href="../Styles/portal.css">
+</head>
+<body class="clinical-env">
+
+    <!-- Encabezado Institucional / Barra de Navegación Privada -->
+    <header class="portal-header">
+        <div class="header-container">
+            <div class="brand-identity">
+                <span class="logo-title">JADE CORE</span>
+                <span class="logo-descriptor">TECNOLOGÍA & SALUD</span>
+            </div>
+            
+            <!-- Selector de Entorno (Simulación SPA / Control de Acceso) -->
+            <nav class="portal-nav" aria-label="Navegación del Portal">
+                <button id="btn-view-paciente" class="nav-tab active" data-target="view-paciente">
+                    <span class="icon">🧬</span> Perfil Clínico Paciente
+                </button>
+                <button id="btn-view-corporativo" class="nav-tab" data-target="view-corporativo">
+                    <span class="icon">📊</span> Dashboard Institucional RIS
+                </button>
+            </nav>
+
+            <div class="user-session-control">
+                <div class="user-badge">
+                    <span class="user-avatar" aria-hidden="true">US</span>
+                    <span class="user-name">Usuario Autenticado</span>
+                </div>
+                <button id="btn-logout" class="btn-exit" aria-label="Cerrar sesión">Cerrar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Vistas Dinámicas -->
+    <main id="portal-root" class="portal-main">
+
+        <!-- ========================================== -->
+        <!-- VISTA 1: ACCESO PACIENTES (Clínico/Renal)  -->
+        <!-- ========================================== -->
+        <section id="view-paciente" class="portal-view" aria-hidden="false">
+            <header class="view-header">
+                <h2>Panel de Evolución Nutricional Clínica</h2>
+                <p class="view-subtitle">Monitoreo de alta precisión para patologías crónicas y soporte renal.</p>
+            </header>
+
+            <div class="dashboard-grid grid-paciente">
+                <!-- Tarjeta: Estado Crítico / Alertas Médicas -->
+                <article class="panel-card critical-indicators">
+                    <h3>Indicadores Metabólicos Críticos</h3>
+                    <div class="metrics-subgrid">
+                        <div class="metric-box alert">
+                            <span class="metric-label">Filtrado Glomerular Estomado (eGFR)</span>
+                            <strong class="metric-value">34 mL/min/1.73m²</strong>
+                            <span class="metric-status">Estadio G3b - Monitoreo Requerido</span>
+                        </div>
+                        <div class="metric-box stable">
+                            <span class="metric-label">Potasio Sérico (K+)</span>
+                            <strong class="metric-value">4.8 mEq/L</strong>
+                            <span class="metric-status">Rango Óptimo</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Tarjeta: Plan Nutricional Activo -->
+                <article class="panel-card nutrition-plan">
+                    <h3>Prescripción Nutricional y Soporte Convectivo</h3>
+                    <div class="plan-details">
+                        <p class="plan-summary"><strong>Enfoque actual:</strong> Restricción proteica controlada para la preservación de la función renal basal y balance hidroelectrolítico estricto.</p>
+                        <table class="clinical-data-table">
+                            <thead>
+                                <tr>
+                                    <th>Macronutriente / Componente</th>
+                                    <th>Prescripción Diaria</th>
+                                    <th>Estado de Cumplimiento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Proteínas (Alto Valor Biológico)</td>
+                                    <td>0.6 g/kg/día</td>
+                                    <td><span class="badge success">Óptimo</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Fósforo</td>
+                                    <td>&lt; 800 mg/día</td>
+                                    <td><span class="badge warning">Límite</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <!-- Tarjeta: Gráfico de Evolución Temporal -->
+                <article class="panel-card chart-container">
+                    <h3>Evolución de Composición Corporal Funcional</h3>
+                    <!-- Contenedor donde se renderizará el gráfico semántico o canvas mediante JS -->
+                    <div id="chart-paciente-composicion" class="clinical-chart-placeholder">
+                        <span class="chart-fallback-text">Cargando curva analítica de masa celular activa...</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VISTA 2: ACCESO CORPORATIVO / INSTITUCIONAL -->
+        <!-- ========================================== -->
+        <section id="view-corporativo" class="portal-view" aria-hidden="true" hidden>
+            <header class="view-header">
+                <h2>Business Intelligence & Control de Gestión IPRESS / RIS</h2>
+                <p class="view-subtitle">Análisis epidemiológico automatizado y monitoreo de la Hoja Gerencial.</p>
+            </header>
+
+            <div class="dashboard-grid grid-corporativo">
+                <!-- Tarjeta: KPIs Gerenciales de Red de Salud -->
+                <article class="panel-card kpi-summary">
+                    <h3>Cuadro de Mando Transaccional (Red Asistencial)</h3>
+                    <div class="kpi-row">
+                        <div class="kpi-card">
+                            <span class="kpi-title">Eficiencia Operativa RIS</span>
+                            <strong class="kpi-value">94.2%</strong>
+                            <span class="kpi-trend positive">↑ +1.5% este mes</span>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Cobertura de Tamizaje Renal</span>
+                            <strong class="kpi-value">87.6%</strong>
+                            <span class="kpi-trend stable">= Estable</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Tarjeta: Automatización de Reportes Epidemiológicos -->
+                <article class="panel-card epidemiological-analytics">
+                    <h3>Modelos Predictivos y Carga Epidemiológica</h3>
+                    <p class="section-desc">Distribución analítica de la prevalencia de enfermedad renal crónica en la red de establecimientos de salud asesorados.</p>
+                    <div id="chart-corp-epidemiologia" class="clinical-chart-placeholder">
+                        <span class="chart-fallback-text">Inicializando modelo predictivo de carga de enfermedad...</span>
+                    </div>
+                </article>
+
+                <!-- Tarjeta: Descarga de Reportes Estructurados -->
+                <article class="panel-card reports-manager">
+                    <h3>Repositorio Documental Automatizado</h3>
+                    <ul class="report-list">
+                        <li>
+                            <div class="report-info">
+                                <strong>Hoja Gerencial Consolidada - Q1</strong>
+                                <small>Formato oficial optimizado para auditoría e IPRESS</small>
+                            </div>
+                            <button class="btn-download" aria-label="Descargar Hoja Gerencial Q1">Exportar PDF</button>
+                        </li>
+                        <li>
+                            <div class="report-info">
+                                <strong>Análisis de Costo-Efectividad en Terapias de Reemplazo</strong>
+                                <small>Reporte gerencial e indicadores de impacto</small>
+                            </div>
+                            <button class="btn-download" aria-label="Descargar Análisis de Costo-Efectividad">Exportar Excel</button>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer de Control Técnico -->
+    <footer class="portal-footer">
+        <p>&copy; 2026 Jade Core. Entorno de Datos Seguro. Cumplimiento estricto de confidencialidad clínica y estándares de interoperabilidad.</p>
+    </footer>
+
+    <!-- Inyección del Script con Patrón Namespace -->
+    <script src="../Scripts/portal.js"></script>
+</body>
+</html>
