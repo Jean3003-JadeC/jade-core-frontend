@@ -14,7 +14,7 @@ const JadeCoreApp = (() => {
     const DOM = {};
 
     const cacheDOM = () => {
-        DOM.portalNav = document.querySelector('.portal-nav');
+        DOM.AppNav = document.querySelector('.App-nav');
         DOM.mobileToggle = document.querySelector('.mobile-nav-toggle');
         DOM.btnWhatsapp = document.querySelector('.btn-whatsapp-app');
     };
@@ -31,8 +31,8 @@ const JadeCoreApp = (() => {
 
     const toggleMobileNavigation = () => {
         state.isMobileNavOpen = !state.isMobileNavOpen;
-        if (DOM.portalNav && DOM.mobileToggle) {
-            DOM.portalNav.classList.toggle('nav-active', state.isMobileNavOpen);
+        if (DOM.AppNav && DOM.mobileToggle) {
+            DOM.AppNav.classList.toggle('nav-active', state.isMobileNavOpen);
             DOM.mobileToggle.setAttribute('aria-expanded', state.isMobileNavOpen.toString());
         }
     };

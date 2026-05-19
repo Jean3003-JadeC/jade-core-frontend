@@ -166,7 +166,7 @@ const JadeCoreLegal = {
     handleConsentRevocation: function() {
         const confirmRevoke = confirm(
             'ADVERTENCIA DE SEGURIDAD CLÍNICA:\n\n' +
-            'Al revocar los permisos generales, se suspenderá de forma inmediata el acceso automatizado a su Portal del Paciente, interconsultas de telemedicina y la generación de métricas de soporte renal.\n\n' +
+            'Al revocar los permisos generales, se suspenderá de forma inmediata el acceso automatizado a su App del Paciente, interconsultas de telemedicina y la generación de métricas de soporte renal.\n\n' +
             '¿Desea ejercer su derecho de revocación de tratamiento de datos?'
         );
 
