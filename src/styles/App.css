@@ -1,0 +1,406 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO CORPORATIVO (Sincronizadas con el Ecosistema)
+   ========================================================================== */
+:root {
+    --organic-emerald: #4B9F86;
+    --organic-emerald-hover: #3d856f;
+    --clinical-graphite: #4A4D50;
+    --data-slate: #6C757D;
+    --sanitary-white: #FFFFFF;
+    --soft-clinical-bg: #F8F9FA;
+    --clinical-dark: #121416;
+    --hospital-border: #E9ECEF;
+    --transition-bezier: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --font-heading: 'Montserrat', sans-serif;
+    --font-accent: 'Lato', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
+/* ==========================================================================
+   2. REGLAS GENERALES DEL ENTORNO MÓVIL/CLÍNICO
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body.clinical-env {
+    background-color: var(--soft-clinical-bg);
+    color: var(--clinical-graphite);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   3. COMPONENTE COMPARTIDO: NAVBAR INSTITUCIONAL DE ALTA PRECISIÓN
+   ========================================================================== */
+.main-navbar {
+    width: 100%;
+    height: 90px;
+    background-color: var(--sanitary-white);
+    border-bottom: 1px solid var(--hospital-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: all 0.3s var(--transition-bezier);
+}
+
+.navbar-container {
+    max-width: 1400px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.navbar-brand__logo {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--clinical-graphite);
+    line-height: 1.1;
+}
+
+.navbar-brand__descriptor {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 0.65rem;
+    color: var(--organic-emerald);
+    letter-spacing: 0.2em;
+    margin-top: 0.25rem;
+}
+
+/* Listado de Enlaces Desktop */
+.nav-menu__list {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-menu__link {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--data-slate);
+    text-decoration: none;
+    transition: color 0.3s var(--transition-bezier);
+}
+
+.nav-menu__link:hover, 
+.nav-menu__link.is-active {
+    color: var(--organic-emerald);
+}
+
+/* Botón Hamburguesa Estructurado */
+.mobile-nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1100;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+}
+
+.mobile-nav-toggle__bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--clinical-graphite);
+    transition: all 0.3s var(--transition-bezier);
+}
+
+/* ==========================================================================
+   4. MAQUETACIÓN ESPECÍFICA: PORTAL / APP LAUNCH CARD
+   ========================================================================== */
+.App-main-app {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 130px 2rem 4rem 2rem; /* Compensación del Navbar Fijo superior */
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.app-launch-card {
+    background-color: var(--sanitary-white);
+    border: 1px solid var(--hospital-border);
+    border-radius: 12px;
+    padding: 3.5rem;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(74, 77, 80, 0.05);
+}
+
+.launch-badge {
+    display: inline-block;
+    background-color: rgba(75, 159, 134, 0.08);
+    color: var(--organic-emerald);
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.launch-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: var(--clinical-graphite);
+    line-height: 1.2;
+}
+
+.launch-countdown-text {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--organic-emerald);
+    margin: 0.5rem 0 1.5rem 0;
+    letter-spacing: 0.2em;
+}
+
+.launch-description {
+    font-size: 0.95rem;
+    color: var(--data-slate);
+    max-width: 650px;
+    margin: 0 auto 2.5rem auto;
+    text-align: justify;
+    text-align-last: center;
+}
+
+/* Acciones y Botón Corporativo de WhatsApp */
+.btn-whatsapp-app {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--organic-emerald);
+    color: var(--sanitary-white);
+    text-decoration: none;
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(75, 159, 134, 0.3);
+    transition: transform 0.3s var(--transition-bezier), background-color 0.3s var(--transition-bezier);
+}
+
+.btn-whatsapp-app:hover {
+    transform: translateY(-2px);
+    background-color: var(--organic-emerald-hover);
+    box-shadow: 0 6px 20px rgba(75, 159, 134, 0.4);
+}
+
+/* Cajas de Previsualización de Módulos Core */
+.app-features-preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+    border-top: 1px solid var(--hospital-border);
+    padding-top: 2rem;
+}
+
+.feat-box {
+    text-align: left;
+    background-color: var(--soft-clinical-bg);
+    padding: 1.25rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--organic-emerald);
+}
+
+.feat-box strong {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    display: block;
+    color: var(--clinical-graphite);
+    margin-bottom: 0.25rem;
+}
+
+.feat-box p {
+    font-size: 0.8rem;
+    color: var(--data-slate);
+}
+
+/* ==========================================================================
+   5. COMPONENTE COMPARTIDO: PIE DE PÁGINA (FOOTER CORPORATIVO)
+   ========================================================================= */
+.main-footer {
+    background-color: var(--clinical-dark);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 4rem 2rem 2rem 2rem;
+    border-top: 4px solid var(--organic-emerald);
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-brand .footer-logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--sanitary-white);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.footer-tagline {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.55);
+    max-width: 320px;
+}
+
+.footer-grid h4 {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--sanitary-white);
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+}
+
+.footer-links__list, .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.footer-links a, .footer-links__list a {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.3s var(--transition-bezier);
+}
+
+.footer-links a:hover, 
+.footer-links a.is-active,
+.footer-links__list a:hover {
+    color: var(--organic-emerald);
+}
+
+.footer-info__text {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.footer-bottom__copy {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE MEDIA QUERIES (Ajuste Dinámico de Interfaz Móvil)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-nav-toggle {
+        display: flex; /* Se expone el botón hamburguesa */
+    }
+
+    /* Transformación dinámica del menú de la App a cajón colapsable lateral */
+    .nav-menu {
+        position: fixed;
+        top: 90px;
+        left: -100%; /* Oculto lateralmente */
+        width: 100%;
+        height: calc(100vh - 90px);
+        background-color: var(--sanitary-white);
+        z-index: 1050;
+        transition: left 0.4s var(--transition-bezier);
+        padding: 2rem;
+        border-top: 1px solid var(--hospital-border);
+    }
+
+    /* Activación coordinada mediante App.ts */
+    .nav-menu.nav-active {
+        left: 0;
+    }
+
+    .nav-menu__list {
+        flex-direction: column;
+        width: 100%;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+
+    .nav-menu__link {
+        font-size: 1.1rem;
+        display: block;
+        width: 100%;
+    }
+
+    /* Rotación Bezier del botón hamburguesa coordinada por TS */
+    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(2) {
+        opacity: 0;
+    }
+    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .App-main-app {
+        padding-top: 120px;
+    }
+
+    .app-launch-card {
+        padding: 2rem 1rem;
+    }
+
+    .launch-title {
+        font-size: 2rem;
+    }
+
+    .app-features-preview {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,562 @@
+/* ==========================================================================
+   JADE CORE - MÓDULO 4: METODOLOGÍA Y TECNOLOGÍA
+   Manual de Identidad Visual e Interfaz Clínica (Refactorizado)
+   ========================================================================== */
+
+:root {
+    /* Paleta de Colores Oficial Estricta */
+    --organic-emerald: #4B9F86;
+    --organic-emerald-hover: #3a7d69;
+    --clinical-graphite: #4A4D50;
+    --data-slate: #6C757D;
+    --sanitary-white: #FFFFFF;
+    --soft-clinical-bg: #F8F9FA;
+    --clinical-dark: #121416;
+    --hospital-border: #E2E8F0;
+    
+    /* Tipografías */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-accent: 'Lato', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+    
+    /* Transiciones y Bordes de Alto Rendimiento */
+    --transition-bezier: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-clinical: 1px solid rgba(74, 77, 80, 0.1);
+    --radius-sm: 4px;
+    --shadow-subtle: 0 4px 12px rgba(74, 77, 80, 0.05);
+}
+
+/* ==========================================================================
+   Estructura Base y Layout General
+   ========================================================================== */
+body {
+    background-color: var(--soft-clinical-bg);
+    color: var(--clinical-graphite);
+    font-family: var(--font-body);
+    font-weight: 300; /* Open Sans Light */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--clinical-graphite);
+    font-size: 2.25rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    font-family: var(--font-accent);
+    color: var(--data-slate);
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* ==========================================================================
+   3. COMPONENTE COMPARTIDO: NAVBAR INSTITUCIONAL DE ALTA PRECISIÓN
+   ========================================================================== */
+.main-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background-color: var(--sanitary-white);
+    border-bottom: var(--border-clinical);
+    z-index: 1000;
+    transition: all 0.3s var(--transition-bezier);
+}
+
+.navbar-container {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.navbar-brand__logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--clinical-graphite);
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.navbar-brand__descriptor {
+    font-family: var(--font-accent);
+    font-size: 0.65rem;
+    color: var(--organic-emerald);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-top: 0.25rem;
+}
+
+/* Listado de Enlaces Desktop */
+.nav-menu__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-menu__link {
+    font-family: var(--font-accent);
+    text-decoration: none;
+    color: var(--clinical-graphite);
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding: 0.5rem 0;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.nav-menu__link:hover,
+.nav-menu__link.is-active {
+    color: var(--organic-emerald);
+}
+
+/* Botón Hamburguesa Nativo */
+.mobile-nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1100;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+}
+
+.mobile-nav-toggle__bar {
+    width: 24px;
+    height: 2px;
+    background-color: var(--clinical-graphite);
+    transition: var(--transition-smooth);
+}
+
+/* Interfaz Sticky Header (Inyectado dinámicamente por metodologia.ts) */
+.main-navbar.header--sticky {
+    height: 70px;
+    box-shadow: 0 4px 20px rgba(74, 77, 80, 0.05);
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+.methodology-flow {
+    padding-top: 90px; /* Evita solapamiento con fixed header de 90px */
+}
+
+.methodology-hero {
+    background-color: var(--sanitary-white);
+    border-bottom: var(--border-clinical);
+    padding: 6rem 0 4rem 0;
+    text-align: center;
+}
+
+.container-center {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.tech-badge, .section-subtitle {
+    font-family: var(--font-accent);
+    color: var(--organic-emerald);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.methodology-hero h1 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 3rem;
+    color: var(--clinical-graphite);
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.03em;
+}
+
+.methodology-subtitle, .hero-lead {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 1.25rem;
+    color: var(--data-slate);
+    line-height: 1.7;
+}
+
+/* ==========================================================================
+   Sección: Ecosistema Jade Core (Sinergia de Datos e Intervención)
+   ========================================================================== */
+.ecosystem-flow-section {
+    padding: 5rem 0;
+    background-color: var(--soft-clinical-bg);
+}
+
+.ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    align-items: stretch;
+}
+
+.ecosystem-card {
+    background-color: var(--sanitary-white);
+    border: var(--border-clinical);
+    border-radius: var(--radius-sm);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-subtle);
+    transition: var(--transition-smooth);
+}
+
+.card-phase-num, .card-icon {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--organic-emerald);
+    line-height: 1;
+}
+
+.ecosystem-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--clinical-graphite);
+    margin: 0 0 1rem 0;
+}
+
+.ecosystem-card p, .card-description {
+    font-size: 0.95rem;
+    color: var(--data-slate);
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+/* ==========================================================================
+   Sección: Herramientas e Innovación
+   ========================================================================== */
+.innovation-section {
+    padding: 5rem 0;
+    background-color: var(--sanitary-white);
+    border-top: var(--border-clinical);
+}
+
+.innovation-features {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.feature-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2.5rem;
+    border: var(--border-clinical);
+    border-radius: var(--radius-sm);
+    background-color: var(--soft-clinical-bg);
+    gap: 3rem;
+    transition: var(--transition-smooth);
+}
+
+.feature-text {
+    flex: 1;
+}
+
+.feature-text h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--clinical-graphite);
+    margin: 0 0 0.75rem 0;
+}
+
+.feature-text p {
+    font-size: 0.95rem;
+    color: var(--data-slate);
+    margin: 0;
+}
+
+.feature-badge {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+    min-width: 220px;
+}
+
+.tech-tag {
+    font-family: var(--font-accent);
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--clinical-graphite);
+    background-color: var(--sanitary-white);
+    border: var(--border-clinical);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: var(--transition-smooth);
+}
+
+.feature-block:hover .tech-tag {
+    border-color: var(--organic-emerald);
+    color: var(--organic-emerald);
+}
+
+/* ==========================================================================
+   9. COMPONENTE COMPARTIDO: PIE DE PÁGINA (FOOTER UNIFICADO)
+   ========================================================================== */
+.main-footer {
+    background-color: var(--clinical-dark);
+    color: var(--sanitary-white);
+    padding: 4rem 0 0 0;
+    border-top: 4px solid var(--organic-emerald);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-brand .logo-title {
+    color: var(--sanitary-white);
+    font-size: 1.6rem;
+}
+
+.footer-brand-text {
+    color: #CED4DA;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    font-weight: 300;
+}
+
+.footer-grid h4 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 1.25rem 0;
+    color: var(--organic-emerald);
+}
+
+.footer-grid ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-grid li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-grid a {
+    color: #E9ECEF;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition-smooth);
+    font-weight: 300;
+}
+
+.footer-grid a:hover {
+    color: var(--organic-emerald);
+    padding-left: 4px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.5rem 0;
+    background-color: #1a1d20;
+}
+
+.footer-bottom p, .footer-bottom__copy {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #ADB5BD;
+    text-align: center;
+    font-weight: 300;
+}
+
+/* ==========================================================================
+   Responsividad y Adaptación Móvil (Media Queries)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .navbar-container {
+        padding: 1rem 2rem;
+    }
+    
+    .nav-menu__list {
+        gap: 1rem;
+    }
+    
+    .nav-menu__link {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Interfaz Menú Hamburguesa Activa */
+    .mobile-nav-toggle {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 90px; /* Alineado milimétricamente debajo de la barra fija */
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 90px);
+        background-color: var(--sanitary-white);
+        border-top: var(--border-clinical);
+        transition: cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+        z-index: 999;
+    }
+
+    .nav-menu__list {
+        flex-direction: column;
+        padding: 3rem 2rem;
+        gap: 2rem;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .nav-menu__link {
+        font-size: 1.1rem;
+        display: block;
+        width: 100%;
+    }
+
+    /* Estado Desplegado (Controlado por metodologia.ts) */
+    .nav-menu.nav-active {
+        left: 0;
+    }
+
+    /* Transformación de Hamburguesa a X por hardware */
+    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(2) {
+        opacity: 0;
+    }
+    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Ajustes de Elementos del Contenido */
+    .methodology-hero h1 {
+        font-size: 2.25rem;
+    }
+    
+    .methodology-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .ecosystem-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .feature-block {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .feature-badge {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .container {
+        padding: 0 1.25rem;
+    }
+    
+    .ecosystem-card, .feature-block {
+        padding: 1.75rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* ==========================================================================
+   Integración Dinámica y Estados de Control (JS States)
+   ========================================================================== */
+
+/* Efecto de entrada controlado por IntersectionObserver */
+.ecosystem-card.is-visible,
+.feature-block.is-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Estado de interacción cruzada (Hover/Focus gestionado por Namespace) */
+.ecosystem-card.card-highlighted {
+    border-color: var(--organic-emerald);
+    box-shadow: 0 12px 30px rgba(75, 159, 134, 0.08);
+    transform: translateY(-4px);
+}
+
+/* Cumplimiento de Accesibilidad y Navegación por Teclado (WCAG) */
+.ecosystem-card:focus-visible {
+    outline: 2px solid var(--organic-emerald);
+    outline-offset: 4px;
+}

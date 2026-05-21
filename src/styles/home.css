@@ -1,0 +1,350 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO CORPORATIVO (Ecosistema Jade Core 2026)
+   ========================================================================== */
+:root {
+    /* Paleta Oficial Estricta */
+    --organic-emerald: #4B9F86;        /* Verde Jade Clínico */
+    --organic-emerald-hover: #3d856f;
+    --clinical-graphite: #4A4D50;     /* Gris Oscuro Estructurado */
+    --data-slate: #6C757D;            /* Gris de Datos de Soporte */
+    --sanitary-white: #FFFFFF;        /* Blanco Puro Hospitalario */
+    --soft-clinical-bg: #F8F9FA;      /* Fondo Atenuado */
+    --clinical-dark: #121416;         /* Modo Oscuro Corporativo */
+    
+    /* Configuración de Control de UI */
+    --hospital-border: #E9ECEF;
+    --transition-bezier: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Reglas Tipográficas */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+    --font-accent: 'Lato', sans-serif;
+}
+
+/* ==========================================================================
+   2. REGLAS DE REINICIO Y ESTILOS BASE (Módulo Sanitario)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--soft-clinical-bg);
+    color: var(--clinical-graphite);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--clinical-graphite);
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   3. COMPONENTE: NAVBAR INSTITUCIONAL DE ALTA PRECISIÓN
+   ========================================================================== */
+.main-navbar {
+    width: 100%;
+    height: 90px;
+    background-color: var(--sanitary-white);
+    border-bottom: 1px solid var(--hospital-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: all 0.3s var(--transition-bezier);
+}
+
+/* Estado Sticky inyectado dinámicamente por TS */
+.main-navbar.header--sticky {
+    height: 70px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-container {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Identidad de la Marca */
+.navbar-brand {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.navbar-brand__logo {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--organic-emerald);
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.navbar-brand__descriptor {
+    font-family: var(--font-accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--data-slate);
+    letter-spacing: 0.25em;
+    margin-top: 4px;
+}
+
+/* Enlaces de Navegación Desktop */
+.nav-menu__list {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    align-items: center;
+}
+
+.nav-menu__link {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--clinical-graphite);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.3s var(--transition-bezier);
+    position: relative;
+    padding: 8px 0;
+}
+
+.nav-menu__link:hover,
+.nav-menu__link.is-active {
+    color: var(--organic-emerald);
+}
+
+/* Indicador de pestaña activa */
+.nav-menu__link.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--organic-emerald);
+}
+
+/* Botón Hamburguesa Móvil */
+.mobile-nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-nav-toggle__bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--clinical-graphite);
+    transition: all 0.3s var(--transition-bezier);
+}
+
+/* ==========================================================================
+   4. ESTILOS ESPECÍFICOS DE LA PÁGINA: HERO SECTON (INDEX/HOME)
+   ========================================================================== */
+.hero-section {
+    padding-top: 150px;
+    padding-bottom: 80px;
+    background: linear-gradient(135deg, var(--sanitary-white) 0%, #E8F5F1 100%);
+    text-align: center;
+}
+
+.hero-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    color: var(--clinical-graphite);
+    margin-bottom: 24px;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: var(--data-slate);
+    margin-bottom: 40px;
+}
+
+.btn-primary {
+    display: inline-block;
+    font-family: var(--font-heading);
+    background-color: var(--organic-emerald);
+    color: var(--sanitary-white);
+    padding: 16px 32px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s var(--transition-bezier);
+}
+
+.btn-primary:hover {
+    background-color: var(--organic-emerald-hover);
+}
+
+/* ==========================================================================
+   5. COMPONENTE: PIE DE PÁGINA CORPORATIVO (FOOTER UNIFICADO)
+   ========================================================================== */
+.main-footer {
+    background-color: var(--clinical-dark);
+    color: #CED4DA;
+    padding: 60px 0 30px 0;
+    margin-top: 80px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-brand__logo {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--organic-emerald);
+    display: block;
+    margin-bottom: 16px;
+}
+
+.footer-brand__text {
+    font-size: 0.9rem;
+    color: #9C9FA1;
+}
+
+.footer-title {
+    font-size: 1rem;
+    color: var(--sanitary-white);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.footer-links__list {
+    list-style: none;
+}
+
+.footer-links__list li {
+    margin-bottom: 12px;
+}
+
+.footer-links__list a {
+    color: #9C9FA1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s var(--transition-bezier);
+}
+
+.footer-links__list a:hover {
+    color: var(--organic-emerald);
+}
+
+.footer-info__text {
+    font-size: 0.9rem;
+    color: #9C9FA1;
+    margin-bottom: 8px;
+}
+
+.footer-bottom {
+    border-top: 1px solid #2B3035;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.footer-bottom__copy {
+    font-size: 0.8rem;
+    color: #6C757D;
+}
+
+/* ==========================================================================
+   6. RESPONSIVE DESIGN & CONTROL DEL MENÚ MÓVIL (CAPA UI/UX)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-nav-toggle {
+        display: flex; /* Se muestra en entornos móviles */
+    }
+
+    /* Transformación del menú de navegación a un cajón lateral */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Escondido por defecto */
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        background-color: var(--sanitary-white);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        padding: 120px 32px;
+        transition: right 0.4s var(--transition-bezier);
+        z-index: 999;
+    }
+
+    /* Clase inyectada activamente por home.ts / main.ts */
+    .nav-menu.nav-active {
+        right: 0;
+    }
+
+    .nav-menu__list {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 32px;
+    }
+
+    .nav-menu__link {
+        font-size: 1.1rem;
+    }
+
+    /* Transformación de barras a cruz (Toggle activo) */
+    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(2) {
+        opacity: 0;
+    }
+    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
