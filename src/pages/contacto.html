@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <meta name="description" content="Establezca comunicación con Jade Core. Solicite auditorías analíticas de procesos RIS, consultorías gerenciales para IPRESS o soporte clínico especializado.">
     <title>Contacto Central y Liquidación | Jade Core</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700;800&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/src/styles/contacto.css">
+
+    <script>
+        // 1. Ocultamos el elemento raíz del DOM antes de que el navegador intente pintar texto plano
+        document.documentElement.style.visibility = 'hidden';
+        
+        // 2. En cuanto el árbol del DOM y las hojas de estilo estén procesadas, mostramos la interfaz limpia
+        window.addEventListener('DOMContentLoaded', () => {
+            document.documentElement.style.visibility = 'visible';
+        });
+    </script>
 </head>
 <body>
 
     <header class="main-navbar" id="mainHeader">
         <div class="navbar-container">
-            <a href="index.html" class="navbar-brand" style="text-decoration: none;">
+            <a href="/" class="navbar-brand" style="text-decoration: none;">
                 <span class="navbar-brand__logo">JADE CORE</span>
                 <span class="navbar-brand__descriptor">TECNOLOGIA & SALUD</span>
             </a>
@@ -26,20 +40,21 @@
 
             <nav class="nav-menu" id="mainNav" role="navigation" aria-label="Navegación principal">
                 <ul class="nav-menu__list">
-                    <li class="nav-menu__item"><a href="index.html" class="nav-menu__link">Home</a></li>
-                    <li class="nav-menu__item"><a href="nosotros.html" class="nav-menu__link">Nosotros</a></li>
-                    <li class="nav-menu__item"><a href="servicios.html" class="nav-menu__link">Servicios</a></li>
-                    <li class="nav-menu__item"><a href="metodologia.html" class="nav-menu__link">Metodología</a></li>
-                    <li class="nav-menu__item"><a href="recursos.html" class="nav-menu__link">Recursos</a></li>
-                    <li class="nav-menu__item"><a href="App.html" class="nav-menu__link">App</a></li>
-                    <li class="nav-menu__item"><a href="contacto.html" class="nav-menu__link is-active" aria-current="page">Contacto</a></li>
-                    <li class="nav-menu__item"><a href="legal.html" class="nav-menu__link">Legal</a></li>
+                    <li class="nav-menu__item"><a href="/" class="nav-menu__link">Home</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/nosotros.html" class="nav-menu__link">Nosotros</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/servicios.html" class="nav-menu__link">Servicios</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/metodologia.html" class="nav-menu__link">Metodología</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/recursos.html" class="nav-menu__link">Recursos</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/App.html" class="nav-menu__link">App</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/contacto.html" class="nav-menu__link is-active" aria-current="page">Contacto</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/legal.html" class="nav-menu__link">Legal</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main class="contact-container">
+        
         <header class="contact-header">
             <span class="contact-header__subtitle">INTEGRACIÓN OPERATIVA INSTITUCIONAL</span>
             <h1 class="contact-header__title">Canales de Comunicación y Soporte</h1>
@@ -51,6 +66,7 @@
         <div class="contact-grid">
             
             <aside class="contact-sidebar">
+                
                 <section class="contact-card" aria-labelledby="sidebar-channels-title">
                     <h2 id="sidebar-channels-title" class="contact-card__title">Canales Directos</h2>
                     <div class="channel-group">
@@ -77,6 +93,7 @@
             </aside>
 
             <div class="contact-main-content">
+                
                 <section class="contact-card" aria-labelledby="form-title">
                     <h2 id="form-title" class="contact-card__title">Formulario de Ingesta Analítica</h2>
                     <form id="contactForm" class="clinical-form" novalidate>
@@ -161,19 +178,19 @@
                 <div class="footer-links">
                     <h4 class="footer-title">Ecosistema</h4>
                     <ul class="footer-links__list">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="nosotros.html">Nosotros</a></li>
-                        <li><a href="servicios.html">Servicios</a></li>
-                        <li><a href="metodologia.html">Metodología</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/src/pages/nosotros.html">Nosotros</a></li>
+                        <li><a href="/src/pages/servicios.html">Servicios</a></li>
+                        <li><a href="/src/pages/metodologia.html">Metodología</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4 class="footer-title">Plataforma</h4>
                     <ul class="footer-links__list">
-                        <li><a href="recursos.html">Recursos</a></li>
-                        <li><a href="App.html">App del Paciente</a></li>
-                        <li><a href="contacto.html">Contacto</a></li>
-                        <li><a href="legal.html">Legal y Privacidad</a></li>
+                        <li><a href="/src/pages/recursos.html">Recursos</a></li>
+                        <li><a href="/src/pages/App.html">App del Paciente</a></li>
+                        <li><a href="/src/pages/contacto.html" class="nav-menu__link is-active">Contacto</a></li>
+                        <li><a href="/src/pages/legal.html">Legal y Privacidad</a></li>
                     </ul>
                 </div>
                 <div class="footer-info">

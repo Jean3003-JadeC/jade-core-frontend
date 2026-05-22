@@ -4,16 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recursos y Evidencia | Jade Core - Tecnología & Salud</title>
+    
     <meta name="description" content="Centro de conocimiento integrado, meta-análisis de nutrición renal, casos de estudio en Business Intelligence y descargas de material clínico de Jade Core.">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700;800&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/src/styles/recursos.css">
+
+    <script>
+        // 1. Ocultamos el elemento raíz del DOM antes de que el navegador intente pintar texto plano
+        document.documentElement.style.visibility = 'hidden';
+        
+        // 2. En cuanto el árbol del DOM y las hojas de estilo estén procesadas, mostramos la interfaz limpia
+        window.addEventListener('DOMContentLoaded', () => {
+            document.documentElement.style.visibility = 'visible';
+        });
+    </script>
 </head>
 <body class="clinical-context">
 
     <header class="main-navbar" id="mainHeader">
         <div class="navbar-container">
-            <a href="index.html" class="navbar-brand" style="text-decoration: none;">
+            <a href="/" class="navbar-brand" style="text-decoration: none;">
                 <span class="navbar-brand__logo">JADE CORE</span>
                 <span class="navbar-brand__descriptor">TECNOLOGIA & SALUD</span>
             </a>
@@ -26,20 +40,21 @@
 
             <nav class="nav-menu main-navigation" id="mainNav" role="navigation" aria-label="Navegación principal">
                 <ul class="nav-menu__list">
-                    <li class="nav-menu__item"><a href="index.html" class="nav-menu__link">Home</a></li>
-                    <li class="nav-menu__item"><a href="nosotros.html" class="nav-menu__link">Nosotros</a></li>
-                    <li class="nav-menu__item"><a href="servicios.html" class="nav-menu__link">Servicios</a></li>
-                    <li class="nav-menu__item"><a href="metodologia.html" class="nav-menu__link">Metodología</a></li>
-                    <li class="nav-menu__item"><a href="recursos.html" class="nav-menu__link is-active" aria-current="page">Recursos</a></li>
-                    <li class="nav-menu__item"><a href="App.html" class="nav-menu__link">App</a></li>
-                    <li class="nav-menu__item"><a href="contacto.html" class="nav-menu__link">Contacto</a></li>
-                    <li class="nav-menu__item"><a href="legal.html" class="nav-menu__link">Legal</a></li>
+                    <li class="nav-menu__item"><a href="/" class="nav-menu__link">Home</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/nosotros.html" class="nav-menu__link">Nosotros</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/servicios.html" class="nav-menu__link">Servicios</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/metodologia.html" class="nav-menu__link">Metodología</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/recursos.html" class="nav-menu__link is-active" aria-current="page">Recursos</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/App.html" class="nav-menu__link">App</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/contacto.html" class="nav-menu__link">Contacto</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/legal.html" class="nav-menu__link">Legal</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main id="main-content">
+        
         <section class="resources-hero section-padding-lg">
             <div class="container">
                 <span class="section-subtitle">Evidencia Científica & Analítica</span>
@@ -192,19 +207,19 @@
                 <div class="footer-map">
                     <span class="map-title">Ecosistema</span>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="nosotros.html">Nosotros</a></li>
-                        <li><a href="servicios.html">Servicios</a></li>
-                        <li><a href="metodologia.html">Metodología</a></li>
-                        <li><a href="recursos.html">Recursos y Evidencias</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/src/pages/nosotros.html">Nosotros</a></li>
+                        <li><a href="/src/pages/servicios.html">Servicios</a></li>
+                        <li><a href="/src/pages/metodologia.html">Metodología</a></li>
+                        <li><a href="/src/pages/recursos.html" class="is-active">Recursos y Evidencias</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-legal">
                     <span class="map-title">Regulaciones</span>
                     <ul>
-                        <li><a href="legal.html">Términos y Condiciones</a></li>
-                        <li><a href="legal.html#privacidad">Política de Privacidad</a></li>
+                        <li><a href="/src/pages/legal.html">Términos y Condiciones</a></li>
+                        <li><a href="/src/pages/legal.html#privacidad">Política de Privacidad</a></li>
                     </ul>
                     <p class="footer-copyright">&copy; 2026 Jade Core. Todos los derechos reservados. TECNOLOGIA & SALUD.</p>
                 </div>
