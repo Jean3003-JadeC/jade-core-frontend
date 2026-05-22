@@ -1,165 +1,92 @@
 /**
  * ==========================================================================
- * COMPONENTE JAVASCRIPT: RECURSOS Y EVIDENCIA - JADE CORE
- * Patrón de Diseño: Namespace Computacional Seguro (Aislado)
- * Alcance: Control de renderizado, filtrado reactivo, transiciones analíticas 
- * y gestión del menú adaptativo (UI/UX).
+ * JADE CORE - MÓDULO: RECURSOS Y EVIDENCIA (SPA Version)
+ * Componentes: Filtrado del Repositorio Clínico, Descargas y Animaciones
  * ==========================================================================
  */
 
-// 1. DECLARACIÓN DEL NAMESPACE GLOBAL COMPATIBLE CON TYPESCRIPT
-interface JadeCoreNamespace {
-    ResourcesModule?: {
-        init: () => void;
-    };
-}
+const sectionRecursos = document.getElementById('recursos');
 
-const JadeCore: JadeCoreNamespace = (window as any).JadeCore || {};
-(window as any).JadeCore = JadeCore;
+if (sectionRecursos) {
+    // 1. SELECTORES AISLADOS (Búsqueda exclusiva dentro de #recursos)
+    const filterButtons = sectionRecursos.querySelectorAll('.filter-btn');
+    const resourceCards = sectionRecursos.querySelectorAll('.resource-card');
+    const downloadLinks = sectionRecursos.querySelectorAll('.btn-download');
 
-JadeCore.ResourcesModule = (function () {
-    'use strict';
-
-    // --- CONTEXTO Y SELECTORES PRIVADOS DEL MÓDULO (AUDITADOS Y TIPADOS) ---
-    const DOM = {
-        filters: document.querySelectorAll('.filter-btn') as NodeListOf<HTMLElement>,
-        cards: document.querySelectorAll('.resource-card') as NodeListOf<HTMLElement>,
-        grid: document.querySelector('.resources-grid') as HTMLElement | null,
-        navToggle: document.querySelector('.mobile-nav-toggle') as HTMLElement | null,
-        navigation: document.querySelector('.main-navigation') as HTMLElement | null
-    };
-
-    /**
-     * Inicializa el observador de intersección nativo (IntersectionObserver)
-     * para manejar efectos de revelado clínico sutiles en la carga y scroll.
-     */
-    const _initScrollAnimations = function () {
-        if (!('IntersectionObserver' in window)) {
-            // Fallback inmediato para navegadores legacy sin soporte analítico
-            DOM.cards.forEach(card => card.classList.add('fade-in'));
-            return;
-        }
-
-        const observerOptions = {
-            root: null, // Ventana gráfica (Viewport)
-            rootMargin: '0px 0px -50px 0px', // Disparo anticipado antes de la entrada total
-            threshold: 0.15 // 15% del componente visible en pantalla
-        };
-
-        const cardObserver = new IntersectionObserver(function (entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const card = entry.target;
-                    card.classList.add('fade-in');
-                    // Una vez revelado, se remueve el nodo del pipeline del observador
-                    observer.unobserve(card);
-                }
-            });
-        }, observerOptions);
-
-        DOM.cards.forEach(card => cardObserver.observe(card));
-    };
-
-    /**
-     * Gestiona la lógica transaccional de filtrado sobre el DOM.
-     * @param {string | null} targetCategory - Categoría seleccionada por el usuario.
-     */
-    const _filterRepository = function (targetCategory: string | null) {
-        DOM.cards.forEach(card => {
-            const cardCategory = card.getAttribute('data-category');
-
-            // Lógica de visualización adaptativa y síncrona
-            if (targetCategory === 'all' || cardCategory === targetCategory) {
-                card.style.display = 'flex';
-                // Retardo forzado para inyectar la animación CSS de forma fluida
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 10);
-            } else {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(10px)';
-                card.style.display = 'none';
-            }
-        });
-    };
-
-    /**
-     * Controla el despliegue del menú de navegación en dispositivos móviles
-     * y actualiza de forma síncrona los estados de accesibilidad ARIA.
-     */
-    const _toggleMobileNavigation = function () {
-        if (!DOM.navToggle || !DOM.navigation) return;
-
-        const isExpanded = DOM.navToggle.getAttribute('aria-expanded') === 'true';
+    // 2. ANIMACIÓN ESCALONADA NATIVA (Staggered Fade-In)
+    // Se ejecuta de inmediato porque main.ts carga este script cuando la sección es visible
+    resourceCards.forEach((card, index) => {
+        const htmlCard = card as HTMLElement;
         
-        // Mutación de estados semánticos y visuales convertidos explícitamente a texto
-        DOM.navToggle.setAttribute('aria-expanded', String(!isExpanded));
-        DOM.navigation.classList.toggle('nav-active');
-    };
+        // Configuración inicial de estilo en línea para la transición
+        htmlCard.style.opacity = '0';
+        htmlCard.style.transform = 'translateY(20px)';
+        htmlCard.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+        htmlCard.style.display = 'flex'; 
 
-    /**
-     * Orquesta y vincula los manejadores de eventos funcionales en la UI.
-     */
-    const _bindEvents = function () {
-        // Evento 1: Control de Menú de Navegación Móvil
-        if (DOM.navToggle) {
-            DOM.navToggle.addEventListener('click', function (e) {
-                e.stopPropagation();
-                _toggleMobileNavigation();
-            });
-        }
+        setTimeout(() => {
+            htmlCard.style.opacity = '1';
+            htmlCard.style.transform = 'translateY(0)';
+        }, 120 * (index + 1));
+    });
 
-        // Cierre automático del menú móvil al hacer clic fuera del contenedor (UX)
-        document.addEventListener('click', function (e) {
-            if (DOM.navigation && DOM.navigation.classList.contains('nav-active')) {
-                const targetNode = e.target as Node | null;
-                if (targetNode && DOM.navToggle) {
-                    if (!DOM.navigation.contains(targetNode) && !DOM.navToggle.contains(targetNode)) {
-                        _toggleMobileNavigation();
-                    }
-                }
-            }
-        });
-
-        // Evento 2: Control de Filtros del Repositorio Clínico
-        DOM.filters.forEach(button => {
-            // Cambiado a función de flecha para preservar de manera segura el contexto del 'button'
+    // 3. LÓGICA DE FILTRADO REACTIVO
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
+                const target = e.target as HTMLElement;
 
-                // Validación de redundancia operativa directa sobre la constante lexica
-                if (button.classList.contains('active')) return;
+                // Evitar ciclos si ya está activo
+                if (target.classList.contains('active')) return;
 
-                // Actualización semántica del estado de los botones (Accesibilidad ARIA)
-                DOM.filters.forEach(btn => {
+                // Actualizar estado visual y semántico (ARIA) de los botones
+                filterButtons.forEach(btn => {
                     btn.classList.remove('active');
                     btn.setAttribute('aria-selected', 'false');
                 });
+                target.classList.add('active');
+                target.setAttribute('aria-selected', 'true');
 
-                button.classList.add('active');
-                button.setAttribute('aria-selected', 'true');
+                const selectedFilter = target.getAttribute('data-filter');
 
-                // Ejecución del algoritmo de filtrado analítico
-                const selectedFilter = button.getAttribute('data-filter');
-                _filterRepository(selectedFilter);
+                // Filtrar el repositorio con transiciones
+                resourceCards.forEach(card => {
+                    const htmlCard = card as HTMLElement;
+                    const cardCategory = htmlCard.getAttribute('data-category');
+
+                    if (selectedFilter === 'all' || cardCategory === selectedFilter) {
+                        htmlCard.style.display = 'flex';
+                        // Pequeño retardo para que el DOM registre el display flex antes de animar opacidad
+                        setTimeout(() => {
+                            htmlCard.style.opacity = '1';
+                            htmlCard.style.transform = 'translateY(0)';
+                        }, 20); 
+                    } else {
+                        htmlCard.style.opacity = '0';
+                        htmlCard.style.transform = 'translateY(10px)';
+                        // Ocultar del flujo del DOM luego de la transición visual
+                        setTimeout(() => {
+                            htmlCard.style.display = 'none';
+                        }, 400); 
+                    }
+                });
             });
         });
-    };
-
-    // --- INTERFAZ PÚBLICA EXCLUSIVA (API DEL MÓDULO) ---
-    return {
-        init: function () {
-            _initScrollAnimations();
-            _bindEvents();
-        }
-    };
-
-})();
-
-// Inicialización controlada una vez que la estructura del DOM está completamente parseada
-document.addEventListener('DOMContentLoaded', function () {
-    if (JadeCore.ResourcesModule) {
-        JadeCore.ResourcesModule.init();
     }
-});
+
+    // 4. TRACKING ANALÍTICO DE DESCARGAS (Documentos Técnicos)
+    if (downloadLinks.length > 0) {
+        downloadLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const target = e.target as HTMLElement;
+                // Buscar el título dinámicamente navegando por los nodos padres
+                const docName = target.closest('.card-content')?.querySelector('.card-title')?.textContent || 'Documento Clínico';
+                
+                console.log(`%c[BI Data Log] Extracción registrada: ${docName}`, 'color: #4B9F86; font-weight: bold;');
+            });
+        });
+    }
+
+    console.log('%c[Jade Core Node]: Módulo Recursos / Repositorio Clínico Operativo.', 'color: #4B9F86;');
+}

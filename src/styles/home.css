@@ -1,350 +1,856 @@
 /* ==========================================================================
-   1. VARIABLES DE DISEÑO CORPORATIVO (Ecosistema Jade Core 2026)
+   JADE CORE - HOME.CSS
+   Estética: Clínica, Datos, Minimalista, Institucional.
    ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. IMPORTACIONES ATÓMICAS (Placeholders)
+   -------------------------------------------------------------------------- */
+/* @import url('atoms/colors.css'); */
+/* @import url('atoms/typography.css'); */
+/* @import url('atoms/buttons.css'); */
+/* @import url('atoms/inputs.css'); */
+/* @import url('molecules/cards.css'); */
+/* @import url('organisms/navbar.css'); */
+/* @import url('organisms/footer.css'); */
+
+/* --------------------------------------------------------------------------
+   2. VARIABLES GLOBALES (Paleta Oficial Jade Core)
+   -------------------------------------------------------------------------- */
 :root {
-    /* Paleta Oficial Estricta */
-    --organic-emerald: #4B9F86;        /* Verde Jade Clínico */
-    --organic-emerald-hover: #3d856f;
-    --clinical-graphite: #4A4D50;     /* Gris Oscuro Estructurado */
-    --data-slate: #6C757D;            /* Gris de Datos de Soporte */
-    --sanitary-white: #FFFFFF;        /* Blanco Puro Hospitalario */
-    --soft-clinical-bg: #F8F9FA;      /* Fondo Atenuado */
-    --clinical-dark: #121416;         /* Modo Oscuro Corporativo */
+    /* Paleta Corporativa Oficial */
+    --clr-jade-core: #4B9F86;       /* Organic Emerald - Identidad y Bienestar */
+    --clr-carbono: #4A4D50;         /* Clinical Graphite - Rigor y Textos principales */
+    --clr-niebla: #6C757D;          /* Data Slate - Soporte y Textos secundarios */
+    --clr-blanco: #FFFFFF;          /* Sanitary White - Higiene y Transparencia */
     
-    /* Configuración de Control de UI */
-    --hospital-border: #E9ECEF;
-    --transition-bezier: cubic-bezier(0.4, 0, 0.2, 1);
+    /* Mapeo de Interfaz */
+    --clr-bg-main: var(--clr-blanco);
+    --clr-bg-surface: var(--clr-blanco);
+    /* Usamos el carbono con una opacidad ínfima (3%) para separar secciones sin ensuciar el blanco */
+    --clr-bg-alt: rgba(74, 77, 80, 0.03); 
+    --clr-border: rgba(108, 117, 125, 0.15); /* Niebla muy suave para bordes */
     
-    /* Reglas Tipográficas */
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Open Sans', sans-serif;
-    --font-accent: 'Lato', sans-serif;
+    /* Mapeo de Texto */
+    --clr-text-heading: var(--clr-carbono);
+    --clr-text-body: var(--clr-carbono);
+    --clr-text-muted: var(--clr-niebla);
+    
+    /* Tipografía: "The Clinical Sans" */
+    --font-heading: 'Montserrat', sans-serif; /* Principal: Logo y Titulares (Autoridad científica) */
+    --font-accent: 'Lato', sans-serif;        /* Secundaria: Descriptor y Subtítulos (Equilibrio elegante) */
+    --font-body: 'Open Sans', sans-serif;     /* Lectura: Cuerpos de texto y Planes (Legibilidad excepcional) */
+    
+    /* Espaciado y Layout */
+    --section-padding: 5rem 2rem;
+    --container-width: 1200px;
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    
+    /* Transiciones y Sombras (muy sutiles para mantener minimalismo) */
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-sm: 0 1px 2px rgba(74, 77, 80, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(74, 77, 80, 0.05), 0 2px 4px -1px rgba(74, 77, 80, 0.03);
+    --shadow-lg: 0 10px 15px -3px rgba(74, 77, 80, 0.08), 0 4px 6px -2px rgba(74, 77, 80, 0.04);
 }
 
-/* ==========================================================================
-   2. REGLAS DE REINICIO Y ESTILOS BASE (Módulo Sanitario)
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   3. RESET Y BASE
+   -------------------------------------------------------------------------- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--font-body);
-    background-color: var(--soft-clinical-bg);
-    color: var(--clinical-graphite);
+    color: var(--clr-text-body);
+    background-color: var(--clr-bg-main);
     line-height: 1.6;
-    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4 {
     font-family: var(--font-heading);
-    color: var(--clinical-graphite);
-    font-weight: 700;
+    color: var(--clr-text-heading);
+    line-height: 1.2;
 }
 
-/* ==========================================================================
-   3. COMPONENTE: NAVBAR INSTITUCIONAL DE ALTA PRECISIÓN
-   ========================================================================== */
-.main-navbar {
+p, .about-lead-text, .hero-lead, .card-excerpt {
+    font-family: var(--font-body);
+    font-weight: 300; 
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Contenedores Generales */
+.container, .container-center, .hero-container, .about-hero-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
     width: 100%;
-    height: 90px;
-    background-color: var(--sanitary-white);
-    border-bottom: 1px solid var(--hospital-border);
+}
+
+.section-padding {
+    padding: var(--section-padding);
+}
+
+/* Badges / Etiquetas */
+.hero-badge, .section-badge, .tech-badge, .card-badge {
+    display: inline-block;
+    font-family: var(--font-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background-color: var(--clr-bg-alt);
+    color: var(--clr-jade-core);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 1rem;
+    border: 1px solid rgba(75, 159, 134, 0.2);
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--clr-jade-core);
+    color: var(--clr-blanco);
+    border: 1px solid var(--clr-jade-core);
+}
+
+.btn-primary:hover {
+    background-color: var(--clr-carbono);
+    border-color: var(--clr-carbono);
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   4. NAVEGACIÓN (HEADER)
+   -------------------------------------------------------------------------- */
+.main-navbar {
     position: fixed;
     top: 0;
-    left: 0;
+    width: 100%;
+    background-color: transparent;
+    border-bottom: 1px solid transparent; 
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
     z-index: 1000;
-    transition: all 0.3s var(--transition-bezier);
+    padding: 1rem 2rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Estado Sticky inyectado dinámicamente por TS */
-.main-navbar.header--sticky {
-    height: 70px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+.main-navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--clr-border);
+    box-shadow: var(--shadow-sm); 
 }
 
 .navbar-container {
-    max-width: 1200px;
-    height: 100%;
+    max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-/* Identidad de la Marca */
 .navbar-brand {
     display: flex;
     flex-direction: column;
-    text-decoration: none;
 }
 
 .navbar-brand__logo {
     font-family: var(--font-heading);
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--organic-emerald);
-    letter-spacing: -0.03em;
-    line-height: 1;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--clr-carbono);
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
 }
 
 .navbar-brand__descriptor {
     font-family: var(--font-accent);
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--data-slate);
-    letter-spacing: 0.25em;
-    margin-top: 4px;
+    font-weight: 400;
+    font-size: 0.65rem;
+    color: var(--clr-niebla);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
 }
 
-/* Enlaces de Navegación Desktop */
 .nav-menu__list {
     display: flex;
     list-style: none;
-    gap: 24px;
+    gap: 2rem;
     align-items: center;
 }
 
 .nav-menu__link {
-    font-family: var(--font-heading);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    text-transform: uppercase;
-    color: var(--clinical-graphite);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    transition: color 0.3s var(--transition-bezier);
-    position: relative;
-    padding: 8px 0;
+    color: var(--clr-carbono);
+    transition: var(--transition-fast);
 }
 
-.nav-menu__link:hover,
-.nav-menu__link.is-active {
-    color: var(--organic-emerald);
+.nav-menu__link:hover, .nav-menu__link.is-active {
+    color: var(--clr-jade-core);
 }
 
-/* Indicador de pestaña activa */
-.nav-menu__link.is-active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--organic-emerald);
+.btn-app-link {
+    background: var(--clr-carbono);
+    color: var(--clr-blanco) !important;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
 }
 
-/* Botón Hamburguesa Móvil */
+.btn-app-link:hover {
+    background: var(--clr-jade-core);
+}
+
 .mobile-nav-toggle {
     display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 24px;
-    height: 18px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
 }
 
-.mobile-nav-toggle__bar {
-    width: 100%;
-    height: 2px;
-    background-color: var(--clinical-graphite);
-    transition: all 0.3s var(--transition-bezier);
-}
-
-/* ==========================================================================
-   4. ESTILOS ESPECÍFICOS DE LA PÁGINA: HERO SECTON (INDEX/HOME)
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   5. SECCIÓN HERO (#home)
+   -------------------------------------------------------------------------- */
 .hero-section {
-    padding-top: 150px;
-    padding-bottom: 80px;
-    background: linear-gradient(135deg, var(--sanitary-white) 0%, #E8F5F1 100%);
+    padding: 8rem 2rem 5rem;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--clr-carbono);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.hero-lead {
+    font-size: 1.1rem;
+    color: var(--clr-niebla);
+    margin-bottom: 2.5rem;
+    max-width: 90%;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Placeholder para el Canvas 3D Inicial */
+#canvas-3d-container {
+    width: 100%;
+    height: 500px;
+    background: var(--clr-bg-alt);
+    border-radius: var(--border-radius-md);
+    border: 1px dashed var(--clr-niebla);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#canvas-3d-container::after {
+    content: 'Canvas 3D / Datos Render';
+    color: var(--clr-niebla);
+    font-family: var(--font-accent);
+}
+
+/* --------------------------------------------------------------------------
+   6. NOSOTROS (#nosotros) - MASCOTA 3D Y PILARES
+   -------------------------------------------------------------------------- */
+.about-page {
+    background-color: var(--clr-bg-main);
+    border-top: 1px solid var(--clr-border);
+}
+
+.about-hero-container {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+}
+
+.about-hero-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.about-lead-text {
+    color: var(--clr-niebla);
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 5rem;
+}
+
+.pillar-card {
+    background: var(--clr-bg-surface);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-md);
+    border-top: 4px solid var(--clr-jade-core);
+    box-shadow: var(--shadow-sm);
+    border-left: 1px solid var(--clr-border);
+    border-right: 1px solid var(--clr-border);
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.pillar-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Ecosistema / Mascota 3D */
+.ecosystem-visualization {
+    background: var(--clr-carbono);
+    border-radius: var(--border-radius-md);
+    padding: 4rem;
+    color: var(--clr-blanco);
     text-align: center;
 }
 
-.hero-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 24px;
+.ecosystem-visualization h2 {
+    color: var(--clr-blanco);
+    margin-bottom: 1rem;
 }
 
-.hero-section h1 {
-    font-size: 3rem;
-    line-height: 1.2;
-    color: var(--clinical-graphite);
-    margin-bottom: 24px;
+.visualization-description {
+    color: var(--clr-niebla);
+    margin-bottom: 3rem;
 }
 
-.hero-section p {
-    font-size: 1.2rem;
-    color: var(--data-slate);
-    margin-bottom: 40px;
+/* Aquí irá la Mascota 3D */
+.ecosystem-graphic-placeholder {
+    width: 100%;
+    height: 400px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
-.btn-primary {
-    display: inline-block;
-    font-family: var(--font-heading);
-    background-color: var(--organic-emerald);
-    color: var(--sanitary-white);
-    padding: 16px 32px;
-    border-radius: 4px;
+.ecosystem-graphic-placeholder::after {
+    content: '[ Espacio reservado para Mascota 3D & Nodos de Datos ]';
+    color: var(--clr-jade-core);
+    font-family: var(--font-accent);
+    letter-spacing: 1px;
+}
+
+.video-wrapper {
+    width: 100%;
+    height: 300px;
+    background: #000;
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lazy-video::after {
+    content: 'Video Corporativo';
+    color: var(--clr-blanco);
+}
+
+/* --------------------------------------------------------------------------
+   7. SERVICIOS Y RECURSOS (Grillas y Tarjetas)
+   -------------------------------------------------------------------------- */
+.knowledge-grid-section, .clinical-context {
+    background-color: var(--clr-bg-main);
+    border-top: 1px solid var(--clr-border);
+}
+
+.resources-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.repository-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.filter-btn {
+    background: var(--clr-bg-surface);
+    border: 1px solid var(--clr-niebla);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
     font-weight: 600;
-    text-decoration: none;
+    color: var(--clr-niebla);
+    transition: var(--transition-fast);
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: var(--clr-carbono);
+    color: var(--clr-blanco);
+    border-color: var(--clr-carbono);
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.resource-card {
+    background: var(--clr-bg-surface);
+    border-radius: var(--border-radius-md);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-smooth);
+    border: 1px solid var(--clr-border);
+    display: flex;
+    flex-direction: column;
+}
+
+.resource-card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--clr-jade-core);
+    transform: translateY(-5px);
+}
+
+.card-meta {
+    font-size: 0.75rem;
+    color: var(--clr-niebla);
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: background-color 0.3s var(--transition-bezier);
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
 }
 
-.btn-primary:hover {
-    background-color: var(--organic-emerald-hover);
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
 }
 
-/* ==========================================================================
-   5. COMPONENTE: PIE DE PÁGINA CORPORATIVO (FOOTER UNIFICADO)
-   ========================================================================== */
-.main-footer {
-    background-color: var(--clinical-dark);
-    color: #CED4DA;
-    padding: 60px 0 30px 0;
-    margin-top: 80px;
+.card-excerpt {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    flex-grow: 1;
 }
 
-.footer-container {
-    max-width: 1200px;
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--clr-border);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--clr-niebla);
+}
+
+.btn-text-link {
+    color: var(--clr-jade-core);
+    font-weight: 700;
+}
+
+.card-metrics {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.metric-box {
+    background: var(--clr-bg-alt);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    border: 1px solid var(--clr-border);
+}
+
+.metric-value {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--clr-jade-core);
+    font-size: 1.2rem;
+}
+
+.metric-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--clr-niebla);
+}
+
+/* --------------------------------------------------------------------------
+   8. METODOLOGÍA (Diagrama de Flujo Analítico)
+   -------------------------------------------------------------------------- */
+.methodology-flow {
+    background-color: var(--clr-bg-alt);
+}
+
+.methodology-subtitle {
+    color: var(--clr-niebla);
+    text-align: center;
+    max-width: 600px;
+    margin: 1rem auto 3rem;
+}
+
+.ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    position: relative;
+}
+
+/* Línea conectora entre pasos */
+.ecosystem-grid::before {
+    content: '';
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--clr-border);
+    z-index: 0;
+}
+
+.ecosystem-card {
+    position: relative;
+    z-index: 1;
+    background: var(--clr-bg-surface);
+    padding: 2rem 1.5rem;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.card-phase-num {
+    width: 3rem;
+    height: 3rem;
+    background: var(--clr-jade-core);
+    color: var(--clr-blanco);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 0 0 5px var(--clr-bg-surface);
+}
+
+/* --------------------------------------------------------------------------
+   9. CONTACTO Y FORMULARIO CLÍNICO
+   -------------------------------------------------------------------------- */
+.contact-container {
+    background-color: var(--clr-bg-main);
+    border-top: 1px solid var(--clr-border);
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.contact-header__description {
+    color: var(--clr-niebla);
+    max-width: 700px;
+    margin: 1rem auto 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 24px;
+}
+
+.contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-card {
+    background: var(--clr-bg-surface);
+    padding: 2rem;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--clr-border);
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-card__title {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--clr-jade-core);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.channel-item__link, .channel-item__whatsapp {
+    color: var(--clr-jade-core);
+    font-weight: 600;
+}
+
+/* Formulario */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.clinical-form__label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--clr-carbono);
+}
+
+.clinical-form__input, .clinical-form__select, .clinical-form__textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-body);
+    background: var(--clr-bg-surface);
+    transition: var(--transition-fast);
+    color: var(--clr-carbono);
+}
+
+.clinical-form__input:focus, .clinical-form__select:focus, .clinical-form__textarea:focus {
+    outline: none;
+    border-color: var(--clr-jade-core);
+    box-shadow: 0 0 0 3px rgba(75, 159, 134, 0.1);
+}
+
+.clinical-form__submit {
+    background: var(--clr-carbono);
+    color: var(--clr-blanco);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    transition: var(--transition-smooth);
+}
+
+.clinical-form__submit:hover {
+    background: var(--clr-jade-core);
+}
+
+/* Simulador de Aranceles */
+.payment-methods {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.payment-badge {
+    flex: 1;
+    border: 1px solid var(--clr-border);
+    padding: 1rem;
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    background: var(--clr-bg-surface);
+    cursor: pointer;
+}
+
+.payment-badge__logo-placeholder {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    color: var(--clr-carbono);
+    margin-bottom: 0.5rem;
+}
+
+.payment-simulator {
+    background: var(--clr-bg-alt);
+    padding: 1.5rem;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--border-radius-sm);
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.summary-line--total {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--clr-jade-core);
+    border-top: 1px solid var(--clr-border);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.payment-simulator__btn {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--clr-carbono);
+    color: var(--clr-carbono);
+    font-weight: 700;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+}
+
+.payment-simulator__btn:hover {
+    background: var(--clr-carbono);
+    color: var(--clr-blanco);
+}
+
+/* --------------------------------------------------------------------------
+   10. FOOTER
+   -------------------------------------------------------------------------- */
+.main-footer {
+    background-color: var(--clr-carbono);
+    color: var(--clr-blanco);
+    padding: 4rem 2rem 2rem;
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 2fr repeat(3, 1fr);
-    gap: 40px;
-    margin-bottom: 40px;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    max-width: var(--container-width);
+    margin: 0 auto;
 }
 
 .footer-brand__logo {
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--organic-emerald);
     display: block;
-    margin-bottom: 16px;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--clr-blanco);
+    margin-bottom: 1rem;
 }
 
 .footer-brand__text {
-    font-size: 0.9rem;
-    color: #9C9FA1;
+    color: var(--clr-niebla);
 }
 
-.footer-title {
-    font-size: 1rem;
-    color: var(--sanitary-white);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+.map-title {
+    color: var(--clr-jade-core);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: block;
 }
 
-.footer-links__list {
+.footer-map ul, .footer-legal ul {
     list-style: none;
 }
 
-.footer-links__list li {
-    margin-bottom: 12px;
+.footer-map li, .footer-legal li {
+    margin-bottom: 0.75rem;
 }
 
-.footer-links__list a {
-    color: #9C9FA1;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s var(--transition-bezier);
+.footer-map a, .footer-legal a {
+    color: var(--clr-niebla);
 }
 
-.footer-links__list a:hover {
-    color: var(--organic-emerald);
+.footer-map a:hover, .footer-legal a:hover {
+    color: var(--clr-blanco);
 }
 
-.footer-info__text {
-    font-size: 0.9rem;
-    color: #9C9FA1;
-    margin-bottom: 8px;
-}
-
-.footer-bottom {
-    border-top: 1px solid #2B3035;
-    padding-top: 30px;
-    text-align: center;
-}
-
-.footer-bottom__copy {
+.footer-copyright {
+    margin-top: 2rem;
     font-size: 0.8rem;
-    color: #6C757D;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1rem;
+    color: var(--clr-niebla);
 }
 
-/* ==========================================================================
-   6. RESPONSIVE DESIGN & CONTROL DEL MENÚ MÓVIL (CAPA UI/UX)
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   11. MEDIA QUERIES (Responsividad básica)
+   -------------------------------------------------------------------------- */
 @media (max-width: 992px) {
-    .footer-grid {
+    .hero-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 8rem;
+    }
+    .hero-lead {
+        margin: 0 auto 2.5rem;
+    }
+    .hero-buttons {
+        justify-content: center;
+    }
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    .ecosystem-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 32px;
+    }
+    .ecosystem-grid::before {
+        display: none;
     }
 }
 
 @media (max-width: 768px) {
-    .mobile-nav-toggle {
-        display: flex; /* Se muestra en entornos móviles */
-    }
-
-    /* Transformación del menú de navegación a un cajón lateral */
     .nav-menu {
-        position: fixed;
-        top: 0;
-        right: -100%; /* Escondido por defecto */
-        width: 80%;
-        max-width: 320px;
-        height: 100vh;
-        background-color: var(--sanitary-white);
-        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-        padding: 120px 32px;
-        transition: right 0.4s var(--transition-bezier);
-        z-index: 999;
+        display: none;
     }
-
-    /* Clase inyectada activamente por home.ts / main.ts */
-    .nav-menu.nav-active {
-        right: 0;
-    }
-
-    .nav-menu__list {
+    .mobile-nav-toggle {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 32px;
+        gap: 4px;
+        background: none;
+        border: none;
+        cursor: pointer;
     }
-
-    .nav-menu__link {
-        font-size: 1.1rem;
+    .mobile-nav-toggle__bar {
+        width: 25px;
+        height: 3px;
+        background: var(--clr-carbono);
     }
-
-    /* Transformación de barras a cruz (Toggle activo) */
-    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
+    .form-grid {
+        grid-template-columns: 1fr;
     }
-    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(2) {
-        opacity: 0;
+    .ecosystem-grid {
+        grid-template-columns: 1fr;
     }
-    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-
-    .hero-section h1 {
-        font-size: 2rem;
-    }
-    
     .footer-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
 }

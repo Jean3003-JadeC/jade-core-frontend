@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="Jade Core: Ecosistema estratégico de alta precisión que converge nutrición clínica especializada, analítica predictiva de datos con IA y gestión de redes integradas de salud.">
-    <title>Jade Core | Inteligencia Sanitaria y Precisión Clínica</title>
+    <meta name="description" content="Jade Core: Ecosistema estratégico de alta precisión. Nutrición clínica, IA y gestión de IPRESS.">
+    <title>Jade Core | Inteligencia Sanitaria</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700;800&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300&family=Montserrat:wght@400;600;700;800&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="/src/styles/home.css">
 
     <script>
-        // 1. Ocultamos el elemento raíz del DOM antes de que el navegador intente pintar texto plano
         document.documentElement.style.visibility = 'hidden';
-        
-        // 2. En cuanto el árbol del DOM y las hojas de estilo estén procesadas, mostramos la interfaz limpia
         window.addEventListener('DOMContentLoaded', () => {
             document.documentElement.style.visibility = 'visible';
         });
@@ -27,7 +23,7 @@
 
     <header class="main-navbar" id="mainHeader">
         <div class="navbar-container">
-            <a href="/" class="navbar-brand" style="text-decoration: none;">
+            <a href="#home" class="navbar-brand" style="text-decoration: none;">
                 <span class="navbar-brand__logo">JADE CORE</span>
                 <span class="navbar-brand__descriptor">TECNOLOGIA & SALUD</span>
             </a>
@@ -40,21 +36,20 @@
 
             <nav class="nav-menu" id="mainNav" role="navigation" aria-label="Navegación principal">
                 <ul class="nav-menu__list">
-                    <li class="nav-menu__item"><a href="/" class="nav-menu__link is-active" aria-current="page">Home</a></li>
-                    <li class="nav-menu__item"><a href="/src/pages/nosotros.html" class="nav-menu__link">Nosotros</a></li>
-                    <li class="nav-menu__item"><a href="/src/pages/servicios.html" class="nav-menu__link">Servicios</a></li>
-                    <li class="nav-menu__item"><a href="/src/pages/metodologia.html" class="nav-menu__link">Metodología</a></li>
-                    <li class="nav-menu__item"><a href="/src/pages/recursos.html" class="nav-menu__link">Recursos</a></li>
-                    <li class="nav-menu__item"><a href="/src/pages/App.html" class="nav-menu__link">App</a></li>
-                    <li class="nav-menu__item"><a href="/src/pages/contacto.html" class="nav-menu__link">Contacto</a></li>
-                    <li class="nav-menu__item"><a href="/src/pages/legal.html" class="nav-menu__link">Legal</a></li>
+                    <li class="nav-menu__item"><a href="#home" class="nav-menu__link is-active">Home</a></li>
+                    <li class="nav-menu__item"><a href="#nosotros" class="nav-menu__link">Nosotros</a></li>
+                    <li class="nav-menu__item"><a href="#servicios" class="nav-menu__link">Servicios</a></li>
+                    <li class="nav-menu__item"><a href="#metodologia" class="nav-menu__link">Metodología</a></li>
+                    <li class="nav-menu__item"><a href="#recursos" class="nav-menu__link">Recursos</a></li>
+                    <li class="nav-menu__item"><a href="#contacto" class="nav-menu__link">Contacto</a></li>
+                    <li class="nav-menu__item"><a href="/src/pages/App.html" class="nav-menu__link btn-app-link">App</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <section id="hero" class="hero-section">
+        <section id="home" class="hero-section">
             <div class="hero-container">
                 <span class="hero-badge">INGENIERÍA DE DATOS & ANALÍTICA METABÓLICA</span>
                 <h1 class="hero-title">Modelos Predictivos y Cuidado Renal de Precisión</h1>
@@ -63,52 +58,377 @@
                     Optimización auditable de Hojas Gerenciales para IPRESS/RIS y planes nutricionales clínicos personalizados de alta fidelidad.
                 </p>
                 <div class="hero-buttons">
-                    <a href="/src/pages/servicios.html" class="btn btn-primary">Ver Servicios Especializados</a>
-                    <a href="/src/pages/contacto.html" class="btn btn-primary">Solicitar Auditoría RIS</a>
+                    <a href="#servicios" class="btn btn-primary">Ver Servicios Especializados</a>
+                    <a href="#contacto" class="btn btn-primary">Auditoría Tec & Health</a>
+                </div>
+            </div>
+            <div id="canvas-3d-container"></div>
+        </section>
+
+        <section id="nosotros" class="about-page section-padding">
+            <div class="about-hero-container">
+                <span class="section-badge">IDENTIDAD CORE</span>
+                <h1>Fusión Transdisciplinaria para la Gestión de la Salud</h1>
+                <p class="about-lead-text">
+                    Jade Core es un ecosistema estratégico de alta precisión que converge la ciencia de la Nutrición Clínica, 
+                    la Ingeniería de Datos con Inteligencia Artificial y la Alta Gerencia de Servicios Sanitarios para redefinir el cuidado metabólico regional.
+                </p>
+            </div>
+            <div class="pillars-section">
+                <div class="pillars-container">
+                    <div class="pillars-grid">
+                        <div class="pillar-card">
+                            <div class="pillar-icon">🧬</div>
+                            <h3>Nutrición de Precisión</h3>
+                            <p>Modelado avanzado de planes nutricionales clínicos específicos para patologías crónicas complejas y soporte renal metabólico de alta fidelidad.</p>
+                        </div>
+                        <div class="pillar-card">
+                            <div class="pillar-icon">📊</div>
+                            <h3>Ingeniería de Datos e IA</h3>
+                            <p>Construcción de arquitecturas analíticas predictivas orientadas al procesamiento estadístico sanitario y optimización de curvas de filtrado glomerular (eGFR).</p>
+                        </div>
+                        <div class="pillar-card">
+                            <div class="pillar-icon">🏛️</div>
+                            <h3>Gestión y Auditoría RIS</h3>
+                            <p>Consultoría experta en control de calidad para IPRESS, análisis estratégico de la Hoja Gerencial y optimización de flujos operativos en redes asistenciales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ecosystem-visualization">
+                <div class="visualization-container">
+                    <h2>Convergencia de Nodos del Ecosistema</h2>
+                    <p class="visualization-description">Representación algorítmica interactiva de la interacción de datos entre nuestros pilares técnicos en tiempo real.</p>
+                    <div class="ecosystem-graphic-placeholder"></div>
+                    <div class="video-wrapper" style="margin-top: 2rem;">
+                        <video class="lazy-video" data-src="/assets/videos/corporativo.mp4" muted loop></video>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section-container bg-light">
-            <div class="section-header">
-                <h2>Impacto Operacional Basado en Evidencia</h2>
-                <div class="header-line"></div>
-            </div>
-            
-            <div id="informacion-clave">
-                <article>
-                    <h3>Métricas de Rendimiento</h3>
-                    <ul class="stats-list">
-                        <li>
-                            <span class="stat-number" data-target="98">0</span>
-                            <span class="stat-label">Precisión en Modelos Clínicos Predictivos (eGFR)</span>
-                        </li>
-                        <li>
-                            <span class="stat-number" data-target="45">0</span>
-                            <span class="stat-label">Minutos de Reducción en Procesamiento Quirúrgico e IPRESS</span>
-                        </li>
-                    </ul>
-                </article>
-
-                <article>
-                    <h3>Visualización Gerencial</h3>
-                    <div class="grafico-placeholder" style="display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--gris-niebla); font-weight: 600;">
-                        [MATRIZ ANALÍTICA DE ATENCIONES RIS]
-                    </div>
-                    <p style="font-size: 0.85rem; color: var(--gris-niebla); margin: 0; text-align: justify;">
-                        Simulación de flujos transaccionales consolidando el procesamiento masivo de datos para reportes epidemiológicos regionales.
+        <section id="servicios" class="knowledge-grid-section section-padding">
+            <div class="resources-hero">
+                <div class="container">
+                    <span class="section-subtitle">Soluciones de Alta Precisión</span>
+                    <h1 class="section-title-main">Portafolio de Servicios Corporativos</h1>
+                    <p class="hero-lead-text">
+                        Desplegamos capacidades avanzadas en el modelado metabólico clínico, analítica predictiva de datos e inteligencia de negocio para transformar el rendimiento operacional de los servicios sanitarios regionales.
                     </p>
-                </article>
+                    <div class="repository-filters" role="tablist" aria-label="Filtrar servicios">
+                        <button class="filter-btn active" role="tab" aria-selected="true" data-filter="all">Todos los Servicios</button>
+                        <button class="filter-btn" role="tab" aria-selected="false" data-filter="clinical">Nutrición Clínica</button>
+                        <button class="filter-btn" role="tab" aria-selected="false" data-filter="analytics">Ingeniería de Datos</button>
+                        <button class="filter-btn" role="tab" aria-selected="false" data-filter="management">Auditoría & Gestión</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="margin-top: 3rem;">
+                <div class="resources-grid">
+                    <article class="resource-card card-reveal" data-category="clinical">
+                        <div class="card-badge">Nutrición de Precisión</div>
+                        <div class="card-content">
+                            <span class="card-meta">Intervención Avanzada | Cuidado Renal</span>
+                            <h2 class="card-title">Soporte Metabólico Nutricional de Alta Fidelidad</h2>
+                            <p class="card-excerpt">
+                                Diseño automatizado y estructurado de planes clínico-nutricionales específicos para patologías renales complejas, optimizando el balance nitrogenado y la tasa de filtrado glomerular (eGFR).
+                            </p>
+                            <div class="card-footer">
+                                <span class="read-time">Protocolo Basado en Evidencia</span>
+                                <a href="#contacto" class="btn-text-link">Consultar Servicio →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="resource-card card-reveal" data-category="analytics">
+                        <div class="card-badge">Inteligencia Artificial</div>
+                        <div class="card-content">
+                            <span class="card-meta">Ciencia de Datos | Analítica Predictiva</span>
+                            <h2 class="card-title">Modelado Analítico de Curvas Clínicas Predictivas</h2>
+                            <p class="card-excerpt">
+                                Construcción de arquitecturas analíticas avanzadas y entrenamiento de modelos predictivos locales para detectar desviaciones epidemiológicas tempranas y optimizar flujos logísticos transaccionales.
+                            </p>
+                            <div class="card-footer">
+                                <span class="read-time">Entornos TypeScript Rigurosos</span>
+                                <a href="#contacto" class="btn-text-link">Solicitar Simulación →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="resource-card card-reveal" data-category="management">
+                        <div class="card-badge">Business Intelligence</div>
+                        <div class="card-content">
+                            <span class="card-meta">Consultoría Gerencial | Redes de Salud</span>
+                            <h2 class="card-title">Auditoría Operacional de la Hoja Gerencial e IPRESS</h2>
+                            <p class="card-excerpt">
+                                Implementación de procesos automatizados de extracción y transformación de datos (ETL) para reportes oficiales de la Red Asistencial, reduciendo el error manual y optimizando costos en redes RIS.
+                            </p>
+                            <div class="card-footer">
+                                <span class="read-time">Control de Calidad Auditable</span>
+                                <a href="#contacto" class="btn-text-link">Solicitar Auditoría →</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-                <article>
-                    <h3>Soporte Metabólico</h3>
-                    <ul class="stats-list">
-                        <li>
-                            <span class="stat-number" data-target="1500">0</span>
-                            <span class="stat-label">Evaluaciones Clínico-Nutricionales de Alta Fidelidad Realizadas</span>
-                        </li>
-                    </ul>
-                </article>
+        <section id="metodologia" class="methodology-flow section-padding">
+            <div class="methodology-hero">
+                <div class="container-center">
+                    <span class="tech-badge">INGENIERÍA SANITARIA EXPERIMENTAL</span>
+                    <h1>Nuestra Metodología Analítica de Datos</h1>
+                    <p class="methodology-subtitle">
+                        Fusión avanzada de ciencia de datos, machine learning y marcos regulatorios clínicos para la transformación operativa de los servicios de salud.
+                    </p>
+                </div>
+            </div>
+            <div class="ecosystem-flow-section">
+                <div class="container">
+                    <div class="ecosystem-grid">
+                        <div class="ecosystem-card" id="phase1">
+                            <div class="card-phase-num">01</div>
+                            <h3>Extracción e Interoperabilidad</h3>
+                            <p>Captura automatizada y normalización de Hojas Gerenciales y registros metabólicos clínicos bajo estrictos estándares de seguridad y consistencia en la Red Asistencial.</p>
+                        </div>
+                        <div class="ecosystem-card" id="phase2">
+                            <div class="card-phase-num">02</div>
+                            <h3>Procesamiento Predictivo</h3>
+                            <p>Análisis masivo mediante algoritmos de Inteligencia Artificial para la identificación temprana de desviaciones y modelado de curvas de filtrado glomerular (eGFR).</p>
+                        </div>
+                        <div class="ecosystem-card" id="phase3">
+                            <div class="card-phase-num">03</div>
+                            <h3>Diseño y Precisión Clínica</h3>
+                            <p>Traducción de métricas estadísticas en intervenciones personalizadas de alta fidelidad y directrices estructuradas para el cuidado clínico-nutricional.</p>
+                        </div>
+                        <div class="ecosystem-card" id="phase4">
+                            <div class="card-phase-num">04</div>
+                            <h3>Auditoría Operativa RIS</h3>
+                            <p>Despliegue de dashboards analíticos de Business Intelligence para optimizar la toma de decisiones gerenciales en IPRESS y el control de calidad institucional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="recursos" class="clinical-context section-padding">
+            <div class="resources-hero">
+                <div class="container">
+                    <span class="section-subtitle">Evidencia Científica & Analítica</span>
+                    <h1 class="section-title-main">Centro de Conocimiento Integrado</h1>
+                    <p class="hero-lead-text">
+                        Repositorio avanzado de investigaciones clínicas, optimización de sistemas de gestión de salud y herramientas técnicas estructuradas para profesionales e instituciones médicas.
+                    </p>
+                    <div class="repository-filters" role="tablist" aria-label="Filtrar recursos">
+                        <button class="filter-btn active" role="tab" aria-selected="true" data-filter="all">Todos los Recursos</button>
+                        <button class="filter-btn" role="tab" aria-selected="false" data-filter="clinical">Artículos Clínicos</button>
+                        <button class="filter-btn" role="tab" aria-selected="false" data-filter="bi">Casos de Estudio (BI)</button>
+                        <button class="filter-btn" role="tab" aria-selected="false" data-filter="technical">Material Técnico</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="margin-top: 3rem;">
+                <div class="resources-grid">
+                    <article class="resource-card card-reveal" data-category="clinical">
+                        <div class="card-badge">Artículo Clínico</div>
+                        <div class="card-content">
+                            <span class="card-meta">Meta-análisis | Nutrición Renal</span>
+                            <h2 class="card-title">Intervención Nutricional en Terapias Convectivas y de Reemplazo Renal Continuo</h2>
+                            <p class="card-excerpt">
+                                Revisión sistemática sobre la pérdida de aminoácidos y el balance nitrogenado óptimo en pacientes críticos bajo hemodiafiltración de alto volumen.
+                            </p>
+                            <div class="card-footer">
+                                <span class="read-time">Lectura: 12 min</span>
+                                <a href="#" class="btn-text-link">Ver Análisis Completo →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="resource-card card-reveal" data-category="clinical">
+                        <div class="card-badge">Artículo Clínico</div>
+                        <div class="card-content">
+                            <span class="card-meta">Actualización | Patologías Crónicas</span>
+                            <h2 class="card-title">Restricción Proteica Modulada y Preservación de la Función Renal Residual</h2>
+                            <p class="card-excerpt">
+                                Evidencia clínica actual sobre el uso de cetoanálogos combinados con dietas muy bajas en proteínas en la ERC estadios 3b y 4.
+                            </p>
+                            <div class="card-footer">
+                                <span class="read-time">Lectura: 9 min</span>
+                                <a href="#" class="btn-text-link">Ver Análisis Completo →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="resource-card card-reveal" data-category="bi">
+                        <div class="card-badge">Business Intelligence</div>
+                        <div class="card-content">
+                            <span class="card-meta">Caso de Éxito | Optimización RIS / IPRESS</span>
+                            <h2 class="card-title">Reducción de Tiempos de Espera Quirúrgica Mediante Modelos Predictivos e IA</h2>
+                            <p class="card-excerpt">
+                                Análisis de la optimización del flujo transaccional y asignación de recursos en una red asistencial de salud utilizando analítica de datos avanzada.
+                            </p>
+                            <div class="card-metrics">
+                                <div class="metric-box">
+                                    <span class="metric-value">-24%</span>
+                                    <span class="metric-label">Tiempo de Espera</span>
+                                </div>
+                                <div class="metric-box">
+                                    <span class="metric-value">94.2%</span>
+                                    <span class="metric-label">Precisión de Red</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span class="read-time">Estudio de Gestión</span>
+                                <a href="#" class="btn-text-link">Leer Caso de Éxito →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="resource-card card-reveal" data-category="bi">
+                        <div class="card-badge">Business Intelligence</div>
+                        <div class="card-content">
+                            <span class="card-meta">Dashboard | Reportes Gerenciales</span>
+                            <h2 class="card-title">Automatización de la Hoja Gerencial y Control Epidemiológico</h2>
+                            <p class="card-excerpt">
+                                Implementación de procesos ETL dinámicos para el consolidado estadístico de atenciones crónicas, minimizando errores de transcripción en un 98%.
+                            </p>
+                            <div class="card-metrics">
+                                <div class="metric-box">
+                                    <span class="metric-value">100%</span>
+                                    <span class="metric-label">Automatizado</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span class="read-time">Estudio de Datos</span>
+                                <a href="#" class="btn-text-link">Leer Caso de Éxito →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="resource-card download-card card-reveal" data-category="technical">
+                        <div class="card-badge download-badge">Repositorio Técnico</div>
+                        <div class="card-content">
+                            <span class="card-meta">Flujograma | Operaciones IPRESS</span>
+                            <h2 class="card-title">Flujograma de Derivación e Interconsulta en Redes Integradas de Salud (RIS)</h2>
+                            <p class="card-excerpt">
+                                Diagrama operativo estandarizado en alta resolución para la optimización de flujos de pacientes entre centros de atención primaria y especializada.
+                            </p>
+                            <div class="card-footer">
+                                <span class="file-info">PDF (4.2 MB)</span>
+                                <a href="/flujograma-ris.pdf" class="btn-download" download>📥 Descargar Documento</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="resource-card download-card card-reveal" data-category="technical">
+                        <div class="card-badge download-badge">Guía Clínica</div>
+                        <div class="card-content">
+                            <span class="card-meta">Infografía | Soporte Nutricional</span>
+                            <h2 class="card-title">Guía de Bolsillo: Prescripción de Macronutrientes en el Paciente Renal Crónico</h2>
+                            <p class="card-excerpt">
+                                Infografía clínica avanzada y estructurada con fórmulas de cálculo rápido para estadios pre-diálisis y soporte dialítico automatizado.
+                            </p>
+                            <div class="card-footer">
+                                <span class="file-info">PDF (2.8 MB)</span>
+                                <a href="/guia-macronutrientes-renal.pdf" class="btn-download" download>📥 Descargar Documento</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact-container section-padding">
+            <header class="contact-header">
+                <span class="contact-header__subtitle">INTEGRACIÓN OPERATIVA INSTITUCIONAL</span>
+                <h1 class="contact-header__title">Canales de Comunicación y Soporte</h1>
+                <p class="contact-header__description">
+                    Contacte con nuestro equipo multidisciplinario para la optimización de procesos sanitarios, soporte en nutrición renal analítica o consultorías de Business Intelligence gerencial.
+                </p>
+            </header>
+            <div class="contact-grid">
+                <aside class="contact-sidebar">
+                    <section class="contact-card" aria-labelledby="sidebar-channels-title">
+                        <h2 id="sidebar-channels-title" class="contact-card__title">Canales Directos</h2>
+                        <div class="channel-group">
+                            <div class="channel-item">
+                                <h3 class="channel-item__area">Consultoría Institucional</h3>
+                                <p class="channel-item__info">Auditorías operacionales para Redes Integradas de Salud (RIS) e IPRESS.</p>
+                                <a href="mailto:gestion@jadecore.com" class="channel-item__link">gestion@jadecore.com</a>
+                            </div>
+                            <div class="channel-item">
+                                <h3 class="channel-item__area">Soporte Clínico Renal</h3>
+                                <p class="channel-item__info">Interconsultas y telemonitoreo de biomarcadores metabólicos crónicos.</p>
+                                <a href="https://wa.me/51951000000" target="_blank" rel="noopener noreferrer" class="channel-item__whatsapp">Enlace WhatsApp Clínico</a>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="contact-card" aria-labelledby="sidebar-location-title">
+                        <h2 id="sidebar-location-title" class="contact-card__title">Ubicación de Referencia</h2>
+                        <address class="location-info">
+                            <p class="location-info__item"><strong>Región Operativa:</strong> Arequipa, Perú.</p>
+                            <p class="location-info__item"><strong>Cobertura Asistencial:</strong> Centros Médicos y Redes de Salud Macrorregionales.</p>
+                        </address>
+                    </section>
+                </aside>
+                <div class="contact-main-content">
+                    <section class="contact-card" aria-labelledby="form-title">
+                        <h2 id="form-title" class="contact-card__title">Formulario de Ingesta Analítica</h2>
+                        <form id="contactForm" class="clinical-form" novalidate>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="txtName" class="clinical-form__label">Nombre Completo / Institución</label>
+                                    <input type="text" id="txtName" name="txtName" class="clinical-form__input" required>
+                                    <span class="clinical-form__error" id="error-txtName"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtEmail" class="clinical-form__label">Correo Electrónico Institucional</label>
+                                    <input type="email" id="txtEmail" name="txtEmail" class="clinical-form__input" required>
+                                    <span class="clinical-form__error" id="error-txtEmail"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ddlService" class="clinical-form__label">Área de Requerimiento Específico</label>
+                                <select id="ddlService" name="ddlService" class="clinical-form__select" required>
+                                    <option value="">-- Seleccione el servicio core --</option>
+                                    <option value="nutrition">Nutrición Clínica Renal Avanzada</option>
+                                    <option value="analytics">Ingeniería de Datos e Inteligencia Artificial</option>
+                                    <option value="bi">Business Intelligence y Gestión de IPRESS</option>
+                                </select>
+                                <span class="clinical-form__error" id="error-ddlService"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtMessage" class="clinical-form__label">Descripción Detallada del Requerimiento / Datos Clínicos</label>
+                                <textarea id="txtMessage" name="txtMessage" rows="5" class="clinical-form__textarea" required></textarea>
+                                <span class="clinical-form__error" id="error-txtMessage"></span>
+                            </div>
+                            <button type="submit" class="clinical-form__submit">Enviar Solicitud de Precisión</button>
+                        </form>
+                    </section>
+                    <section class="contact-card contact-card--payment" aria-labelledby="payment-title">
+                        <div class="payment-header">
+                            <h2 id="payment-title" class="contact-card__title">Liquidación y Aranceles Operativos</h2>
+                            <p class="payment-header__description">Consulte y simule las tasas de liquidación correspondientes a auditorías o planes especializados.</p>
+                        </div>
+                        <div class="payment-methods">
+                            <div class="payment-badge" data-gateway="yape">
+                                <div class="payment-badge__logo-placeholder">YAPE</div>
+                                <div class="payment-badge__text">Procesamiento Inmediato Móvil</div>
+                            </div>
+                            <div class="payment-badge" data-gateway="pagoefectivo">
+                                <div class="payment-badge__logo-placeholder">PE</div>
+                                <div class="payment-badge__text">Código Transaccional CIP</div>
+                            </div>
+                        </div>
+                        <div class="payment-simulator">
+                            <h3 class="payment-simulator__title">Simulador Unitario</h3>
+                            <div class="payment-simulator__summary">
+                                <div class="summary-line">
+                                    <span>Tasa Base Analítica:</span>
+                                    <span>S/ 0.00</span>
+                                </div>
+                                <div class="summary-line summary-line--total">
+                                    <span>Total a Liquidar:</span>
+                                    <span id="lblTotal">S/ 0.00</span>
+                                </div>
+                            </div>
+                            <button type="button" class="payment-simulator__btn" id="btnCalculate">Calcular Arancel Estimado</button>
+                        </div>
+                    </section>
+                </div>
             </div>
         </section>
     </main>
@@ -118,43 +438,30 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <span class="footer-brand__logo">JADE CORE</span>
-                    <p class="footer-brand__text">Ecosistema de Salud Avanzado de Alta Precisión.</p>
-                    <p class="brand-legal-summary" style="font-size: 0.8rem; color: #9C9FA1; margin-top: 10px;">
-                        Gobernanza analítica de datos médicos orientada al rendimiento institucional de la Red Asistencial.
-                    </p>
+                    <p class="footer-brand__text">Ecosistema Clínico, Tecnológico y de Gestión de Precisión.</p>
+                    <div class="footer-channels">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="Perfil institucional de LinkedIn">LinkedIn</a>
+                        <a href="https://wa.me/51951000000" target="_blank" rel="noopener noreferrer" aria-label="Canal de atención directa por WhatsApp">WhatsApp</a>
+                    </div>
                 </div>
-                
-                <div class="footer-nav-map">
-                    <h4 class="footer-title">Ecosistema</h4>
-                    <ul class="footer-links__list">
-                        <li><a href="/">Inicio</a></li>
-                        <li><a href="/src/pages/nosotros.html">Nosotros</a></li>
-                        <li><a href="/src/pages/servicios.html">Servicios</a></li>
-                        <li><a href="/src/pages/metodologia.html">Metodología</a></li>
+                <div class="footer-map">
+                    <span class="map-title">Ecosistema</span>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#metodologia">Metodología</a></li>
+                        <li><a href="#recursos">Recursos y Evidencias</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-nav-map">
-                    <h4 class="footer-title">Plataforma</h4>
-                    <ul class="footer-links__list">
-                        <li><a href="/src/pages/recursos.html">Recursos</a></li>
-                        <li><a href="/src/pages/App.html">App del Paciente</a></li>
-                        <li><a href="/src/pages/contacto.html">Contacto</a></li>
-                        <li><a href="/src/pages/legal.html">Legal y Privacidad</a></li>
+                <div class="footer-legal">
+                    <span class="map-title">Regulaciones</span>
+                    <ul>
+                        <li><a href="/src/pages/legal.html">Términos y Condiciones</a></li>
+                        <li><a href="/src/pages/legal.html#privacidad">Política de Privacidad</a></li>
                     </ul>
+                    <p class="footer-copyright">&copy; 2026 Jade Core. Todos los derechos reservados. TECNOLOGIA & SALUD.</p>
                 </div>
-                
-                <div class="footer-info">
-                    <h4 class="footer-title">Sede Central</h4>
-                    <p class="footer-info__text">Arequipa, Perú.</p>
-                    <p class="footer-info__text">Soporte: info@jadecore.com</p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p class="footer-bottom__copy">
-                    &copy; 2026 Jade Core. Todos los derechos reservados. Tratamiento de Datos Personales Sensibles regulado bajo estándares éticos de auditoría algorítmica.
-                </p>
             </div>
         </div>
     </footer>

@@ -1,192 +1,96 @@
 /**
  * ==========================================================================
- * JADE CORE - MÓDULO 7: CONTACTO E INTEGRACIÓN DE SERVICIOS
- * Patrón de Arquitectura: Namespace Pattern (Producción Core)
- * Componentes: Menú Responsive UI, Formulario Dinámico, Validación, Simulador
+ * JADE CORE - MÓDULO: CONTACTO E INTEGRACIÓN DE SERVICIOS (SPA Version)
+ * Componentes: Formulario Clínico, Validación, Simulador de Aranceles
  * ==========================================================================
  */
 
-// 1. DEFINICIÓN DE LA INTERFAZ PARA EL CACHE DEL DOM CON ELEMENTOS ESPECÍFICOS
 interface ContactDOM {
-    navToggle?: HTMLElement | null;
-    navMenu?: HTMLElement | null;
     form?: HTMLFormElement | null;
-    userName?: HTMLInputElement | null;
-    userEmail?: HTMLInputElement | null;
-    requirementType?: HTMLSelectElement | null;
-    dynamicFieldsContainer?: HTMLElement | null;
-    message?: HTMLTextAreaElement | null;
-    serviceSelect?: HTMLSelectElement | null;
-    paymentSummary?: HTMLElement | null;
-    summarySubtotal?: HTMLElement | null;
-    summaryTax?: HTMLElement | null;
-    summaryTotal?: HTMLElement | null;
-    btnGeneratePayment?: HTMLElement | null;
+    txtName?: HTMLInputElement | null;
+    txtEmail?: HTMLInputElement | null;
+    ddlService?: HTMLSelectElement | null;
+    txtMessage?: HTMLTextAreaElement | null;
+    btnCalculate?: HTMLElement | null;
+    lblTotal?: HTMLElement | null;
 }
 
 const JadeCoreContact = {
-    // 1. ESTADO INTERNO DEL MÓDULO (STATE MANAGEMENT)
-    state: {
-        selectedRequirement: '',
-        selectedServicePrice: 0,
-        taxRate: 0.18 // IGV de precisión para la legislación nacional
-    },
-
-    // 2. SELECTORES DE ELEMENTOS DEL DOM (CACHE DOM) - Tipado con la interfaz superior
+    // 1. SELECTORES DEL DOM
     dom: {} as ContactDOM,
 
     initSelectors: function() {
-        // Selectores de Infraestructura Global (Navbar Móvil)
-        this.dom.navToggle = document.querySelector('.mobile-nav-toggle');
-        this.dom.navMenu = document.querySelector('.nav-menu');
-
-        // Selectores del Formulario Clínico con aserciones de tipos de elementos específicos
+        // Mapeado estrictamente a los IDs de tu nuevo index.html
         this.dom.form = document.getElementById('contactForm') as HTMLFormElement;
-        this.dom.userName = document.getElementById('userName') as HTMLInputElement;
-        this.dom.userEmail = document.getElementById('userEmail') as HTMLInputElement;
-        this.dom.requirementType = document.getElementById('requirementType') as HTMLSelectElement;
-        this.dom.dynamicFieldsContainer = document.getElementById('dynamicFieldsContainer');
-        this.dom.message = document.getElementById('message') as HTMLTextAreaElement;
+        this.dom.txtName = document.getElementById('txtName') as HTMLInputElement;
+        this.dom.txtEmail = document.getElementById('txtEmail') as HTMLInputElement;
+        this.dom.ddlService = document.getElementById('ddlService') as HTMLSelectElement;
+        this.dom.txtMessage = document.getElementById('txtMessage') as HTMLTextAreaElement;
         
-        // Selectores del Simulador de Pagos
-        this.dom.serviceSelect = document.getElementById('serviceSelect') as HTMLSelectElement;
-        this.dom.paymentSummary = document.getElementById('paymentSummary');
-        this.dom.summarySubtotal = document.getElementById('summarySubtotal');
-        this.dom.summaryTax = document.getElementById('summaryTax');
-        this.dom.summaryTotal = document.getElementById('summaryTotal');
-        this.dom.btnGeneratePayment = document.getElementById('btnGeneratePayment');
+        // Selectores del simulador unitario
+        this.dom.btnCalculate = document.getElementById('btnCalculate');
+        this.dom.lblTotal = document.getElementById('lblTotal');
     },
 
-    // 3. MÉTODO DE INICIALIZACIÓN (ENTRY POINT)
+    // 2. ENTRY POINT
     init: function() {
         this.initSelectors();
         this.registerEvents();
+        console.log('%c[Jade Core Node]: Módulo de Contacto Inicializado', 'color: #4B9F86;');
     },
 
-    // 4. REGISTRO DE ESCUCHADORES DE EVENTOS (EVENT BINDING)
+    // 3. REGISTRO DE EVENTOS
     registerEvents: function() {
-        // Evento de Interfaz: Menú Adaptativo
-        if (this.dom.navToggle && this.dom.navMenu) {
-            this.dom.navToggle.addEventListener('click', () => this.handleMenuToggle());
-        }
-
-        // Eventos del Formulario Clínico
-        if (this.dom.form && this.dom.requirementType) {
-            this.dom.requirementType.addEventListener('change', (e: Event) => this.handleRequirementChange(e));
+        // Evento principal del formulario
+        if (this.dom.form) {
             this.dom.form.addEventListener('submit', (e: Event) => this.handleFormSubmit(e));
             
-            // Limpieza reactiva de estados inválidos en inputs
-            const inputs = [this.dom.userName, this.dom.userEmail, this.dom.message, this.dom.requirementType];
+            // Limpieza reactiva de errores al escribir
+            const inputs = [this.dom.txtName, this.dom.txtEmail, this.dom.txtMessage, this.dom.ddlService];
             inputs.forEach(input => {
                 if (input) {
                     input.addEventListener('input', (e: Event) => {
-                        if (e.target) {
-                            this.clearFieldError(e.target as HTMLElement);
-                        }
+                        this.clearFieldError(e.target as HTMLElement);
                     });
                 }
             });
         }
 
-        // Eventos del Simulador de Transacciones
-        if (this.dom.serviceSelect) {
-            this.dom.serviceSelect.addEventListener('change', (e: Event) => this.handleServiceSelection(e));
-        }
-        if (this.dom.btnGeneratePayment) {
-            this.dom.btnGeneratePayment.addEventListener('click', () => this.executePaymentSimulation());
+        // Evento del simulador de pagos
+        if (this.dom.btnCalculate) {
+            this.dom.btnCalculate.addEventListener('click', () => this.executePaymentSimulation());
         }
     },
 
-    // 5. CONTROLADOR DEL MENÚ RESPONSIVE INTERACTIVO
-    handleMenuToggle: function() {
-        if (!this.dom.navMenu || !this.dom.navToggle) return;
-
-        const isOpen = this.dom.navMenu.classList.contains('nav-active');
-        
-        if (isOpen) {
-            this.dom.navMenu.classList.remove('nav-active');
-            this.dom.navToggle.classList.remove('nav-active');
-            this.dom.navToggle.setAttribute('aria-expanded', 'false');
-        } else {
-            this.dom.navMenu.classList.add('nav-active');
-            this.dom.navToggle.classList.add('nav-active');
-            this.dom.navToggle.setAttribute('aria-expanded', 'true');
-        }
-    },
-
-    // 6. LÓGICA DE CAMPOS CONDICIONALES / DINÁMICOS
-    handleRequirementChange: function(event: Event) {
-        const target = event.target as HTMLSelectElement;
-        this.state.selectedRequirement = target.value;
-        let dynamicHTML = '';
-
-        switch(this.state.selectedRequirement) {
-            case 'nutricion_renal':
-                dynamicHTML = `
-                    <div class="form-group" style="animation: fadeIn 0.3s ease-out forwards;">
-                        <label for="clinicalHistory" class="clinical-form__label">¿Cuenta con Diagnóstico o Interconsulta Médica previa?</label>
-                        <select id="clinicalHistory" name="clinicalHistory" class="clinical-form__select">
-                            <option value="si">Sí, cuento con informe de nefrología / soporte</option>
-                            <option value="no">No, requiero evaluación diagnóstica inicial</option>
-                        </select>
-                    </div>
-                `;
-                break;
-            case 'auditoria_gestion':
-                dynamicHTML = `
-                    <div class="form-group" style="animation: fadeIn 0.3s ease-out forwards;">
-                        <label for="ipressType" class="clinical-form__label">Tipo de Establecimiento Sanitario (IPRESS)</label>
-                        <input type="text" id="ipressType" name="ipressType" class="clinical-form__input" placeholder="Ej. Centro Médico, Red Asistencial, Clínica Privada">
-                    </div>
-                `;
-                break;
-            case 'integracion_ia':
-                dynamicHTML = `
-                    <div class="form-group" style="animation: fadeIn 0.3s ease-out forwards;">
-                        <label for="dataSource" class="clinical-form__label">Origen o Infraestructura de Datos Base</label>
-                        <select id="dataSource" name="dataSource" class="clinical-form__select">
-                            <option value="sql_emr">Bases de Datos Relacionales / Historias Clínicas Electrónicas</option>
-                            <option value="hojas_gerenciales">Hojas Gerenciales / Matrices Estadísticas Excel</option>
-                            <option value="no_estructurado">Datos No Estructurados / APIs de Terceros</option>
-                        </select>
-                    </div>
-                `;
-                break;
-            default:
-                dynamicHTML = '';
-        }
-
-        if (this.dom.dynamicFieldsContainer) {
-            this.dom.dynamicFieldsContainer.innerHTML = dynamicHTML;
-        }
-    },
-
-    // 7. CONTROLADOR DE VALIDACIÓN DE FORMULARIO CORPORATIVO
+    // 4. VALIDACIÓN DE FORMULARIO CORPORATIVO
     handleFormSubmit: function(event: Event) {
         event.preventDefault();
         let isFormValid = true;
 
-        // Aseguramos que los inputs requeridos estén disponibles para evaluar sus valores
-        if (!this.dom.userName || !this.dom.userEmail || !this.dom.requirementType || !this.dom.message) return;
+        if (!this.dom.txtName || !this.dom.txtEmail || !this.dom.ddlService || !this.dom.txtMessage) return;
 
-        if (this.dom.userName.value.trim().length < 4) {
-            this.setFieldError(this.dom.userName, 'El nombre institucional o personal debe contener al menos 4 caracteres.');
+        // Validación de Nombre
+        if (this.dom.txtName.value.trim().length < 4) {
+            this.setFieldError(this.dom.txtName, 'El nombre institucional debe contener al menos 4 caracteres.');
             isFormValid = false;
         }
 
+        // Validación de Correo
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(this.dom.userEmail.value.trim())) {
-            this.setFieldError(this.dom.userEmail, 'Ingrese una dirección de correo electrónico institucional válida.');
+        if (!emailRegex.test(this.dom.txtEmail.value.trim())) {
+            this.setFieldError(this.dom.txtEmail, 'Ingrese una dirección de correo institucional válida.');
             isFormValid = false;
         }
 
-        if (!this.dom.requirementType.value) {
-            this.setFieldError(this.dom.requirementType, 'Debe seleccionar un área de requerimiento de Jade Core.');
+        // Validación de Servicio
+        if (!this.dom.ddlService.value) {
+            this.setFieldError(this.dom.ddlService, 'Debe seleccionar un área de requerimiento (Nutrición, Datos o BI).');
             isFormValid = false;
         }
 
-        if (this.dom.message.value.trim().length < 15) {
-            this.setFieldError(this.dom.message, 'La descripción del caso clínico o corporativo debe ser más detallada (mínimo 15 caracteres).');
+        // Validación de Mensaje
+        if (this.dom.txtMessage.value.trim().length < 15) {
+            this.setFieldError(this.dom.txtMessage, 'La descripción clínica o corporativa debe ser más detallada (mínimo 15 caracteres).');
             isFormValid = false;
         }
 
@@ -195,78 +99,65 @@ const JadeCoreContact = {
         }
     },
 
-    setFieldError: function(element: HTMLElement | null, message: string) {
-        if (!element) return;
+    // 5. MANEJO DE ERRORES UI
+    setFieldError: function(element: HTMLElement, message: string) {
         element.classList.add('is-invalid');
         const errorSpan = document.getElementById(`error-${element.id}`);
         if (errorSpan) {
             errorSpan.textContent = message;
+            errorSpan.style.display = 'block';
         }
     },
 
-    clearFieldError: function(element: HTMLElement | null) {
-        if (!element) return;
+    clearFieldError: function(element: HTMLElement) {
         element.classList.remove('is-invalid');
         const errorSpan = document.getElementById(`error-${element.id}`);
         if (errorSpan) {
             errorSpan.textContent = '';
+            errorSpan.style.display = 'none';
         }
     },
 
+    // 6. PROCESAMIENTO
     processValidSubmission: function() {
-        if (!this.dom.form || !this.dom.dynamicFieldsContainer) return;
+        if (!this.dom.form) return;
 
         const submitButton = this.dom.form.querySelector('.clinical-form__submit') as HTMLButtonElement;
-        if (!submitButton) return;
-
-        submitButton.disabled = true;
-        submitButton.textContent = 'Procesando e Encriptando Solicitud...';
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Procesando Encriptación...';
+        }
 
         setTimeout(() => {
-            alert(`Solicitud registrada con éxito.\nUn especialista de la división de Jade Core se comunicará con usted de forma prioritaria.`);
+            const servicio = this.dom.ddlService?.value.toUpperCase();
+            alert(`Solicitud de ${servicio} registrada con éxito.\nUn especialista de Jade Core se comunicará con usted.`);
+            
             this.dom.form?.reset();
-            if (this.dom.dynamicFieldsContainer) {
-                this.dom.dynamicFieldsContainer.innerHTML = '';
+            
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Enviar Solicitud de Precisión';
             }
-            submitButton.disabled = false;
-            submitButton.textContent = 'Procesando e Iniciar Solicitud';
         }, 1500);
     },
 
-    // 8. MOTOR LÓGICO DEL SIMULADOR DE ARANCELES Y FACTURACIÓN
-    handleServiceSelection: function(event: Event) {
-        const target = event.target as HTMLSelectElement;
-        const value = parseFloat(target.value);
-        this.state.selectedServicePrice = value;
-
-        if (!this.dom.summarySubtotal || !this.dom.summaryTax || !this.dom.summaryTotal || !this.dom.paymentSummary) return;
-
-        if (value > 0) {
-            const total = this.state.selectedServicePrice;
-            const subtotal = total / (1 + this.state.taxRate);
-            const tax = total - subtotal;
-
-            this.dom.summarySubtotal.textContent = `S/ ${subtotal.toFixed(2)}`;
-            this.dom.summaryTax.textContent = `S/ ${tax.toFixed(2)}`;
-            this.dom.summaryTotal.textContent = `S/ ${total.toFixed(2)}`;
-
-            this.dom.paymentSummary.style.display = 'flex';
-        } else {
-            this.dom.paymentSummary.style.display = 'none';
-        }
-    },
-
+    // 7. SIMULADOR UNITARIO DE ARANCELES (Adaptado al nuevo HTML)
     executePaymentSimulation: function() {
-        if (!this.dom.serviceSelect) return;
+        if (!this.dom.lblTotal) return;
 
-        const selectedText = this.dom.serviceSelect.options[this.dom.serviceSelect.selectedIndex].text;
-        const finalAmount = this.state.selectedServicePrice.toFixed(2);
+        this.dom.lblTotal.textContent = "S/ Consultando BD...";
+        this.dom.lblTotal.style.opacity = "0.5";
         
-        alert(`ORDEN DE LIQUIDACIÓN GENERADA\n\nConcepto: ${selectedText}\nMonto Total: S/ ${finalAmount}\n\nUtilice el código de transacción para liquidar mediante Yape o PagoEfectivo.`);
+        // Simulación asíncrona de consulta a motor de reglas
+        setTimeout(() => {
+            // Se puede hacer dinámico leyendo el valor de un select si se desea a futuro
+            this.dom.lblTotal!.textContent = "S/ 350.00"; 
+            this.dom.lblTotal!.style.opacity = "1";
+            console.log("%c[Business Intelligence] Arancel liquidado", "color: #6C757D;");
+        }, 850);
     }
 };
 
-// Inicialización segura del ciclo de vida del módulo una vez cargado el DOM
-document.addEventListener('DOMContentLoaded', () => {
-    JadeCoreContact.init();
-});
+// EJECUCIÓN DIRECTA: Ya no usamos DOMContentLoaded porque main.ts importa este archivo 
+// dinámicamente solo cuando la sección #contacto ya es visible en el DOM.
+JadeCoreContact.init();
