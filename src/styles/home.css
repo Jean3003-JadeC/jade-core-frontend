@@ -271,15 +271,16 @@ a {
     height: 500px;
     background: var(--clr-bg-alt);
     border-radius: var(--border-radius-md);
-    border: 1px dashed var(--clr-niebla);
+    border: 1px dashed var(--clr-border);
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden; 
 }
 
 #canvas-3d-container::after {
-    content: 'Canvas 3D / Datos Render';
+    content: 'Información 3D a actualizar';
     color: var(--clr-niebla);
     font-family: var(--font-accent);
 }
@@ -330,58 +331,144 @@ a {
     margin-bottom: 1rem;
 }
 
-/* Ecosistema / Mascota 3D */
+/* Ecosistema / Núcleo 3D Interactivo */
 .ecosystem-visualization {
-    background: var(--clr-carbono);
+    background-color: #000000;
     border-radius: var(--border-radius-md);
-    padding: 4rem;
+    padding: 6rem 2rem;
     color: var(--clr-blanco);
-    text-align: center;
+    border: 1px solid var(--clr-border);
+    /* NUEVO: Convertimos el contenedor en relativo y ocultamos los bordes del video */
+    position: relative; 
+    overflow: hidden;
 }
 
-.ecosystem-visualization h2 {
+/* NUEVO: Elevamos los textos y la grilla 3D para que estén por encima del video */
+.visualization-header,
+.visualization-content-grid {
+    position: relative;
+    z-index: 2;
+}
+
+.visualization-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 5rem;
+}
+
+.visualization-header h2 {
     color: var(--clr-blanco);
+    font-size: 2.2rem;
     margin-bottom: 1rem;
 }
 
 .visualization-description {
     color: var(--clr-niebla);
-    margin-bottom: 3rem;
+    font-weight: 300;
 }
 
-/* Aquí irá la Mascota 3D */
-.ecosystem-graphic-placeholder {
-    width: 100%;
-    height: 400px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: var(--border-radius-sm);
-    display: flex;
-    justify-content: center;
+/* Grilla interactiva: Misión - Visor 3D - Visión */
+.visualization-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 3rem;
     align-items: center;
-    position: relative;
+    max-width: var(--container-width);
+    margin: 0 auto;
 }
 
-.ecosystem-graphic-placeholder::after {
-    content: '[ Espacio reservado para Mascota 3D & Nodos de Datos ]';
+.corporate-value-box {
+    background: rgba(255, 255, 255, 0.05); /* Ligeramente más opaco para que se lea mejor sobre el video */
+    padding: 2rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: var(--transition-smooth);
+    backdrop-filter: blur(4px); /* NUEVO: Efecto cristal para que no se pierda legibilidad */
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.corporate-value-box:hover {
+    border-color: var(--clr-jade-core);
+    background: rgba(75, 159, 134, 0.1);
+}
+
+.value-title {
     color: var(--clr-jade-core);
-    font-family: var(--font-accent);
-    letter-spacing: 1px;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
 }
 
-.video-wrapper {
+.value-text {
+    color: var(--clr-blanco);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+/* Contenedor del visor 3D */
+.ecosystem-3d-viewer {
     width: 100%;
-    height: 300px;
-    background: #000;
-    border-radius: var(--border-radius-sm);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 500px;
+    position: relative;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    /* Reducimos un poco la sombra para que contraste mejor con el video */
+    box-shadow: 0 0 50px -10px rgba(75, 159, 134, 0.3); 
+}
+
+/* Ajustes del elemento nativo de Google model-viewer */
+model-viewer {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    --poster-color: transparent;
+    outline: none;
+}
+
+/* --------------------------------------------------------------------------
+   AJUSTE DE VIDEO DE FONDO (NUEVO)
+   -------------------------------------------------------------------------- */
+.video-wrapper {
+    position: absolute; /* Se despega de la estructura normal */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    margin: 0 !important; /* Ignora el margin-top del HTML */
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 0; /* Lo manda totalmente al fondo */
+    opacity: 0.25; /* IMPORTANTE: Transparencia para que no opaque el 3D ni los textos */
+    pointer-events: none; /* IMPORTANTE: Evita que el video atrape los clics y deje rotar el 3D */
+}
+
+/* Ajuste del video interno para que llene el contenedor sin deformarse */
+.lazy-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center center;
 }
 
 .lazy-video::after {
     content: 'Video Corporativo';
     color: var(--clr-blanco);
+}
+
+@media (max-width: 992px) {
+    .visualization-content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .ecosystem-3d-viewer {
+        height: 350px;
+        order: -1;
+    }
 }
 
 /* --------------------------------------------------------------------------
@@ -508,64 +595,7 @@ a {
     color: var(--clr-niebla);
 }
 
-/* --------------------------------------------------------------------------
-   8. METODOLOGÍA (Diagrama de Flujo Analítico)
-   -------------------------------------------------------------------------- */
-.methodology-flow {
-    background-color: var(--clr-bg-alt);
-}
 
-.methodology-subtitle {
-    color: var(--clr-niebla);
-    text-align: center;
-    max-width: 600px;
-    margin: 1rem auto 3rem;
-}
-
-.ecosystem-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    position: relative;
-}
-
-/* Línea conectora entre pasos */
-.ecosystem-grid::before {
-    content: '';
-    position: absolute;
-    top: 3rem;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--clr-border);
-    z-index: 0;
-}
-
-.ecosystem-card {
-    position: relative;
-    z-index: 1;
-    background: var(--clr-bg-surface);
-    padding: 2rem 1.5rem;
-    border: 1px solid var(--clr-border);
-    border-radius: var(--border-radius-md);
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-}
-
-.card-phase-num {
-    width: 3rem;
-    height: 3rem;
-    background: var(--clr-jade-core);
-    color: var(--clr-blanco);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    margin: 0 auto 1.5rem;
-    box-shadow: 0 0 0 5px var(--clr-bg-surface);
-}
 
 /* --------------------------------------------------------------------------
    9. CONTACTO Y FORMULARIO CLÍNICO
@@ -854,3 +884,21 @@ a {
         gap: 2rem;
     }
 }
+
+/* --------------------------------------------------------------------------
+   12. ANIMACIONES INTERSECTION OBSERVER (Dinámica)
+   -------------------------------------------------------------------------- */
+.pillar-card, .ecosystem-card, .resource-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pillar-card.is-visible, .ecosystem-card.is-visible, .resource-card.is-visible {
+    opacity: 1;
+    transform: translateY(0); 
+}
+
+.ecosystem-grid .ecosystem-card:nth-child(2) { transition-delay: 0.1s; }
+.ecosystem-grid .ecosystem-card:nth-child(3) { transition-delay: 0.2s; }
+.ecosystem-grid .ecosystem-card:nth-child(4) { transition-delay: 0.3s; }

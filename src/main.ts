@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!id) return;
 
             if (entry.isIntersecting) {
-                // Actualizar enlaces de navegación activos de la landing
                 navLinks.forEach((link) => {
                     const href = link.getAttribute('href');
                     if (href === `#${id}`) {
@@ -45,24 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                // Carga dinámica exclusiva de los módulos de la landing
                 if (!loadedModules.has(id)) {
                     switch (id) {
                         case 'home':
                             import('./scripts/home').then(() => console.log('🏠 [Jade Core]: Módulo Home listo.'));
                             break;
-                        case 'nosotros':
-                            import('./scripts/nosotros').then(() => console.log('🧬 [Jade Core]: Módulo Nosotros listo.'));
-                            break;
-                        case 'servicios':
-                            import('./scripts/servicios').then(() => console.log('🔬 [Jade Core]: Módulo Servicios listo.'));
-                            break;
-                        case 'metodologia':
-                            import('./scripts/metodologia').then(() => console.log('⚙️ [Jade Core]: Módulo Metodología listo.'));
-                            break;
-                        case 'recursos':
-                            import('./scripts/recursos').then(() => console.log('📚 [Jade Core]: Módulo Recursos listo.'));
-                            break;
+                        // ... (tus otros case) ...
                         case 'contacto':
                             import('./scripts/contacto').then(() => console.log('📊 [Jade Core]: Módulo Contacto listo.'));
                             break;
@@ -71,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Reproducción automática de videos en secciones activas
             const video = entry.target.querySelector<HTMLVideoElement>('video');
             if (video) {
                 if (entry.isIntersecting) {
@@ -84,6 +70,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     sections.forEach(section => sectionObserver.observe(section));
+
+    // =========================================================
+    // 3. ANIMACIONES DE REVELACIÓN (Aparición fluida)
+    // =========================================================
+    // Seleccionamos las tarjetas que queremos animar
+    const animatedElements = document.querySelectorAll('.pillar-card, .ecosystem-card, .resource-card');
+
+    const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // Añade la clase que dispara el CSS
+                entry.target.classList.add('is-visible');
+                
+                // Dejamos de observar el elemento para que la animación solo ocurra la primera vez
+                animationObserver.unobserve(entry.target); 
+            }
+        });
+    }, {
+        root: null,
+        threshold: 0.1, // Se activa cuando el 10% de la tarjeta es visible
+        rootMargin: "0px 0px -50px 0px" // Margen para que se anime un poco antes de llegar al centro
+    });
+
+    animatedElements.forEach(el => animationObserver.observe(el));
     
+    // =========================================================
     console.log('%c🌐 [Jade Core Master Engine]: Ready.', 'color: #4B9F86; font-weight: bold;');
 });
