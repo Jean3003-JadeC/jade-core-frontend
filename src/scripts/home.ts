@@ -156,9 +156,9 @@ function initDataNodes() {
             
             // Lógica visual: El color depende del nivel de filtrado (eGFR)
             if (dataRecord.avgEGFR < 50) {
-                this.color = '#E57373'; // Rojo
+                this.color = '#000000'; // Rojo
             } else if (dataRecord.avgEGFR < 65) {
-                this.color = '#F6C344'; // Naranja/Amarillo
+                this.color = '#060c72'; // Naranja/Amarillo
             } else {
                 this.color = '#4B9F86'; // Verde Jade Core
             }
