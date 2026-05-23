@@ -1,26 +1,32 @@
-import './styles/home.css';
+/**
+ * ==========================================================================
+ * JADE CORE - MASTER ENGINE (main.ts)
+ * Orquestador Global de la Landing Page (index.html)
+ * ==========================================================================
+ */
+
+// 1. IMPORTACIÓN DIRECTA DEL CEREBRO
+// Garantiza que la UI (menú móvil) y validaciones funcionen independientemente 
+// de la sección en la que el usuario aterrice al cargar la página.
+import './scripts/home';
 
 document.addEventListener('DOMContentLoaded', () => {
+    
     // =========================================================
-    // 1. LÓGICA DEL HEADER (Scroll)
+    // 2. LÓGICA DEL HEADER (Scroll Reactivo)
     // =========================================================
     const header = document.getElementById('mainHeader');
     if (header) {
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true }); // Optimización para evitar bloqueos de renderizado
     }
 
     // =========================================================
-    // 2. LÓGICA DE SECCIONES (Intersection Observer)
+    // 3. LÓGICA DE SECCIONES (Scroll Spy & Ahorro de Recursos)
     // =========================================================
     const sections = document.querySelectorAll<HTMLElement>('section');
     const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-menu__link');
-    const loadedModules = new Set<string>();
 
     const observerOptions: IntersectionObserverInit = {
         root: null,
@@ -32,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = entry.target.getAttribute('id');
             if (!id) return;
 
+            // SCROLL SPY: Iluminación dinámica del menú
             if (entry.isIntersecting) {
                 navLinks.forEach((link) => {
                     const href = link.getAttribute('href');
@@ -43,21 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         link.removeAttribute('aria-current');
                     }
                 });
-
-                if (!loadedModules.has(id)) {
-                    switch (id) {
-                        case 'home':
-                            import('./scripts/home').then(() => console.log('🏠 [Jade Core]: Módulo Home listo.'));
-                            break;
-                        // ... (tus otros case) ...
-                        case 'contacto':
-                            import('./scripts/contacto').then(() => console.log('📊 [Jade Core]: Módulo Contacto listo.'));
-                            break;
-                    }
-                    loadedModules.add(id);
-                }
             }
 
+            // RENDIMIENTO: Reproducción inteligente del video de fondo
             const video = entry.target.querySelector<HTMLVideoElement>('video');
             if (video) {
                 if (entry.isIntersecting) {
@@ -72,29 +67,26 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => sectionObserver.observe(section));
 
     // =========================================================
-    // 3. ANIMACIONES DE REVELACIÓN (Aparición fluida)
+    // 4. ANIMACIONES DE REVELACIÓN (Aparición por Hardware)
     // =========================================================
-    // Seleccionamos las tarjetas que queremos animar
     const animatedElements = document.querySelectorAll('.pillar-card, .ecosystem-card, .resource-card');
 
     const animationObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                // Añade la clase que dispara el CSS
                 entry.target.classList.add('is-visible');
-                
-                // Dejamos de observar el elemento para que la animación solo ocurra la primera vez
+                // Se detiene la observación para que la animación se ejecute solo una vez
                 animationObserver.unobserve(entry.target); 
             }
         });
     }, {
         root: null,
-        threshold: 0.1, // Se activa cuando el 10% de la tarjeta es visible
-        rootMargin: "0px 0px -50px 0px" // Margen para que se anime un poco antes de llegar al centro
+        threshold: 0.1, 
+        rootMargin: "0px 0px -50px 0px" // Inicia la animación sutilmente antes de llegar al umbral
     });
 
     animatedElements.forEach(el => animationObserver.observe(el));
     
     // =========================================================
-    console.log('%c🌐 [Jade Core Master Engine]: Ready.', 'color: #4B9F86; font-weight: bold;');
+    console.log('%c🌐 [Jade Core Master Engine]: Ready & Optimized.', 'color: #4B9F86; font-weight: bold;');
 });

@@ -1,63 +1,292 @@
 /**
  * ==========================================================================
- * JADE CORE - MÓDULO: HOME / NAVEGACIÓN GLOBAL (SPA Version)
- * Componentes: Menú Responsive Corporativo
+ * JADE CORE - MÓDULO UNIFICADO: HOME (index.html)
+ * Integra lógica de: Navegación, Nosotros, Servicios, Recursos y Contacto.
  * ==========================================================================
  */
 
-interface HomeDOM {
-    navMenu?: HTMLElement | null;
-    mobileToggle?: HTMLElement | null;
+// --------------------------------------------------------------------------
+// 1. NAVEGACIÓN Y MENÚ MÓVIL
+// --------------------------------------------------------------------------
+const JadeCoreHome = {
+    dom: {
+        mobileToggle: document.getElementById('mobileNavToggle'),
+        navMenu: document.getElementById('mainNav')
+    },
+    init: function() {
+        if (this.dom.mobileToggle && this.dom.navMenu) {
+            this.dom.mobileToggle.addEventListener('click', () => {
+                const isOpen = this.dom.mobileToggle!.classList.toggle('is-active');
+                this.dom.navMenu!.classList.toggle('is-active');
+                this.dom.mobileToggle!.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+    }
+};
+JadeCoreHome.init();
+
+// --------------------------------------------------------------------------
+// 2. SECCIÓN NOSOTROS (Identidad Core & Gráfico Interactivo)
+// --------------------------------------------------------------------------
+const sectionNosotros = document.getElementById('nosotros');
+if (sectionNosotros) {
+    // Animación escalonada de Pilares Core
+    const pillarCards = sectionNosotros.querySelectorAll('.pillar-card');
+    pillarCards.forEach((card, index) => {
+        const htmlCard = card as HTMLElement;
+        htmlCard.style.opacity = '0';
+        htmlCard.style.transform = 'translateY(30px)';
+        htmlCard.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        
+        setTimeout(() => {
+            htmlCard.style.opacity = '1';
+            htmlCard.style.transform = 'translateY(0)';
+        }, 150 * (index + 1));
+    });
+
+    // Gráfico de Convergencia (Nodos interactivos)
+    const ecosystemContainer = sectionNosotros.querySelector('.ecosystem-graphic-placeholder');
+    if (ecosystemContainer) {
+        ecosystemContainer.innerHTML = ''; // Limpieza
+
+        const nodesData = [
+            { id: 'clinica', label: 'Nutrición Clínica & Renal', desc: 'Evidencia y Soporte Convectivo', color: '#4B9F86' },
+            { id: 'datos', label: 'Data Analytics & IA', desc: 'Modelos Predictivos y Automatización', color: '#3B82F6' },
+            { id: 'gestion', label: 'Gestión en Salud', desc: 'Optimización de IPRESS / RIS', color: '#8B5CF6' }
+        ];
+
+        const graphContainer = document.createElement('div');
+        graphContainer.className = 'interactive-graph';
+        graphContainer.style.display = 'flex';
+        graphContainer.style.flexDirection = 'column';
+        graphContainer.style.gap = '15px';
+        graphContainer.style.width = '100%';
+        graphContainer.style.marginTop = '2rem';
+
+        nodesData.forEach(node => {
+            const nodeElement = document.createElement('div');
+            nodeElement.className = 'graph-node';
+            nodeElement.setAttribute('data-node-id', node.id);
+            nodeElement.style.background = 'rgba(255, 255, 255, 0.03)';
+            nodeElement.style.border = `1px solid ${node.color}40`;
+            nodeElement.style.padding = '15px';
+            nodeElement.style.borderRadius = '6px';
+            nodeElement.style.cursor = 'pointer';
+            nodeElement.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            nodeElement.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span class="node-indicator" style="width: 10px; height: 10px; background-color: ${node.color}; border-radius: 50%; display: inline-block;"></span>
+                    <strong style="font-family: 'Montserrat', sans-serif; font-size: 0.95rem; color: #FFFFFF;">${node.label}</strong>
+                </div>
+                <p style="margin: 5px 0 0 20px; font-size: 0.8rem; color: #DFE2E4; opacity: 0.8;">${node.desc}</p>
+            `;
+
+            nodeElement.addEventListener('mouseenter', () => {
+                nodeElement.style.background = 'rgba(255, 255, 255, 0.08)';
+                nodeElement.style.border = `1px solid ${node.color}`;
+                nodeElement.style.transform = 'translateX(5px)';
+            });
+
+            nodeElement.addEventListener('mouseleave', () => {
+                nodeElement.style.background = 'rgba(255, 255, 255, 0.03)';
+                nodeElement.style.border = `1px solid ${node.color}40`;
+                nodeElement.style.transform = 'translateX(0)';
+            });
+
+            graphContainer.appendChild(nodeElement);
+        });
+
+        const coreIndicator = document.createElement('div');
+        coreIndicator.className = 'graph-core-status';
+        coreIndicator.style.marginTop = '15px';
+        coreIndicator.style.fontSize = '0.75rem';
+        coreIndicator.style.fontFamily = "'Lato', sans-serif";
+        coreIndicator.style.color = '#4B9F86';
+        coreIndicator.style.textAlign = 'center';
+        coreIndicator.style.letterSpacing = '0.1em';
+        coreIndicator.innerHTML = '● NÚCLEO CONVERGENTE ACTIVO: ECOSISTEMA DE PRECISIÓN';
+        
+        graphContainer.appendChild(coreIndicator);
+        ecosystemContainer.appendChild(graphContainer);
+    }
 }
 
-const JadeCoreHome = {
-    // 1. SELECTORES DEL DOM
-    dom: {} as HomeDOM,
+// --------------------------------------------------------------------------
+// 3. SECCIÓN SERVICIOS Y RECURSOS (Lógica de Filtrado Compartida)
+// --------------------------------------------------------------------------
+function initSection(sectionId: string) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
 
-    initSelectors: function() {
-        // Mapeado a los IDs del nuevo header en index.html
-        this.dom.mobileToggle = document.getElementById('mobileNavToggle');
-        this.dom.navMenu = document.getElementById('mainNav');
+    const filterButtons = section.querySelectorAll('.filter-btn');
+    const resourceCards = section.querySelectorAll('.resource-card');
+
+    // Cascada de carga elegante
+    resourceCards.forEach((card, index) => {
+        const htmlCard = card as HTMLElement;
+        htmlCard.style.opacity = '0';
+        htmlCard.style.transform = 'translateY(24px)';
+        htmlCard.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+        htmlCard.style.display = 'flex'; 
+
+        setTimeout(() => {
+            htmlCard.style.opacity = '1';
+            htmlCard.style.transform = 'translateY(0)';
+        }, 120 * (index + 1));
+    });
+
+    // Lógica de filtrado
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = e.target as HTMLElement;
+
+                if (target.classList.contains('active')) return;
+
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                });
+                target.classList.add('active');
+                target.setAttribute('aria-selected', 'true');
+
+                const selectedFilter = target.getAttribute('data-filter');
+
+                resourceCards.forEach(card => {
+                    const htmlCard = card as HTMLElement;
+                    const cardCategory = htmlCard.getAttribute('data-category');
+
+                    if (selectedFilter === 'all' || cardCategory === selectedFilter) {
+                        htmlCard.style.display = 'flex';
+                        setTimeout(() => {
+                            htmlCard.style.opacity = '1';
+                            htmlCard.style.transform = 'translateY(0)';
+                        }, 20); 
+                    } else {
+                        htmlCard.style.opacity = '0';
+                        htmlCard.style.transform = 'translateY(10px)';
+                        setTimeout(() => {
+                            htmlCard.style.display = 'none';
+                        }, 400); 
+                    }
+                });
+            });
+        });
+    }
+}
+initSection('servicios');
+initSection('recursos');
+
+// Tracking de Descargas en Recursos
+const sectionRecursos = document.getElementById('recursos');
+if(sectionRecursos) {
+    const downloadLinks = sectionRecursos.querySelectorAll('.btn-download');
+    downloadLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            const docName = target.closest('.card-content')?.querySelector('.card-title')?.textContent || 'Documento Clínico';
+            console.log(`%c[BI Data Log] Extracción registrada: ${docName}`, 'color: #4B9F86; font-weight: bold;');
+        });
+    });
+}
+
+// --------------------------------------------------------------------------
+// 4. SECCIÓN CONTACTO (Formulario & Aranceles)
+// --------------------------------------------------------------------------
+const JadeCoreContact = {
+    dom: {
+        form: document.getElementById('contactForm') as HTMLFormElement,
+        txtName: document.getElementById('txtName') as HTMLInputElement,
+        txtEmail: document.getElementById('txtEmail') as HTMLInputElement,
+        ddlService: document.getElementById('ddlService') as HTMLSelectElement,
+        txtMessage: document.getElementById('txtMessage') as HTMLTextAreaElement,
+        btnCalculate: document.getElementById('btnCalculate'),
+        lblTotal: document.getElementById('lblTotal')
     },
-
-    // 2. ENTRY POINT
+    
     init: function() {
-        this.initSelectors();
-        this.registerEvents();
-        console.log('%c[Jade Core Node]: Módulo Home / UI Inicializado', 'color: #4B9F86;');
-    },
+        if(this.dom.form) {
+            this.dom.form.addEventListener('submit', (e) => this.handleFormSubmit(e));
+            
+            const inputs = [this.dom.txtName, this.dom.txtEmail, this.dom.txtMessage, this.dom.ddlService];
+            inputs.forEach(input => {
+                if (input) input.addEventListener('input', (e) => this.clearFieldError(e.target as HTMLElement));
+            });
+        }
 
-    // 3. REGISTRO DE EVENTOS
-    registerEvents: function() {
-        if (this.dom.mobileToggle && this.dom.navMenu) {
-            this.dom.mobileToggle.addEventListener('click', () => this.toggleMobileNavigation());
+        if(this.dom.btnCalculate) {
+            this.dom.btnCalculate.addEventListener('click', () => this.executePaymentSimulation());
         }
     },
 
-    // 4. CONTROLADOR DEL MENÚ RESPONSIVE
-    toggleMobileNavigation: function() {
-        if (!this.dom.mobileToggle || !this.dom.navMenu) return;
+    handleFormSubmit: function(event: Event) {
+        event.preventDefault();
+        let isFormValid = true;
 
-        // Alternar la clase 'is-active' según tu nuevo CSS
-        const isOpen = this.dom.mobileToggle.classList.toggle('is-active');
-        this.dom.navMenu.classList.toggle('is-active');
+        if (this.dom.txtName.value.trim().length < 4) {
+            this.setFieldError(this.dom.txtName, 'El nombre debe contener al menos 4 caracteres.');
+            isFormValid = false;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(this.dom.txtEmail.value.trim())) {
+            this.setFieldError(this.dom.txtEmail, 'Ingrese un correo válido.');
+            isFormValid = false;
+        }
+
+        if (!this.dom.ddlService.value) {
+            this.setFieldError(this.dom.ddlService, 'Seleccione un área de requerimiento.');
+            isFormValid = false;
+        }
+
+        if (this.dom.txtMessage.value.trim().length < 15) {
+            this.setFieldError(this.dom.txtMessage, 'Descripción muy corta (mínimo 15 caracteres).');
+            isFormValid = false;
+        }
+
+        if (isFormValid) {
+            const btn = this.dom.form.querySelector('.clinical-form__submit') as HTMLButtonElement;
+            if(btn) { btn.disabled = true; btn.textContent = 'Procesando...'; }
+            
+            setTimeout(() => {
+                alert(`Solicitud registrada con éxito.`);
+                this.dom.form.reset();
+                if(btn) { btn.disabled = false; btn.textContent = 'Enviar Solicitud'; }
+            }, 1500);
+        }
+    },
+
+    setFieldError: function(element: HTMLElement, message: string) {
+        element.classList.add('is-invalid');
+        const err = document.getElementById(`error-${element.id}`);
+        if(err) { err.textContent = message; err.style.display = 'block'; }
+    },
+    
+    clearFieldError: function(element: HTMLElement) {
+        element.classList.remove('is-invalid');
+        const err = document.getElementById(`error-${element.id}`);
+        if(err) { err.textContent = ''; err.style.display = 'none'; }
+    },
+
+    executePaymentSimulation: function() {
+        if (!this.dom.lblTotal) return;
+        this.dom.lblTotal.textContent = "S/ Consultando BD...";
+        this.dom.lblTotal.style.opacity = "0.5";
         
-        // Mantener accesibilidad estricta
-        this.dom.mobileToggle.setAttribute('aria-expanded', String(isOpen));
+        setTimeout(() => {
+            this.dom.lblTotal!.textContent = "S/ 350.00"; 
+            this.dom.lblTotal!.style.opacity = "1";
+        }, 850);
     }
 };
+JadeCoreContact.init();
 
-// EJECUCIÓN DIRECTA MENÚ
-JadeCoreHome.init();
-
-
-/**
- * ==========================================================================
- * JADE CORE - HOME SCRIPT
- * Módulo: Renderizado Analítico de Nodos (Simulación IPRESS Interactiva)
- * ==========================================================================
- */
-
+console.log('%c[Jade Core Node]: Módulo unificado HOME Inicializado', 'color: #4B9F86;');
+// =========================================================
+// 5. RENDERIZADO ANALÍTICO DE NODOS (Simulación IPRESS)
+// =========================================================
 function initDataNodes() {
     const container = document.getElementById('canvas-3d-container');
     if (!container) return;
@@ -91,9 +320,6 @@ function initDataNodes() {
         canvas.height = height;
     });
 
-    // =========================================================
-    // 1. DATA FICTICIA INYECTADA (MOCK JSON)
-    // =========================================================
     interface IpressData {
         id: string;
         name: string;
@@ -101,7 +327,6 @@ function initDataNodes() {
         avgEGFR: number; 
     }
 
-    // Datos simulados listos para visualizar en el tooltip
     const mockRISData: IpressData[] = [
         { id: 'HNCASE', name: 'Hospital Nacional CASE', chronicPatients: 450, avgEGFR: 45 }, 
         { id: 'JLYR', name: 'Hospital Base JLBYR', chronicPatients: 320, avgEGFR: 55 },      
@@ -113,15 +338,11 @@ function initDataNodes() {
         { id: 'YUR', name: 'CAP II Yura', chronicPatients: 60, avgEGFR: 80 }                 
     ];
 
-    // Multiplicamos los datos simulando múltiples pacientes por centro para que el lienzo se vea lleno
     const expandedData: IpressData[] = [];
     for(let i = 0; i < 6; i++) {
         mockRISData.forEach(node => expandedData.push({...node, id: `${node.id}-${i}`}));
     }
 
-    // =========================================================
-    // 2. INTERACCIÓN DEL MOUSE
-    // =========================================================
     let mouse = { x: -1000, y: -1000 };
     container.addEventListener('mousemove', (e) => {
         const rect = container.getBoundingClientRect();
@@ -132,9 +353,6 @@ function initDataNodes() {
         mouse = { x: -1000, y: -1000 };
     });
 
-    // =========================================================
-    // 3. CONSTRUCTOR LÓGICO DEL NODO
-    // =========================================================
     class DataNode {
         x: number;
         y: number;
@@ -151,21 +369,18 @@ function initDataNodes() {
             this.vx = (Math.random() - 0.5) * 0.3; 
             this.vy = (Math.random() - 0.5) * 0.3;
             
-            // Lógica visual: El tamaño depende de la cantidad de pacientes
             this.radius = Math.max(3, dataRecord.chronicPatients / 35); 
             
-            // Lógica visual: El color depende del nivel de filtrado (eGFR)
             if (dataRecord.avgEGFR < 50) {
-                this.color = '#000000'; // Rojo
+                this.color = '#000000'; 
             } else if (dataRecord.avgEGFR < 65) {
-                this.color = '#060c72'; // Naranja/Amarillo
+                this.color = '#060c72'; 
             } else {
-                this.color = '#4B9F86'; // Verde Jade Core
+                this.color = '#4B9F86'; 
             }
         }
 
         update() {
-            // Rebote suave en los bordes del recuadro
             if (this.x < 0 || this.x > width) this.vx *= -1;
             if (this.y < 0 || this.y > height) this.vy *= -1;
             this.x += this.vx;
@@ -183,9 +398,6 @@ function initDataNodes() {
 
     const nodes: DataNode[] = expandedData.map(record => new DataNode(record));
 
-    // =========================================================
-    // 4. MOTOR DE ANIMACIÓN Y RENDERIZADO DE TOOLTIPS
-    // =========================================================
     function animate() {
         if (!ctx) return;
         ctx.clearRect(0, 0, width, height);
@@ -201,7 +413,6 @@ function initDataNodes() {
                 const dy = nodes[i].y - nodes[j].y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                // Dibuja las líneas grises entre nodos que estén cerca
                 if (distance < 100) {
                     ctx.beginPath();
                     ctx.strokeStyle = `rgba(108, 117, 125, ${0.5 - distance / 200})`; 
@@ -212,7 +423,6 @@ function initDataNodes() {
                 }
             }
 
-            // Dibuja la línea de conexión hacia el puntero del mouse
             const mouseDx = nodes[i].x - mouse.x;
             const mouseDy = nodes[i].y - mouse.y;
             const mouseDistance = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
@@ -228,38 +438,31 @@ function initDataNodes() {
                 ctx.globalAlpha = 1.0; 
             }
 
-            // Detectar si el cursor está tocando el nodo para mostrar el tooltip
             if (mouseDistance < nodes[i].radius + 5) {
                 hoveredNode = nodes[i];
             }
         }
 
-        // DIBUJAR LA ETIQUETA DE INFORMACIÓN (TOOLTIP)
         if (hoveredNode) {
-            ctx.fillStyle = 'rgba(74, 77, 80, 0.95)'; // Fondo color Carbono
+            ctx.fillStyle = 'rgba(74, 77, 80, 0.95)'; 
             
-            // Dibujar rectángulo del Tooltip
             const boxWidth = 220;
             const boxHeight = 65;
             const boxX = hoveredNode.x + 15;
             const boxY = hoveredNode.y - boxHeight / 2;
             
-            // Borde redondeado
             ctx.beginPath();
             ctx.roundRect(boxX, boxY, boxWidth, boxHeight, 6);
             ctx.fill();
 
-            // Renderizar Texto: Nombre de la IPRESS
             ctx.fillStyle = '#FFFFFF';
             ctx.font = 'bold 12px Montserrat, sans-serif';
             ctx.fillText(hoveredNode.data.name, boxX + 12, boxY + 22);
             
-            // Renderizar Texto: Datos metabólicos y métricas
             ctx.font = '11px Open Sans, sans-serif';
-            ctx.fillStyle = '#A0AEC0'; // Color niebla claro
+            ctx.fillStyle = '#A0AEC0'; 
             ctx.fillText(`Pacientes Crónicos: ${hoveredNode.data.chronicPatients}`, boxX + 12, boxY + 40);
             
-            // Colorear el texto de eGFR según su estado de salud
             ctx.fillStyle = hoveredNode.color;
             ctx.fillText(`Promedio eGFR: ${hoveredNode.data.avgEGFR} mL/min`, boxX + 12, boxY + 56);
         }
@@ -270,5 +473,5 @@ function initDataNodes() {
     animate();
 }
 
-// EJECUCIÓN DIRECTA NODOS
+// Ejecutamos la animación al final del script
 initDataNodes();

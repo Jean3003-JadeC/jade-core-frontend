@@ -265,24 +265,40 @@ a {
     gap: 1rem;
 }
 
-/* Placeholder para el Canvas 3D Inicial */
+/* Contenedor del Canvas 3D Inicial */
 #canvas-3d-container {
     width: 100%;
     height: 500px;
     background: var(--clr-bg-alt);
     border-radius: var(--border-radius-md);
     border: 1px dashed var(--clr-border);
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative; /* CRÍTICO: Mantiene el título dentro de esta caja */
     overflow: hidden; 
 }
 
+/* Etiqueta / Título Superior del Gráfico */
 #canvas-3d-container::after {
-    content: 'Información 3D a actualizar';
-    color: var(--clr-niebla);
+    /* He cambiado el texto a algo más oficial, pero puedes volver a poner 'Información 3D a actualizar' si gustas */
+    content: 'Noticias actualizadas'; 
+    position: absolute;
+    top: 1.5rem; /* Separación desde el techo de la caja */
+    left: 50%; /* Lo empuja a la mitad... */
+    transform: translateX(-50%); /* ...y esto lo centra matemáticamente de forma perfecta */
+    
+    /* Estética del "cuadrito color jade" */
+    background-color: var(--clr-jade-core);
+    color: var(--clr-blanco);
     font-family: var(--font-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    border-radius: var(--border-radius-sm);
+    
+    /* Profundidad y jerarquía visual */
+    z-index: 10; 
+    box-shadow: 0 4px 10px rgba(75, 159, 134, 0.25);
 }
 
 /* --------------------------------------------------------------------------
