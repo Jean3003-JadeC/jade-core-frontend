@@ -1,68 +1,56 @@
 /**
- * @namespace JadeCoreApp
- * @description Maneja la interacción adaptativa y el tracking de eventos del módulo privado.
+ * ==========================================================================
+ * JADE CORE - MÓDULO: APP (Plataforma Digital)
+ * Controlador exclusivo para App.html
+ * ==========================================================================
  */
 
-// 1. DEFINICIÓN DE LA INTERFAZ PARA EL CACHE DEL DOM
-interface AppDOM {
-    AppNav?: HTMLElement | null;
-    mobileToggle?: HTMLElement | null;
-    btnWhatsapp?: HTMLElement | null;
-}
-
-const JadeCoreApp = (() => {
-    'use strict';
-
-    const state = {
-        isMobileNavOpen: false
-    };
-
-    // 2. TIPADO EXPLÍCITO DEL OBJETO DOM
-    const DOM: AppDOM = {};
-
-    const cacheDOM = () => {
-        DOM.AppNav = document.querySelector('.App-nav');
-        DOM.mobileToggle = document.querySelector('.mobile-nav-toggle');
-        DOM.btnWhatsapp = document.querySelector('.btn-whatsapp-app');
-    };
-
-    const toggleMobileNavigation = () => {
-        state.isMobileNavOpen = !state.isMobileNavOpen;
-        if (DOM.AppNav && DOM.mobileToggle) {
-            DOM.AppNav.classList.toggle('nav-active', state.isMobileNavOpen);
-            DOM.mobileToggle.setAttribute('aria-expanded', state.isMobileNavOpen.toString());
-        }
-    };
-
-    /**
-     * Auditoría técnica de clics para trazabilidad corporativa en la adquisición
-     */
-    const logAcquisitionIntent = () => {
-        console.group(`[Jade Core Analytics] App Acquisition`);
-        console.log(`Acción: Redirección WhatsApp Corporativo`);
-        console.log(`Timestamp: ${new Date().toISOString()}`);
-        console.groupEnd();
-    };
-
-    const bindEvents = () => {
-        if (DOM.mobileToggle) {
-            DOM.mobileToggle.addEventListener('click', toggleMobileNavigation);
-        }
-
-        if (DOM.btnWhatsapp) {
-            DOM.btnWhatsapp.addEventListener('click', logAcquisitionIntent);
-        }
-    };
-
-    return {
-        init: () => {
-            console.log('Initializing Jade Core App Coming Soon Module...');
-            cacheDOM();
-            bindEvents();
-        }
-    };
-})();
+// 1. IMPORTACIÓN DEL DISEÑO
+import '../styles/App.css';
 
 document.addEventListener('DOMContentLoaded', () => {
-    JadeCoreApp.init();
+    
+    // =========================================================
+    // 2. LÓGICA DEL HEADER (Scroll Reactivo Sincronizado)
+    // =========================================================
+    const header = document.getElementById('mainHeader');
+    if (header) {
+        window.addEventListener('scroll', () => {
+            // Usa el mismo umbral (50px) que la landing page para consistencia visual
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+    }
+
+    // =========================================================
+    // 3. MENÚ MÓVIL RESPONSIVE (Estandarizado)
+    // =========================================================
+    const mobileToggle = document.getElementById('mobileNavToggle');
+    const mainNav = document.getElementById('mainNav');
+
+    if (mobileToggle && mainNav) {
+        mobileToggle.addEventListener('click', () => {
+            // Utilizamos .is-active en lugar del antiguo .nav-active/.toggle-active
+            const isOpen = mobileToggle.classList.toggle('is-active');
+            mainNav.classList.toggle('is-active');
+            
+            // Mantener accesibilidad estricta
+            mobileToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+    }
+
+    // =========================================================
+    // 4. AUDITORÍA TÉCNICA Y TRACKING (Rescue del código antiguo)
+    // =========================================================
+    const btnWhatsapp = document.querySelector('.btn-whatsapp-app');
+    if (btnWhatsapp) {
+        btnWhatsapp.addEventListener('click', () => {
+            console.group(`%c[Jade Core Analytics] App Acquisition`, 'color: #4B9F86; font-weight: bold;');
+            console.log(`Acción: Redirección WhatsApp Corporativo`);
+            console.log(`Timestamp: ${new Date().toISOString()}`);
+            console.groupEnd();
+        });
+    }
+
+    // =========================================================
+    console.log('%c🌐 [Jade Core Node]: Módulo de Plataforma APP Listo.', 'color: #3B82F6; font-weight: bold;');
 });

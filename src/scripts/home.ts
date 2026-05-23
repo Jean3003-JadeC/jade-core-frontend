@@ -372,11 +372,11 @@ function initDataNodes() {
             this.radius = Math.max(3, dataRecord.chronicPatients / 35); 
             
             if (dataRecord.avgEGFR < 50) {
-                this.color = '#000000'; 
-            } else if (dataRecord.avgEGFR < 65) {
-                this.color = '#060c72'; 
-            } else {
                 this.color = '#4B9F86'; 
+            } else if (dataRecord.avgEGFR < 65) {
+                this.color = '#292e96'; 
+            } else {
+                this.color = '#000000'; 
             }
         }
 
