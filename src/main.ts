@@ -8,10 +8,14 @@
 // 1. IMPORTACIÓN DIRECTA DEL CEREBRO
 // Garantiza que la UI (menú móvil) y validaciones funcionen independientemente 
 // de la sección en la que el usuario aterrice al cargar la página.
-import './scripts/home';
+import { JadeCoreHome } from './scripts/home';
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
+    // INICIALIZACIÓN DE INTERFAZ HOME (Garantiza existencia del DOM)
+    // =========================================================
+    JadeCoreHome.init();
+
     // =========================================================
     // 2. LÓGICA DEL HEADER (Scroll Reactivo)
     // =========================================================
@@ -19,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (header) {
         window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 50);
-        }, { passive: true }); // Optimización para evitar bloqueos de renderizado
+        }, { passive: true });
     }
 
     // =========================================================
@@ -38,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = entry.target.getAttribute('id');
             if (!id) return;
 
-            // SCROLL SPY: Iluminación dinámica del menú
             if (entry.isIntersecting) {
                 navLinks.forEach((link) => {
                     const href = link.getAttribute('href');
@@ -52,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // RENDIMIENTO: Reproducción inteligente del video de fondo
             const video = entry.target.querySelector<HTMLVideoElement>('video');
             if (video) {
                 if (entry.isIntersecting) {
@@ -75,18 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                // Se detiene la observación para que la animación se ejecute solo una vez
                 animationObserver.unobserve(entry.target); 
             }
         });
     }, {
         root: null,
         threshold: 0.1, 
-        rootMargin: "0px 0px -50px 0px" // Inicia la animación sutilmente antes de llegar al umbral
+        rootMargin: "0px 0px -50px 0px"
     });
 
     animatedElements.forEach(el => animationObserver.observe(el));
     
-    // =========================================================
     console.log('%c🌐 [Jade Core Master Engine]: Ready & Optimized.', 'color: #4B9F86; font-weight: bold;');
 });

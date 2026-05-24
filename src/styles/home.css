@@ -37,7 +37,7 @@
     --clr-text-muted: var(--clr-niebla);
     
     /* Tipografía: "The Clinical Sans" */
-    --font-heading: 'Montserrat', sans-serif; /* Principal: Logo y Titulares (Autoridad científica) */
+    --font-heading: 'Montserrat'; /* Principal: Logo y Titulares (Autoridad científica) */
     --font-accent: 'Lato', sans-serif;        /* Secundaria: Descriptor y Subtítulos (Equilibrio elegante) */
     --font-body: 'Open Sans', sans-serif;     /* Lectura: Cuerpos de texto y Planes (Legibilidad excepcional) */
     
@@ -148,7 +148,7 @@ a {
    -------------------------------------------------------------------------- */
 .main-navbar {
     position: fixed;
-    top: 0;
+    top: -2;
     width: 100%;
     background-color: transparent;
     border-bottom: 1px solid transparent; 
@@ -227,13 +227,93 @@ a {
     background: var(--clr-jade-core);
 }
 
+/* Botón Hamburguesa Estructurado - Oculto por defecto en Escritorio */
 .mobile-nav-toggle {
     display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    z-index: 1100;
+}
+
+.mobile-nav-toggle__bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--clr-carbono);
+    transition: var(--transition-smooth);
+}
+
+/* ==========================================================================
+   A. COMPORTAMENTO RESPONSIVO (MÓVIL & TABLET)
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* 1. Botón visible */
+    .mobile-nav-toggle {
+        display: flex;
+    }
+
+    /* 2. Menú apagado y colapsado por defecto (Igual que en App.css) */
+    .nav-menu {
+        display: none; 
+    }
+
+    /* 3. Menú encendido como caja flotante al tener is-active */
+    .nav-menu.is-active {
+        display: block !important;
+        position: absolute;
+        top: 100%; /* Cae justo debajo del header */
+        left: 0;
+        width: 100%;
+        background-color: var(--clr-blanco);
+        box-shadow: 0 10px 15px rgba(74, 77, 80, 0.1); /* Sombra para que se separe del fondo */
+        padding: 2rem;
+        border-top: 1px solid var(--clr-border);
+        z-index: 1050;
+    }
+
+    /* 4. Lista vertical simple */
+    .nav-menu__list {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+
+    .nav-menu__link {
+        font-size: 1.1rem;
+        display: block;
+        width: 100%;
+        color: var(--clr-carbono);
+    }
+
+    /* Botón de App ajustado a móvil */
+    .btn-app-link {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+
+    /* 5. Animación de Cruz (X) idéntica a la App */
+    .mobile-nav-toggle.is-active .mobile-nav-toggle__bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .mobile-nav-toggle.is-active .mobile-nav-toggle__bar:nth-child(2) {
+        opacity: 0;
+    }
+    .mobile-nav-toggle.is-active .mobile-nav-toggle__bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
 }
 
 /* --------------------------------------------------------------------------
    5. SECCIÓN HERO (#home)
    -------------------------------------------------------------------------- */
+
 .hero-section {
     padding: 8rem 2rem 5rem;
     min-height: 100vh;

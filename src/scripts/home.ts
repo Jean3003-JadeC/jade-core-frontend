@@ -1,29 +1,28 @@
-/**
- * ==========================================================================
- * JADE CORE - MÓDULO UNIFICADO: HOME (index.html)
- * Integra lógica de: Navegación, Nosotros, Servicios, Recursos y Contacto.
- * ==========================================================================
- */
 
 // --------------------------------------------------------------------------
-// 1. NAVEGACIÓN Y MENÚ MÓVIL
+// 1. NAVEGACIÓN Y MENÚ MÓVIL (Módulo Exportable por Clases Oficiales)
 // --------------------------------------------------------------------------
 const JadeCoreHome = {
-    dom: {
-        mobileToggle: document.getElementById('mobileNavToggle'),
-        navMenu: document.getElementById('mainNav')
-    },
+    dom: {} as { mobileToggle: HTMLElement | null; navMenu: HTMLElement | null },
+
     init: function() {
+        // Buscamos por clase, asegurando compatibilidad total con tu HTML
+        this.dom.mobileToggle = document.querySelector('.mobile-nav-toggle');
+        this.dom.navMenu = document.querySelector('.nav-menu');
+
         if (this.dom.mobileToggle && this.dom.navMenu) {
             this.dom.mobileToggle.addEventListener('click', () => {
+                // Forzamos que AMBOS elementos intercambien la clase al mismo tiempo
                 const isOpen = this.dom.mobileToggle!.classList.toggle('is-active');
-                this.dom.navMenu!.classList.toggle('is-active');
+                this.dom.navMenu!.classList.toggle('is-active', isOpen);
+                
                 this.dom.mobileToggle!.setAttribute('aria-expanded', String(isOpen));
             });
         }
     }
 };
-JadeCoreHome.init();
+
+export { JadeCoreHome };
 
 // --------------------------------------------------------------------------
 // 2. SECCIÓN NOSOTROS (Identidad Core & Gráfico Interactivo)
