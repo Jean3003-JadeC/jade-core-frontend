@@ -1,10 +1,3 @@
-/**
- * ==========================================================================
- * JADE CORE - MÓDULO LEGAL (legal.ts)
- * Sincronizado con legal.css y la arquitectura de Jade Core.
- * ==========================================================================
- */
-
 import '../styles/legal.css';
 
 const JadeCoreLegal = {
@@ -19,25 +12,25 @@ const JadeCoreLegal = {
     init: function() {
         this.registerEvents();
         this.initScrollSpy();
-        console.log('%c[Jade Core Node]: Módulo Legal Operativo.', 'color: #4B9F86;');
+        console.log('%c🌐 [Jade Core Node]: Módulo Legal Operativo.', 'color: #4B9F86; font-weight: bold;');
     },
 
     registerEvents: function() {
-        // 1. Menú Móvil (Usando las clases exactas de tu legal.css: .nav-active y .toggle-active)
+        // Menú Móvil (Estandarizado con .is-active)
         if (this.dom.navToggle && this.dom.navMenu) {
             this.dom.navToggle.addEventListener('click', () => {
-                const isActive = this.dom.navToggle!.classList.toggle('toggle-active');
-                this.dom.navMenu!.classList.toggle('nav-active', isActive);
+                const isActive = this.dom.navToggle!.classList.toggle('is-active');
+                this.dom.navMenu!.classList.toggle('is-active', isActive);
                 this.dom.navToggle!.setAttribute('aria-expanded', String(isActive));
             });
         }
 
-        // 2. Formulario Legal
+        // Formulario Legal
         this.dom.form?.addEventListener('submit', (e) => this.handleConsentSubmit(e));
         document.getElementById('btnRevokeConsent')?.addEventListener('click', () => this.handleConsentRevocation());
     },
 
-    // Motor de ScrollSpy para el índice lateral
+    // ScrollSpy para el índice lateral
     initScrollSpy: function() {
         window.addEventListener('scroll', () => {
             let current = '';
@@ -57,6 +50,7 @@ const JadeCoreLegal = {
         }, { passive: true });
     },
 
+    // Gestión de Consentimiento
     handleConsentSubmit: function(e: Event) {
         e.preventDefault();
         const chkTerms = document.getElementById('chkTerms') as HTMLInputElement;

@@ -1,26 +1,30 @@
 {
   "compilerOptions": {
+    /* Configuración Base */
     "target": "es2023",
     "module": "esnext",
     "lib": ["ES2023", "DOM"],
     "types": ["vite/client"],
     "skipLibCheck": true,
 
-    /* Configuración de Rutas (Aliases actualizados sin baseUrl) */
+    /* Tipado Estricto de Alta Precisión */
+    "strict": true,
+
+    /* Configuración de Rutas (Resolución automática en TS 6.0+) */
     "paths": {
       "@/*": ["./src/*"],
       "@scripts/*": ["./src/scripts/*"],
       "@styles/*": ["./src/styles/*"]
     },
 
-    /* Bundler mode */
+    /* Modo Empaquetador (Vite) */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": true,
 
-    /* Linting */
+    /* Linter Estructural */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,

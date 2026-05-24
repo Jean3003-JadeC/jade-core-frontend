@@ -1,24 +1,11 @@
-/**
- * ==========================================================================
- * JADE CORE - MASTER ENGINE (main.ts)
- * Orquestador Global de la Landing Page (index.html)
- * ==========================================================================
- */
-
-// 1. IMPORTACIÓN DIRECTA DEL CEREBRO
-// Garantiza que la UI (menú móvil) y validaciones funcionen independientemente 
-// de la sección en la que el usuario aterrice al cargar la página.
 import { JadeCoreHome } from './scripts/home';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // INICIALIZACIÓN DE INTERFAZ HOME (Garantiza existencia del DOM)
-    // =========================================================
+    // Inicialización de la interfaz Home
     JadeCoreHome.init();
 
-    // =========================================================
-    // 2. LÓGICA DEL HEADER (Scroll Reactivo)
-    // =========================================================
+    // Lógica del Header (Scroll reactivo)
     const header = document.getElementById('mainHeader');
     if (header) {
         window.addEventListener('scroll', () => {
@@ -26,16 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
-    // =========================================================
-    // 3. LÓGICA DE SECCIONES (Scroll Spy & Ahorro de Recursos)
-    // =========================================================
+    // Lógica de Secciones (Scroll Spy y gestión de video)
     const sections = document.querySelectorAll<HTMLElement>('section');
     const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-menu__link');
-
-    const observerOptions: IntersectionObserverInit = {
-        root: null,
-        threshold: 0.15
-    };
 
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -64,13 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-    }, observerOptions);
+    }, { root: null, threshold: 0.15 });
 
     sections.forEach(section => sectionObserver.observe(section));
 
-    // =========================================================
-    // 4. ANIMACIONES DE REVELACIÓN (Aparición por Hardware)
-    // =========================================================
+    // Animaciones de revelación al hacer scroll
     const animatedElements = document.querySelectorAll('.pillar-card, .ecosystem-card, .resource-card');
 
     const animationObserver = new IntersectionObserver((entries) => {
@@ -80,13 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 animationObserver.unobserve(entry.target); 
             }
         });
-    }, {
-        root: null,
-        threshold: 0.1, 
-        rootMargin: "0px 0px -50px 0px"
-    });
+    }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
     animatedElements.forEach(el => animationObserver.observe(el));
     
-    console.log('%c🌐 [Jade Core Master Engine]: Ready & Optimized.', 'color: #4B9F86; font-weight: bold;');
+    console.log('%c🌐 [Jade Core Master Engine]: Ready.', 'color: #4B9F86; font-weight: bold;');
 });

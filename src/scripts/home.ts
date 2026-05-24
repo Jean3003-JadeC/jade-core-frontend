@@ -1,21 +1,15 @@
-
-// --------------------------------------------------------------------------
-// 1. NAVEGACIÓN Y MENÚ MÓVIL (Módulo Exportable por Clases Oficiales)
-// --------------------------------------------------------------------------
+// 1. Navegación y Menú Móvil
 const JadeCoreHome = {
     dom: {} as { mobileToggle: HTMLElement | null; navMenu: HTMLElement | null },
 
     init: function() {
-        // Buscamos por clase, asegurando compatibilidad total con tu HTML
         this.dom.mobileToggle = document.querySelector('.mobile-nav-toggle');
         this.dom.navMenu = document.querySelector('.nav-menu');
 
         if (this.dom.mobileToggle && this.dom.navMenu) {
             this.dom.mobileToggle.addEventListener('click', () => {
-                // Forzamos que AMBOS elementos intercambien la clase al mismo tiempo
                 const isOpen = this.dom.mobileToggle!.classList.toggle('is-active');
                 this.dom.navMenu!.classList.toggle('is-active', isOpen);
-                
                 this.dom.mobileToggle!.setAttribute('aria-expanded', String(isOpen));
             });
         }
@@ -24,96 +18,7 @@ const JadeCoreHome = {
 
 export { JadeCoreHome };
 
-// --------------------------------------------------------------------------
-// 2. SECCIÓN NOSOTROS (Identidad Core & Gráfico Interactivo)
-// --------------------------------------------------------------------------
-const sectionNosotros = document.getElementById('nosotros');
-if (sectionNosotros) {
-    // Animación escalonada de Pilares Core
-    const pillarCards = sectionNosotros.querySelectorAll('.pillar-card');
-    pillarCards.forEach((card, index) => {
-        const htmlCard = card as HTMLElement;
-        htmlCard.style.opacity = '0';
-        htmlCard.style.transform = 'translateY(30px)';
-        htmlCard.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-        
-        setTimeout(() => {
-            htmlCard.style.opacity = '1';
-            htmlCard.style.transform = 'translateY(0)';
-        }, 150 * (index + 1));
-    });
-
-    // Gráfico de Convergencia (Nodos interactivos)
-    const ecosystemContainer = sectionNosotros.querySelector('.ecosystem-graphic-placeholder');
-    if (ecosystemContainer) {
-        ecosystemContainer.innerHTML = ''; // Limpieza
-
-        const nodesData = [
-            { id: 'clinica', label: 'Nutrición Clínica & Renal', desc: 'Evidencia y Soporte Convectivo', color: '#4B9F86' },
-            { id: 'datos', label: 'Data Analytics & IA', desc: 'Modelos Predictivos y Automatización', color: '#3B82F6' },
-            { id: 'gestion', label: 'Gestión en Salud', desc: 'Optimización de IPRESS / RIS', color: '#8B5CF6' }
-        ];
-
-        const graphContainer = document.createElement('div');
-        graphContainer.className = 'interactive-graph';
-        graphContainer.style.display = 'flex';
-        graphContainer.style.flexDirection = 'column';
-        graphContainer.style.gap = '15px';
-        graphContainer.style.width = '100%';
-        graphContainer.style.marginTop = '2rem';
-
-        nodesData.forEach(node => {
-            const nodeElement = document.createElement('div');
-            nodeElement.className = 'graph-node';
-            nodeElement.setAttribute('data-node-id', node.id);
-            nodeElement.style.background = 'rgba(255, 255, 255, 0.03)';
-            nodeElement.style.border = `1px solid ${node.color}40`;
-            nodeElement.style.padding = '15px';
-            nodeElement.style.borderRadius = '6px';
-            nodeElement.style.cursor = 'pointer';
-            nodeElement.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-
-            nodeElement.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <span class="node-indicator" style="width: 10px; height: 10px; background-color: ${node.color}; border-radius: 50%; display: inline-block;"></span>
-                    <strong style="font-family: 'Montserrat', sans-serif; font-size: 0.95rem; color: #FFFFFF;">${node.label}</strong>
-                </div>
-                <p style="margin: 5px 0 0 20px; font-size: 0.8rem; color: #DFE2E4; opacity: 0.8;">${node.desc}</p>
-            `;
-
-            nodeElement.addEventListener('mouseenter', () => {
-                nodeElement.style.background = 'rgba(255, 255, 255, 0.08)';
-                nodeElement.style.border = `1px solid ${node.color}`;
-                nodeElement.style.transform = 'translateX(5px)';
-            });
-
-            nodeElement.addEventListener('mouseleave', () => {
-                nodeElement.style.background = 'rgba(255, 255, 255, 0.03)';
-                nodeElement.style.border = `1px solid ${node.color}40`;
-                nodeElement.style.transform = 'translateX(0)';
-            });
-
-            graphContainer.appendChild(nodeElement);
-        });
-
-        const coreIndicator = document.createElement('div');
-        coreIndicator.className = 'graph-core-status';
-        coreIndicator.style.marginTop = '15px';
-        coreIndicator.style.fontSize = '0.75rem';
-        coreIndicator.style.fontFamily = "'Lato', sans-serif";
-        coreIndicator.style.color = '#4B9F86';
-        coreIndicator.style.textAlign = 'center';
-        coreIndicator.style.letterSpacing = '0.1em';
-        coreIndicator.innerHTML = '● NÚCLEO CONVERGENTE ACTIVO: ECOSISTEMA DE PRECISIÓN';
-        
-        graphContainer.appendChild(coreIndicator);
-        ecosystemContainer.appendChild(graphContainer);
-    }
-}
-
-// --------------------------------------------------------------------------
-// 3. SECCIÓN SERVICIOS Y RECURSOS (Lógica de Filtrado Compartida)
-// --------------------------------------------------------------------------
+// 2. Filtrado de Portafolio (Servicios y Recursos)
 function initSection(sectionId: string) {
     const section = document.getElementById(sectionId);
     if (!section) return;
@@ -121,7 +26,6 @@ function initSection(sectionId: string) {
     const filterButtons = section.querySelectorAll('.filter-btn');
     const resourceCards = section.querySelectorAll('.resource-card');
 
-    // Cascada de carga elegante
     resourceCards.forEach((card, index) => {
         const htmlCard = card as HTMLElement;
         htmlCard.style.opacity = '0';
@@ -135,7 +39,6 @@ function initSection(sectionId: string) {
         }, 120 * (index + 1));
     });
 
-    // Lógica de filtrado
     if (filterButtons.length > 0) {
         filterButtons.forEach(button => {
             button.addEventListener('click', (e) => {
@@ -178,7 +81,7 @@ function initSection(sectionId: string) {
 initSection('servicios');
 initSection('recursos');
 
-// Tracking de Descargas en Recursos
+// Tracking de Descargas
 const sectionRecursos = document.getElementById('recursos');
 if(sectionRecursos) {
     const downloadLinks = sectionRecursos.querySelectorAll('.btn-download');
@@ -191,9 +94,7 @@ if(sectionRecursos) {
     });
 }
 
-// --------------------------------------------------------------------------
-// 4. SECCIÓN CONTACTO (Formulario & Aranceles)
-// --------------------------------------------------------------------------
+// 3. Formulario Clínico y Simulador de Aranceles
 const JadeCoreContact = {
     dom: {
         form: document.getElementById('contactForm') as HTMLFormElement,
@@ -282,18 +183,13 @@ const JadeCoreContact = {
 };
 JadeCoreContact.init();
 
-console.log('%c[Jade Core Node]: Módulo unificado HOME Inicializado', 'color: #4B9F86;');
-// =========================================================
-// 5. RENDERIZADO ANALÍTICO DE NODOS (Simulación IPRESS)
-// =========================================================
+// 4. Renderizado Analítico de Nodos (Simulación RIS)
 function initDataNodes() {
     const container = document.getElementById('canvas-3d-container');
     if (!container) return;
 
-    // Quitamos el texto de fondo
     container.style.setProperty('content', 'none');
     
-    // Creamos el lienzo
     const canvas = document.createElement('canvas');
     canvas.style.width = '100%';
     canvas.style.height = '100%';
@@ -306,7 +202,6 @@ function initDataNodes() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Ajuste de pantalla
     let width = container.clientWidth;
     let height = container.clientHeight;
     canvas.width = width;
@@ -472,5 +367,4 @@ function initDataNodes() {
     animate();
 }
 
-// Ejecutamos la animación al final del script
 initDataNodes();

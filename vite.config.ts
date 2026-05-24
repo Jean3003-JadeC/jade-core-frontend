@@ -10,18 +10,11 @@ export default defineConfig({
   
   build: {
     outDir: 'dist',
-    minify: 'terser',
     sourcemap: false,
     rollupOptions: {
       input: {
-        // Actualizamos las rutas apuntando a src/pages/
-        main: resolve(__dirname, 'index.html'), // Apunta a la raíz
-        nosotros: resolve(__dirname, 'src/pages/nosotros.html'),
-        servicios: resolve(__dirname, 'src/pages/servicios.html'),
-        metodologia: resolve(__dirname, 'src/pages/metodologia.html'),
-        recursos: resolve(__dirname, 'src/pages/recursos.html'),
+        main: resolve(__dirname, 'index.html'), 
         app: resolve(__dirname, 'src/pages/App.html'),
-        contacto: resolve(__dirname, 'src/pages/contacto.html'),
         legal: resolve(__dirname, 'src/pages/legal.html'),
       },
       output: {
@@ -39,7 +32,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
-      '@pages': resolve(__dirname, './src/pages'), // Nuevo alias por si lo necesitas
+      '@pages': resolve(__dirname, './src/pages'),
       '@scripts': resolve(__dirname, './src/scripts'),
       '@styles': resolve(__dirname, './src/styles'),
     },

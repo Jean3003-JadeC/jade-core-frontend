@@ -10,8 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="/src/styles/home.css">
+    
     <link rel="stylesheet" href="/src/styles/legal.css">
-
     <script>
         document.documentElement.style.visibility = 'hidden';
         window.addEventListener('DOMContentLoaded', () => {
@@ -23,7 +24,7 @@
 
     <header class="main-navbar" id="mainHeader">
         <div class="navbar-container">
-            <a href="/" class="navbar-brand" style="text-decoration: none;">
+            <a href="/" class="navbar-brand">
                 <span class="navbar-brand__logo">JADE CORE</span>
                 <span class="navbar-brand__descriptor">TECNOLOGIA & SALUD</span>
             </a>
@@ -36,7 +37,7 @@
 
             <nav class="nav-menu" id="mainNav" role="navigation" aria-label="Navegación principal">
                 <ul class="nav-menu__list">
-                    <li class="nav-menu__item"><a href="/" class="nav-menu__link nav-menu__link--main-home" style="font-size: 1.15rem; font-weight: 700;">Home</a></li>
+                    <li class="nav-menu__item"><a href="/" class="nav-menu__link">Home</a></li>
                     <li class="nav-menu__item"><a href="/src/pages/legal.html" class="nav-menu__link is-active" aria-current="page">Legal</a></li>
                 </ul>
             </nav>
@@ -173,7 +174,6 @@
     </footer>
 
     <script type="module" src="/src/main.ts"></script>
-
     <script type="module" src="/src/scripts/legal.ts"></script>
 </body>
 </html>

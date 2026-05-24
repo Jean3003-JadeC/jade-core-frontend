@@ -15,7 +15,6 @@
     <script>
         document.documentElement.style.visibility = 'hidden';
         window.addEventListener('DOMContentLoaded', () => {
-            // Hace visible el documento pero deja que el CSS controle la suavidad de la cortina
             document.documentElement.style.visibility = 'visible';
         });
     </script>
@@ -24,7 +23,7 @@
 
     <header class="main-navbar" id="mainHeader">
         <div class="navbar-container">
-            <a href="/" class="navbar-brand" style="text-decoration: none;">
+            <a href="/" class="navbar-brand">
                 <span class="navbar-brand__logo">JADE CORE</span>
                 <span class="navbar-brand__descriptor">SALUD & TECNOLOGIA</span>
             </a>
@@ -41,7 +40,7 @@
                         <a href="/" class="nav-menu__link">Home</a>
                     </li>
                     <li class="nav-menu__item">
-                        <a href="/src/pages/App.html" class="nav-menu__link btn-home-return" aria-current="page">App</a>
+                        <a href="/src/pages/App.html" class="nav-menu__link btn-home-return is-active" aria-current="page">App</a>
                     </li>
                 </ul>
             </nav>
@@ -60,7 +59,7 @@
                 bajo entornos con tipado riguroso en TypeScript.
             </p>
             
-            <div style="margin-bottom: 2rem;">
+            <div class="launch-action-container">
                 <a href="https://wa.me/51951000000" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-app">
                     Solicitar Acceso Beta Directo
                 </a>

@@ -1,30 +1,24 @@
-/* ==========================================================================
-   1. VARIABLES DE DISEÑO CORPORATIVO (Sincronizadas con el Ecosistema)
-   ========================================================================== */
+/* Variables Globales de Diseño */
 :root {
-    --clr-jade-core: #4B9F86;       /* Organic Emerald - Identidad y Bienestar */
-    --clr-carbono: #4A4D50;         /* Clinical Graphite - Rigor y Textos principales */
-    --clr-niebla: #6C757D;          /* Data Slate - Soporte y Textos secundarios */
-    --clr-blanco: #FFFFFF;          /* Sanitary White - Higiene y Transparencia */
-
-    --organic-emerald: #4B9F86;
-    --organic-emerald-hover: #3d856f;
-    --clinical-graphite: #4A4D50;
-    --data-slate: #6C757D;
-    --sanitary-white: #FFFFFF;
-    --soft-clinical-bg: #F8F9FA;
-    --clinical-dark: #121416;
-    --hospital-border: rgba(108, 117, 125, 0.15); /* Niebla muy suave para bordes igual que el home */
-    --transition-bezier: cubic-bezier(0.4, 0, 0.2, 1);
+    --clr-jade-core: #4B9F86;
+    --clr-jade-core-hover: #3d856f;
+    --clr-carbono: #4A4D50;
+    --clr-niebla: #6C757D;
+    --clr-blanco: #FFFFFF;
     
-    --font-heading: 'Montserrat';
+    --clr-bg-soft: #F8F9FA;
+    --clr-dark: #121416;
+    --clr-border: rgba(108, 117, 125, 0.15);
+    
+    --transition-bezier: cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-sm: 0 1px 2px rgba(74, 77, 80, 0.05);
+    
+    --font-heading: 'Montserrat', sans-serif;
     --font-accent: 'Lato', sans-serif;
     --font-body: 'Open Sans', sans-serif;
 }
 
-/* ==========================================================================
-   2. REGLAS GENERALES DEL ENTORNO MÓVIL/CLÍNICO
-   ========================================================================== */
+/* Reglas Generales (Entorno Clínico) */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -32,8 +26,8 @@
 }
 
 body.clinical-env {
-    background-color: var(--soft-clinical-bg);
-    color: var(--clinical-graphite);
+    background-color: var(--clr-bg-soft);
+    color: var(--clr-carbono);
     font-family: var(--font-body);
     line-height: 1.6;
     min-height: 100vh;
@@ -41,9 +35,7 @@ body.clinical-env {
     flex-direction: column;
 }
 
-/* ==========================================================================
-   3. COMPONENTE COMPARTIDO: NAVBAR INSTITUCIONAL DE ALTA PRECISIÓN
-   ========================================================================== */
+/* Navbar Institucional */
 .main-navbar {
     position: fixed;
     top: 0px;
@@ -61,7 +53,6 @@ body.clinical-env {
                 box-shadow 0.3s var(--transition-bezier);
 }
 
-/* Efecto Glassmorphism activado por App.ts al hacer scroll */
 .main-navbar.scrolled {
     background-color: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(10px);
@@ -103,8 +94,6 @@ body.clinical-env {
     letter-spacing: 0.2em;
 }
 
-/* Listado de Enlaces Desktop */
-/* Listado de Enlaces Desktop */
 .nav-menu__list {
     display: flex;
     list-style: none;
@@ -112,65 +101,56 @@ body.clinical-env {
     align-items: center;
     margin: 0;
     padding: 0;
-    
-    /* ANIMACIÓN DE CORTINA: Llama a la regla de abajo al cargar */
     animation: slideCortina 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* El motor del efecto Cortina / Deslizamiento lateral */
 @keyframes slideCortina {
     from {
         opacity: 0;
-        transform: translateX(50px); /* Inicia empujado a la derecha */
-        filter: blur(4px);            /* Un sutil desenfoque clínico */
+        transform: translateX(50px);
+        filter: blur(4px);
     }
     to {
         opacity: 1;
-        transform: translateX(0);    /* Regresa a su posición original milimétrica */
+        transform: translateX(0);
         filter: blur(0);
     }
 }
 
 .nav-menu__link {
     font-family: var(--font-accent);
-    font-weight: 600; /* IGUALADO: Cambiado de 700 a 600 exactos del home */
+    font-weight: 600;
     font-size: 0.9rem;
-    color: var(--clinical-graphite); /* Sincronizado al color del texto del home */
+    color: var(--clr-carbono);
     text-decoration: none;
     transition: color 0.3s var(--transition-bezier); 
 }
 
 .nav-menu__link:hover,
 .nav-menu__link.is-active {
-    color: var(--organic-emerald);
+    color: var(--clr-jade-core);
 }
 
-/* Botón de retorno al Home estructurado (Mantiene la simetría del botón App de la landing) */
 .btn-home-return {
-    background-color: var(--clinical-graphite);
-    color: var(--sanitary-white) !important;
-    
-    /* MODIFICACIONES DE PRECISIÓN */
-    font-family: var(--clr-jade-core); /* Cambia la letra a Montserrat (la misma del logo) */
-    font-weight: 600;                 /* Ajusta el grosor exacto de la tipografía */
-    font-size: 0.9rem;                /* Escala el tamaño del texto */
-    line-height: 1.2;                 /* Recorta el espacio invisible que inflaba la caja */
-    padding: 0.5rem 1rem;             /* Mantiene el colchón perimetral de la celda */
-    border-radius: 4px;               /* Sincronizado con el radio del home */
+    background-color: var(--clr-carbono);
+    color: var(--clr-blanco) !important;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
 }
 
 .btn-home-return:hover {
-    background-color: var(--organic-emerald);
+    background-color: var(--clr-jade-core);
 }
 
-/* Botón Hamburguesa Estructurado */
 .mobile-nav-toggle {
     display: none;
 }
 
-/* ==========================================================================
-   4. MAQUETACIÓN ESPECÍFICA: PORTAL / APP LAUNCH CARD
-   ========================================================================== */
+/* Maquetación del Portal (Launch Card) */
 .App-main-app {
     flex: 1;
     display: flex;
@@ -183,8 +163,8 @@ body.clinical-env {
 }
 
 .app-launch-card {
-    background-color: var(--sanitary-white);
-    border: 1px solid var(--hospital-border);
+    background-color: var(--clr-blanco);
+    border: 1px solid var(--clr-border);
     border-radius: 12px;
     padding: 3.5rem;
     max-width: 800px;
@@ -196,7 +176,7 @@ body.clinical-env {
 .launch-badge {
     display: inline-block;
     background-color: rgba(75, 159, 134, 0.08);
-    color: var(--organic-emerald);
+    color: var(--clr-jade-core);
     font-family: var(--font-accent);
     font-weight: 700;
     font-size: 0.75rem;
@@ -211,7 +191,7 @@ body.clinical-env {
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 2.5rem;
-    color: var(--clinical-graphite);
+    color: var(--clr-carbono);
     line-height: 1.2;
 }
 
@@ -219,27 +199,30 @@ body.clinical-env {
     font-family: var(--font-heading);
     font-weight: 800;
     font-size: 1.5rem;
-    color: var(--organic-emerald);
+    color: var(--clr-jade-core);
     margin: 0.5rem 0 1.5rem 0;
     letter-spacing: 0.2em;
 }
 
 .launch-description {
     font-size: 0.95rem;
-    color: var(--data-slate);
+    color: var(--clr-niebla);
     max-width: 650px;
     margin: 0 auto 2.5rem auto;
     text-align: justify;
     text-align-last: center;
 }
 
-/* Acciones y Botón Corporativo de WhatsApp */
+.launch-action-container {
+    margin-bottom: 2rem;
+}
+
 .btn-whatsapp-app {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: var(--organic-emerald);
-    color: var(--sanitary-white);
+    background-color: var(--clr-jade-core);
+    color: var(--clr-blanco);
     text-decoration: none;
     font-family: var(--font-accent);
     font-weight: 700;
@@ -252,53 +235,50 @@ body.clinical-env {
 
 .btn-whatsapp-app:hover {
     transform: translateY(-2px);
-    background-color: var(--organic-emerald-hover);
+    background-color: var(--clr-jade-core-hover);
     box-shadow: 0 6px 20px rgba(75, 159, 134, 0.4);
 }
 
-/* Cajas de Previsualización de Módulos Core */
 .app-features-preview {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     margin-top: 3.5rem;
-    border-top: 1px solid var(--hospital-border);
+    border-top: 1px solid var(--clr-border);
     padding-top: 2rem;
 }
 
 .feat-box {
     text-align: left;
-    background-color: var(--soft-clinical-bg);
+    background-color: var(--clr-bg-soft);
     padding: 1.25rem;
     border-radius: 6px;
-    border-left: 3px solid var(--organic-emerald);
+    border-left: 3px solid var(--clr-jade-core);
 }
 
 .feat-box strong {
     font-family: var(--font-heading);
     font-size: 0.9rem;
     display: block;
-    color: var(--clinical-graphite);
+    color: var(--clr-carbono);
     margin-bottom: 0.25rem;
 }
 
 .feat-box p {
     font-size: 0.8rem;
-    color: var(--data-slate);
+    color: var(--clr-niebla);
 }
 
-/* ==========================================================================
-   5. COMPONENTE COMPARTIDO: PIE DE PÁGINA (FOOTER CORPORATIVO)
-   ========================================================================= */
+/* Pie de Página (Footer) */
 .main-footer {
-    background-color: var(--clinical-dark);
+    background-color: var(--clr-dark);
     color: rgba(255, 255, 255, 0.7);
     padding: 4rem 2rem 2rem 2rem;
-    border-top: 4px solid var(--organic-emerald);
+    border-top: 4px solid var(--clr-jade-core);
 }
 
 .footer-container {
-    max-width: 1200px; /* Cámbialo también a 1200px para empatarlo con el Home */
+    max-width: 1200px; 
     margin: 0 auto;
     width: 100%;
 }
@@ -310,30 +290,30 @@ body.clinical-env {
     margin-bottom: 3rem;
 }
 
-.footer-brand .footer-logo {
+.footer-brand__logo {
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1.3rem;
-    color: var(--sanitary-white);
+    color: var(--clr-blanco);
     display: block;
     margin-bottom: 1rem;
 }
 
-.footer-tagline {
+.footer-brand__text {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.55);
     max-width: 320px;
 }
 
-.footer-grid h4 {
+.footer-title {
     font-family: var(--font-heading);
     font-size: 0.9rem;
-    color: var(--sanitary-white);
+    color: var(--clr-blanco);
     text-transform: uppercase;
     margin-bottom: 1.25rem;
 }
 
-.footer-links__list, .footer-links {
+.footer-links__list {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -350,13 +330,7 @@ body.clinical-env {
 .footer-links a:hover, 
 .footer-links a.is-active,
 .footer-links__list a:hover {
-    color: var(--organic-emerald);
-}
-
-.footer-info__text {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 0.5rem;
+    color: var(--clr-jade-core);
 }
 
 .footer-bottom {
@@ -370,9 +344,7 @@ body.clinical-env {
     color: rgba(255, 255, 255, 0.4);
 }
 
-/* ==========================================================================
-   6. RESPONSIVE MEDIA QUERIES (Ajuste Dinámico de Interfaz Móvil)
-   ========================================================================== */
+/* Media Queries */
 @media (max-width: 1024px) {
     .footer-grid {
         grid-template-columns: 1fr;
@@ -382,7 +354,7 @@ body.clinical-env {
 
 @media (max-width: 768px) {
     .nav-menu {
-        display: none; /* Oculto por defecto en móvil */
+        display: none;
     }
 
     .mobile-nav-toggle {
@@ -397,21 +369,20 @@ body.clinical-env {
     .mobile-nav-toggle__bar {
         width: 25px;
         height: 3px;
-        background: var(--clinical-graphite);
+        background: var(--clr-carbono);
         transition: all 0.3s var(--transition-bezier);
     }
 
-    /* Transformación dinámica del menú de la App a cajón colapsable (Desplegado por TS) */
     .nav-menu.is-active {
         display: block;
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: var(--sanitary-white);
+        background-color: var(--clr-blanco);
         box-shadow: 0 4px 6px -1px rgba(74, 77, 80, 0.05);
         padding: 1.5rem 2rem;
-        border-top: 1px solid var(--hospital-border);
+        border-top: 1px solid var(--clr-border);
     }
 
     .nav-menu__list {
@@ -426,7 +397,6 @@ body.clinical-env {
         width: 100%;
     }
 
-    /* Rotación de la hamburguesa (X) coordinada por TS */
     .mobile-nav-toggle.is-active .mobile-nav-toggle__bar:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
     }

@@ -1,53 +1,28 @@
-/* ==========================================================================
-   JADE CORE - HOME.CSS
-   Estética: Clínica, Datos, Minimalista, Institucional.
-   ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   1. IMPORTACIONES ATÓMICAS (Placeholders)
-   -------------------------------------------------------------------------- */
-/* @import url('atoms/colors.css'); */
-/* @import url('atoms/typography.css'); */
-/* @import url('atoms/buttons.css'); */
-/* @import url('atoms/inputs.css'); */
-/* @import url('molecules/cards.css'); */
-/* @import url('organisms/navbar.css'); */
-/* @import url('organisms/footer.css'); */
-
-/* --------------------------------------------------------------------------
-   2. VARIABLES GLOBALES (Paleta Oficial Jade Core)
-   -------------------------------------------------------------------------- */
+/* Variables Globales */
 :root {
-    /* Paleta Corporativa Oficial */
-    --clr-jade-core: #4B9F86;       /* Organic Emerald - Identidad y Bienestar */
-    --clr-carbono: #4A4D50;         /* Clinical Graphite - Rigor y Textos principales */
-    --clr-niebla: #6C757D;          /* Data Slate - Soporte y Textos secundarios */
-    --clr-blanco: #FFFFFF;          /* Sanitary White - Higiene y Transparencia */
+    --clr-jade-core: #4B9F86;
+    --clr-carbono: #4A4D50;
+    --clr-niebla: #6C757D;
+    --clr-blanco: #FFFFFF;
     
-    /* Mapeo de Interfaz */
     --clr-bg-main: var(--clr-blanco);
     --clr-bg-surface: var(--clr-blanco);
-    /* Usamos el carbono con una opacidad ínfima (3%) para separar secciones sin ensuciar el blanco */
     --clr-bg-alt: rgba(74, 77, 80, 0.03); 
-    --clr-border: rgba(108, 117, 125, 0.15); /* Niebla muy suave para bordes */
+    --clr-border: rgba(108, 117, 125, 0.15);
     
-    /* Mapeo de Texto */
     --clr-text-heading: var(--clr-carbono);
     --clr-text-body: var(--clr-carbono);
     --clr-text-muted: var(--clr-niebla);
     
-    /* Tipografía: "The Clinical Sans" */
-    --font-heading: 'Montserrat'; /* Principal: Logo y Titulares (Autoridad científica) */
-    --font-accent: 'Lato', sans-serif;        /* Secundaria: Descriptor y Subtítulos (Equilibrio elegante) */
-    --font-body: 'Open Sans', sans-serif;     /* Lectura: Cuerpos de texto y Planes (Legibilidad excepcional) */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-accent: 'Lato', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
     
-    /* Espaciado y Layout */
     --section-padding: 5rem 2rem;
     --container-width: 1200px;
     --border-radius-sm: 4px;
     --border-radius-md: 8px;
     
-    /* Transiciones y Sombras (muy sutiles para mantener minimalismo) */
     --transition-fast: 0.2s ease;
     --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --shadow-sm: 0 1px 2px rgba(74, 77, 80, 0.05);
@@ -55,9 +30,7 @@
     --shadow-lg: 0 10px 15px -3px rgba(74, 77, 80, 0.08), 0 4px 6px -2px rgba(74, 77, 80, 0.04);
 }
 
-/* --------------------------------------------------------------------------
-   3. RESET Y BASE
-   -------------------------------------------------------------------------- */
+/* Reset y Base */
 * {
     margin: 0;
     padding: 0;
@@ -143,12 +116,10 @@ a {
     transform: translateY(-2px);
 }
 
-/* --------------------------------------------------------------------------
-   4. NAVEGACIÓN (HEADER)
-   -------------------------------------------------------------------------- */
+/* Navegación (Header) */
 .main-navbar {
     position: fixed;
-    top: -2;
+    top: -2px;
     width: 100%;
     background-color: transparent;
     border-bottom: 1px solid transparent; 
@@ -156,7 +127,7 @@ a {
     -webkit-backdrop-filter: blur(0px);
     z-index: 1000;
     padding: 1rem 2rem;
-    transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
 }
 
 .main-navbar.scrolled {
@@ -227,7 +198,6 @@ a {
     background: var(--clr-jade-core);
 }
 
-/* Botón Hamburguesa Estructurado - Oculto por defecto en Escritorio */
 .mobile-nav-toggle {
     display: none;
     background: none;
@@ -248,72 +218,7 @@ a {
     transition: var(--transition-smooth);
 }
 
-/* ==========================================================================
-   A. COMPORTAMENTO RESPONSIVO (MÓVIL & TABLET)
-   ========================================================================== */
-@media (max-width: 768px) {
-    /* 1. Botón visible */
-    .mobile-nav-toggle {
-        display: flex;
-    }
-
-    /* 2. Menú apagado y colapsado por defecto (Igual que en App.css) */
-    .nav-menu {
-        display: none; 
-    }
-
-    /* 3. Menú encendido como caja flotante al tener is-active */
-    .nav-menu.is-active {
-        display: block !important;
-        position: absolute;
-        top: 100%; /* Cae justo debajo del header */
-        left: 0;
-        width: 100%;
-        background-color: var(--clr-blanco);
-        box-shadow: 0 10px 15px rgba(74, 77, 80, 0.1); /* Sombra para que se separe del fondo */
-        padding: 2rem;
-        border-top: 1px solid var(--clr-border);
-        z-index: 1050;
-    }
-
-    /* 4. Lista vertical simple */
-    .nav-menu__list {
-        flex-direction: column;
-        gap: 1.5rem;
-        align-items: flex-start;
-    }
-
-    .nav-menu__link {
-        font-size: 1.1rem;
-        display: block;
-        width: 100%;
-        color: var(--clr-carbono);
-    }
-
-    /* Botón de App ajustado a móvil */
-    .btn-app-link {
-        display: block;
-        width: 100%;
-        text-align: center;
-        margin-top: 0.5rem;
-    }
-
-    /* 5. Animación de Cruz (X) idéntica a la App */
-    .mobile-nav-toggle.is-active .mobile-nav-toggle__bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    .mobile-nav-toggle.is-active .mobile-nav-toggle__bar:nth-child(2) {
-        opacity: 0;
-    }
-    .mobile-nav-toggle.is-active .mobile-nav-toggle__bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-}
-
-/* --------------------------------------------------------------------------
-   5. SECCIÓN HERO (#home)
-   -------------------------------------------------------------------------- */
-
+/* Sección Hero */
 .hero-section {
     padding: 8rem 2rem 5rem;
     min-height: 100vh;
@@ -345,27 +250,22 @@ a {
     gap: 1rem;
 }
 
-/* Contenedor del Canvas 3D Inicial */
 #canvas-3d-container {
     width: 100%;
     height: 500px;
     background: var(--clr-bg-alt);
     border-radius: var(--border-radius-md);
     border: 1px dashed var(--clr-border);
-    position: relative; /* CRÍTICO: Mantiene el título dentro de esta caja */
+    position: relative;
     overflow: hidden; 
 }
 
-/* Etiqueta / Título Superior del Gráfico */
 #canvas-3d-container::after {
-    /* He cambiado el texto a algo más oficial, pero puedes volver a poner 'Información 3D a actualizar' si gustas */
     content: 'Noticias actualizadas'; 
     position: absolute;
-    top: 1.5rem; /* Separación desde el techo de la caja */
-    left: 50%; /* Lo empuja a la mitad... */
-    transform: translateX(-50%); /* ...y esto lo centra matemáticamente de forma perfecta */
-    
-    /* Estética del "cuadrito color jade" */
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--clr-jade-core);
     color: var(--clr-blanco);
     font-family: var(--font-accent);
@@ -375,15 +275,11 @@ a {
     text-transform: uppercase;
     padding: 0.4rem 1.2rem;
     border-radius: var(--border-radius-sm);
-    
-    /* Profundidad y jerarquía visual */
     z-index: 10; 
     box-shadow: 0 4px 10px rgba(75, 159, 134, 0.25);
 }
 
-/* --------------------------------------------------------------------------
-   6. NOSOTROS (#nosotros) - MASCOTA 3D Y PILARES
-   -------------------------------------------------------------------------- */
+/* Nosotros (Identidad) */
 .about-page {
     background-color: var(--clr-bg-main);
     border-top: 1px solid var(--clr-border);
@@ -427,19 +323,17 @@ a {
     margin-bottom: 1rem;
 }
 
-/* Ecosistema / Núcleo 3D Interactivo */
+/* Visor 3D Interactivo y Video */
 .ecosystem-visualization {
     background-color: #000000;
     border-radius: var(--border-radius-md);
     padding: 6rem 2rem;
     color: var(--clr-blanco);
     border: 1px solid var(--clr-border);
-    /* NUEVO: Convertimos el contenedor en relativo y ocultamos los bordes del video */
     position: relative; 
     overflow: hidden;
 }
 
-/* NUEVO: Elevamos los textos y la grilla 3D para que estén por encima del video */
 .visualization-header,
 .visualization-content-grid {
     position: relative;
@@ -463,7 +357,6 @@ a {
     font-weight: 300;
 }
 
-/* Grilla interactiva: Misión - Visor 3D - Visión */
 .visualization-content-grid {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
@@ -474,12 +367,12 @@ a {
 }
 
 .corporate-value-box {
-    background: rgba(255, 255, 255, 0.05); /* Ligeramente más opaco para que se lea mejor sobre el video */
+    background: rgba(255, 255, 255, 0.05);
     padding: 2rem;
     border-radius: var(--border-radius-sm);
     border: 1px solid rgba(255, 255, 255, 0.15);
     transition: var(--transition-smooth);
-    backdrop-filter: blur(4px); /* NUEVO: Efecto cristal para que no se pierda legibilidad */
+    backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
 }
 
@@ -504,18 +397,15 @@ a {
     line-height: 1.7;
 }
 
-/* Contenedor del visor 3D */
 .ecosystem-3d-viewer {
     width: 100%;
     height: 500px;
     position: relative;
     border-radius: var(--border-radius-md);
     overflow: hidden;
-    /* Reducimos un poco la sombra para que contraste mejor con el video */
     box-shadow: 0 0 50px -10px rgba(75, 159, 134, 0.3); 
 }
 
-/* Ajustes del elemento nativo de Google model-viewer */
 model-viewer {
     width: 100%;
     height: 100%;
@@ -524,25 +414,21 @@ model-viewer {
     outline: none;
 }
 
-/* --------------------------------------------------------------------------
-   AJUSTE DE VIDEO DE FONDO (NUEVO)
-   -------------------------------------------------------------------------- */
 .video-wrapper {
-    position: absolute; /* Se despega de la estructura normal */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     max-width: 100%;
-    margin: 0 !important; /* Ignora el margin-top del HTML */
+    margin: 0 !important;
     border-radius: 0;
     box-shadow: none;
-    z-index: 0; /* Lo manda totalmente al fondo */
-    opacity: 0.25; /* IMPORTANTE: Transparencia para que no opaque el 3D ni los textos */
-    pointer-events: none; /* IMPORTANTE: Evita que el video atrape los clics y deje rotar el 3D */
+    z-index: 0;
+    opacity: 0.25;
+    pointer-events: none;
 }
 
-/* Ajuste del video interno para que llene el contenedor sin deformarse */
 .lazy-video {
     width: 100%;
     height: 100%;
@@ -555,21 +441,7 @@ model-viewer {
     color: var(--clr-blanco);
 }
 
-@media (max-width: 992px) {
-    .visualization-content-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .ecosystem-3d-viewer {
-        height: 350px;
-        order: -1;
-    }
-}
-
-/* --------------------------------------------------------------------------
-   7. SERVICIOS Y RECURSOS (Grillas y Tarjetas)
-   -------------------------------------------------------------------------- */
+/* Servicios y Recursos */
 .knowledge-grid-section, .clinical-context {
     background-color: var(--clr-bg-main);
     border-top: 1px solid var(--clr-border);
@@ -608,6 +480,7 @@ model-viewer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
+    margin-top: 3rem;
 }
 
 .resource-card {
@@ -691,11 +564,7 @@ model-viewer {
     color: var(--clr-niebla);
 }
 
-
-
-/* --------------------------------------------------------------------------
-   9. CONTACTO Y FORMULARIO CLÍNICO
-   -------------------------------------------------------------------------- */
+/* Contacto y Formulario */
 .contact-container {
     background-color: var(--clr-bg-main);
     border-top: 1px solid var(--clr-border);
@@ -747,7 +616,6 @@ model-viewer {
     font-weight: 600;
 }
 
-/* Formulario */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -800,7 +668,7 @@ model-viewer {
     background: var(--clr-jade-core);
 }
 
-/* Simulador de Aranceles */
+/* Simulador de Pagos */
 .payment-methods {
     display: flex;
     gap: 1rem;
@@ -864,9 +732,7 @@ model-viewer {
     color: var(--clr-blanco);
 }
 
-/* --------------------------------------------------------------------------
-   10. FOOTER
-   -------------------------------------------------------------------------- */
+/* Footer */
 .main-footer {
     background-color: var(--clr-carbono);
     color: var(--clr-blanco);
@@ -926,9 +792,7 @@ model-viewer {
     color: var(--clr-niebla);
 }
 
-/* --------------------------------------------------------------------------
-   11. MEDIA QUERIES (Responsividad básica)
-   -------------------------------------------------------------------------- */
+/* Responsive Media Queries */
 @media (max-width: 992px) {
     .hero-section {
         grid-template-columns: 1fr;
@@ -944,35 +808,63 @@ model-viewer {
     .contact-grid {
         grid-template-columns: 1fr;
     }
-    .ecosystem-grid {
-        grid-template-columns: 1fr 1fr;
+    .visualization-content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
-    .ecosystem-grid::before {
-        display: none;
+    .ecosystem-3d-viewer {
+        height: 350px;
+        order: -1;
     }
 }
 
 @media (max-width: 768px) {
-    .nav-menu {
-        display: none;
-    }
     .mobile-nav-toggle {
         display: flex;
+    }
+    .nav-menu {
+        display: none; 
+    }
+    .nav-menu.is-active {
+        display: block !important;
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        width: 100%;
+        background-color: var(--clr-blanco);
+        box-shadow: 0 10px 15px rgba(74, 77, 80, 0.1); 
+        padding: 2rem;
+        border-top: 1px solid var(--clr-border);
+        z-index: 1050;
+    }
+    .nav-menu__list {
         flex-direction: column;
-        gap: 4px;
-        background: none;
-        border: none;
-        cursor: pointer;
+        gap: 1.5rem;
+        align-items: flex-start;
     }
-    .mobile-nav-toggle__bar {
-        width: 25px;
-        height: 3px;
-        background: var(--clr-carbono);
+    .nav-menu__link {
+        font-size: 1.1rem;
+        display: block;
+        width: 100%;
+        color: var(--clr-carbono);
     }
+    .btn-app-link {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+    .mobile-nav-toggle.is-active .mobile-nav-toggle__bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .mobile-nav-toggle.is-active .mobile-nav-toggle__bar:nth-child(2) {
+        opacity: 0;
+    }
+    .mobile-nav-toggle.is-active .mobile-nav-toggle__bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    
     .form-grid {
-        grid-template-columns: 1fr;
-    }
-    .ecosystem-grid {
         grid-template-columns: 1fr;
     }
     .footer-grid {
@@ -981,20 +873,14 @@ model-viewer {
     }
 }
 
-/* --------------------------------------------------------------------------
-   12. ANIMACIONES INTERSECTION OBSERVER (Dinámica)
-   -------------------------------------------------------------------------- */
-.pillar-card, .ecosystem-card, .resource-card {
+/* Animaciones Observer */
+.pillar-card, .resource-card {
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.pillar-card.is-visible, .ecosystem-card.is-visible, .resource-card.is-visible {
+.pillar-card.is-visible, .resource-card.is-visible {
     opacity: 1;
     transform: translateY(0); 
 }
-
-.ecosystem-grid .ecosystem-card:nth-child(2) { transition-delay: 0.1s; }
-.ecosystem-grid .ecosystem-card:nth-child(3) { transition-delay: 0.2s; }
-.ecosystem-grid .ecosystem-card:nth-child(4) { transition-delay: 0.3s; }

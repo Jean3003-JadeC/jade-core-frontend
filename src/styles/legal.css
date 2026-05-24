@@ -1,163 +1,48 @@
-/* ==========================================================================
-   1. VARIABLES DE NÚCLEO (MANUAL DE IDENTIDAD VISUAL - JADE CORE)
-   ========================================================================== */
+/* Variables Exclusivas / Sobrescrituras para la página Legal */
 :root {
-    /* Paleta Cromática Oficial */
-    --organic-emerald: #4B9F86;
-    --organic-emerald-hover: #3a7d69;
-    --clinical-graphite: #4A4D50;
-    --data-slate: #6C757D;
-    --sanitary-white: #FFFFFF;
-    --soft-clinical-bg: #F8F9FA;
-    --hospital-border: #E2E8F0;
-    --color-error: #D9534F;
-    --color-success: #2ECC71;
-    --clinical-dark: #121416;
+    --clr-jade-core: #4B9F86;
+    --clr-jade-core-hover: #3a7d69;
+    --clr-carbono: #4A4D50;
+    --clr-niebla: #6C757D;
+    --clr-blanco: #FFFFFF;
+    
+    --clr-bg-soft: #F8F9FA;
+    --clr-border: #E2E8F0;
+    --clr-error: #D9534F;
+    --clr-dark: #121416;
 
-    /* Tipografías */
     --font-heading: 'Montserrat', sans-serif;
     --font-accent: 'Lato', sans-serif;
     --font-body: 'Open Sans', sans-serif;
 
-    /* Estructura y Transiciones */
-    --radius-clinical: 6px;
+    --radius-sm: 6px;
     --transition-bezier: cubic-bezier(0.4, 0, 0.2, 1);
     --shadow-subtle: 0 4px 12px rgba(74, 77, 80, 0.04);
-    --shadow-header: 0 2px 10px rgba(74, 77, 80, 0.03);
-    --shadow-focus: 0 0 0 3px rgba(75, 159, 134, 0.15);
 }
 
-/* ==========================================================================
-   2. RESET & CONFIGURACIÓN BASE
-   ========================================================================== */
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* Base de la Página Legal */
+body {
+    background-color: var(--clr-bg-soft);
+    color: var(--clr-carbono);
+    line-height: 1.7; 
+    padding-top: 90px; 
 }
 
 html {
-    scroll-behavior: smooth; /* Desplazamiento fluido para los enlaces internos */
+    scroll-behavior: smooth;
 }
 
-body {
-    background-color: var(--soft-clinical-bg);
-    font-family: var(--font-body);
-    color: var(--clinical-graphite);
-    line-height: 1.7; /* Mayor interlineado para textos legales densos */
-    -webkit-font-smoothing: antialiased;
-    padding-top: 90px; /* Previene la superposición por el Navbar Fijo */
-}
-
-/* ==========================================================================
-   3. COMPONENTE COMPARTIDO: NAVBAR INSTITUCIONAL DE ALTA PRECISIÓN
-   ========================================================================== */
-.main-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 90px;
-    background-color: var(--sanitary-white);
-    border-bottom: 1px solid var(--hospital-border);
-    box-shadow: var(--shadow-header);
-    z-index: 1000;
-    transition: all 0.3s var(--transition-bezier);
-}
-
-.navbar-container {
-    max-width: 1280px;
-    height: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar-brand {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-}
-
-.navbar-brand__logo {
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--clinical-graphite);
-    letter-spacing: 1px;
-    line-height: 1.2;
-}
-
-.navbar-brand__descriptor {
-    font-family: var(--font-accent);
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--organic-emerald);
-    letter-spacing: 1.5px;
-}
-
-/* Listado de Enlaces Desktop */
-.nav-menu__list {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-    align-items: center;
-}
-
-.nav-menu__link {
-    text-decoration: none;
-    font-family: var(--font-accent);
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--data-slate);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 8px 0;
-    border-bottom: 2px solid transparent;
-    transition: var(--transition-bezier);
-}
-
-.nav-menu__link:hover,
-.nav-menu__link.is-active {
-    color: var(--organic-emerald);
-    border-bottom-color: var(--organic-emerald);
-}
-
-/* Botón Menú Hamburguesa Móvil */
-.mobile-nav-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 24px;
-    height: 18px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1100;
-}
-
-.mobile-nav-toggle__bar {
-    width: 100%;
-    height: 2px;
-    background-color: var(--clinical-graphite);
-    transition: var(--transition-bezier);
-}
-
-/* ==========================================================================
-   4. CONTENEDOR PRINCIPAL Y ENCABEZADO DE SECCIÓN
-   ========================================================================== */
+/* Encabezado Principal */
 .legal-container {
-    max-width: 1280px;
+    max-width: 1200px; /* Alineado a 1200px como en Home y App */
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 60px 2rem;
 }
 
 .legal-header {
     text-align: center;
     margin-bottom: 50px;
-    border-bottom: 2px solid var(--hospital-border);
+    border-bottom: 2px solid var(--clr-border);
     padding-bottom: 30px;
 }
 
@@ -166,7 +51,7 @@ body {
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 2px;
-    color: var(--organic-emerald);
+    color: var(--clr-jade-core);
     display: block;
     margin-bottom: 10px;
 }
@@ -175,21 +60,19 @@ body {
     font-family: var(--font-heading);
     font-size: 2.2rem;
     font-weight: 700;
-    color: var(--clinical-graphite);
+    color: var(--clr-carbono);
     text-transform: uppercase;
     margin-bottom: 15px;
 }
 
 .legal-header__description {
     font-size: 1.05rem;
-    color: var(--data-slate);
+    color: var(--clr-niebla);
     max-width: 800px;
     margin: 0 auto;
 }
 
-/* ==========================================================================
-   5. DISTRIBUCIÓN EN GRID ASIMÉTRICO (NAVEGACIÓN STICKY + CONTENIDO)
-   ========================================================================== */
+/* Layout (Sidebar Sticky + Contenido) */
 .legal-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -203,9 +86,7 @@ body {
     }
 }
 
-/* ==========================================================================
-   6. COLUMNA IZQUIERDA: MENÚ DE NAVEGACIÓN ANCHOR (STICKY)
-   ========================================================================== */
+/* Sidebar Navigation */
 .legal-nav {
     position: static;
 }
@@ -213,11 +94,11 @@ body {
 @media (min-width: 992px) {
     .legal-nav {
         position: sticky;
-        top: 120px; /* Separación adaptada considerando la altura del Navbar Fijo (90px + 30px) */
-        background-color: var(--sanitary-white);
+        top: 120px; 
+        background-color: var(--clr-blanco);
         padding: 20px;
-        border-radius: var(--radius-clinical);
-        border: 1px solid var(--hospital-border);
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--clr-border);
         box-shadow: var(--shadow-subtle);
     }
 }
@@ -227,12 +108,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    margin: 0;
+    padding: 0;
 }
 
 .legal-nav__link {
     display: block;
     padding: 10px 14px;
-    color: var(--data-slate);
+    color: var(--clr-niebla);
     text-decoration: none;
     font-family: var(--font-accent);
     font-size: 0.95rem;
@@ -243,20 +126,17 @@ body {
 }
 
 .legal-nav__link:hover {
-    color: var(--organic-emerald);
-    background-color: var(--soft-clinical-bg);
+    color: var(--clr-jade-core);
+    background-color: var(--clr-bg-soft);
 }
 
-/* Estado Activo controlado dinámicamente desde el ScrollSpy de legal.ts */
 .legal-nav__link.is-active {
-    color: var(--organic-emerald);
+    color: var(--clr-jade-core);
     background-color: rgba(75, 159, 134, 0.05);
-    border-left-color: var(--organic-emerald);
+    border-left-color: var(--clr-jade-core);
 }
 
-/* ==========================================================================
-   7. COLUMNA DERECHA: SECCIONES DOCUMENTALES Y BLOQUES NORMATIVOS
-   ========================================================================== */
+/* Contenido Documental */
 .legal-content {
     display: flex;
     flex-direction: column;
@@ -264,54 +144,45 @@ body {
 }
 
 .legal-card {
-    background-color: var(--sanitary-white);
-    border: 1px solid var(--hospital-border);
-    border-radius: var(--radius-clinical);
+    background-color: var(--clr-blanco);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-sm);
     padding: 35px;
     box-shadow: var(--shadow-subtle);
-    scroll-margin-top: 120px; /* Evita que el título quede oculto tras el Navbar al hacer click en el índice */
+    scroll-margin-top: 120px; 
 }
 
 .legal-card__title {
     font-family: var(--font-heading);
     font-size: 1.4rem;
     font-weight: 700;
-    color: var(--clinical-graphite);
+    color: var(--clr-carbono);
     padding-bottom: 15px;
-    border-bottom: 1px solid var(--hospital-border);
+    border-bottom: 1px solid var(--clr-border);
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-.legal-card__text p {
+.legal-card__text p, .legal-section__text {
     font-size: 0.95rem;
-    color: var(--clinical-graphite);
+    color: var(--clr-carbono);
     margin-bottom: 18px;
     text-align: justify;
 }
 
-.legal-card__text h3 {
-    font-family: var(--font-accent);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--clinical-graphite);
-    margin: 25px 0 10px 0;
-}
-
-/* Resaltado Clínico de Gobierno de Datos */
 .legal-blockquote {
-    background-color: var(--soft-clinical-bg);
-    border-left: 4px solid var(--organic-emerald);
+    background-color: var(--clr-bg-soft);
+    border-left: 4px solid var(--clr-jade-core);
     padding: 20px;
     margin-bottom: 25px;
     font-size: 0.95rem;
-    color: var(--clinical-graphite);
-    border-radius: 0 var(--radius-clinical) var(--radius-clinical) 0;
+    color: var(--clr-carbono);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 .legal-blockquote strong {
-    color: var(--organic-emerald-hover);
+    color: var(--clr-jade-core-hover);
     display: block;
     margin-bottom: 5px;
     font-family: var(--font-accent);
@@ -320,12 +191,10 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* ==========================================================================
-   8. CENTRO DE GESTIÓN DE CONSENTIMIENTO INFORMADO
-   ========================================================================== */
+/* Formulario de Consentimiento */
 .legal-card__intro {
     font-size: 0.95rem;
-    color: var(--data-slate);
+    color: var(--clr-niebla);
     margin-bottom: 20px;
 }
 
@@ -339,10 +208,10 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background-color: var(--soft-clinical-bg);
+    background-color: var(--clr-bg-soft);
     padding: 20px;
-    border-radius: var(--radius-clinical);
-    border: 1px solid var(--hospital-border);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--clr-border);
 }
 
 .consent-item {
@@ -356,27 +225,25 @@ body {
     margin-top: 5px;
     width: 16px;
     height: 16px;
-    accent-color: var(--organic-emerald);
+    accent-color: var(--clr-jade-core);
     cursor: pointer;
 }
 
 .consent-item__text {
     font-size: 0.9rem;
-    color: var(--clinical-graphite);
+    color: var(--clr-carbono);
     user-select: none;
 }
 
-/* Mensajes de Validación de TypeScript */
 .legal-form__error {
     font-size: 0.8rem;
-    color: var(--color-error);
+    color: var(--clr-error);
     font-weight: 600;
     margin-top: -10px;
     min-height: 16px;
     display: block;
 }
 
-/* Panel de Acciones */
 .form-actions {
     display: flex;
     flex-direction: column;
@@ -390,10 +257,10 @@ body {
 }
 
 .legal-form__submit {
-    background-color: var(--organic-emerald);
-    color: var(--sanitary-white);
+    background-color: var(--clr-jade-core);
+    color: var(--clr-blanco);
     border: none;
-    border-radius: var(--radius-clinical);
+    border-radius: var(--radius-sm);
     padding: 14px 28px;
     font-family: var(--font-heading);
     font-size: 0.9rem;
@@ -405,14 +272,14 @@ body {
 }
 
 .legal-form__submit:hover {
-    background-color: var(--organic-emerald-hover);
+    background-color: var(--clr-jade-core-hover);
 }
 
 .legal-form__btn-secondary {
     background-color: transparent;
-    border: 1px solid var(--hospital-border);
-    color: var(--data-slate);
-    border-radius: var(--radius-clinical);
+    border: 1px solid var(--clr-border);
+    color: var(--clr-niebla);
+    border-radius: var(--radius-sm);
     padding: 14px 28px;
     font-family: var(--font-heading);
     font-size: 0.9rem;
@@ -425,25 +292,23 @@ body {
 
 .legal-form__btn-secondary:hover {
     background-color: rgba(219, 83, 79, 0.05);
-    color: var(--color-error);
-    border-color: var(--color-error);
+    color: var(--clr-error);
+    border-color: var(--clr-error);
 }
 
-/* ==========================================================================
-   9. COMPONENTE COMPARTIDO: PIE DE PÁGINA (FOOTER UNIFICADO)
-   ========================================================================== */
+/* Footer de la página Legal (Manteniendo tu estructura original unificada) */
 .main-footer {
-    background-color: var(--clinical-dark);
-    color: var(--sanitary-white);
+    background-color: var(--clr-dark);
+    color: var(--clr-blanco);
     padding: 60px 0 30px 0;
     margin-top: 60px;
-    border-top: 3px solid var(--organic-emerald);
+    border-top: 3px solid var(--clr-jade-core);
 }
 
 .footer-container {
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 2rem;
 }
 
 .footer-grid {
@@ -464,7 +329,7 @@ body {
     font-size: 1.4rem;
     font-weight: 700;
     letter-spacing: 1px;
-    color: var(--sanitary-white);
+    color: var(--clr-blanco);
     display: block;
     margin-bottom: 12px;
 }
@@ -480,7 +345,7 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--organic-emerald);
+    color: var(--clr-jade-core);
     margin-bottom: 20px;
 }
 
@@ -489,6 +354,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    margin: 0;
+    padding: 0;
 }
 
 .footer-links__list a {
@@ -499,7 +366,7 @@ body {
 }
 
 .footer-links__list a:hover {
-    color: var(--sanitary-white);
+    color: var(--clr-blanco);
     padding-left: 4px;
 }
 
@@ -518,59 +385,4 @@ body {
 .footer-bottom__copy {
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.5);
-}
-
-/* ==========================================================================
-   10. RESPONSIVE DESIGN MEDIA QUERIES
-   ========================================================================== */
-@media (max-width: 1024px) {
-    .mobile-nav-toggle {
-        display: flex; /* Se descubre el botón hamburguesa */
-    }
-
-    .nav-menu {
-        position: fixed;
-        top: 90px;
-        left: -100%; /* Oculto lateralmente */
-        width: 100%;
-        height: calc(100vh - 90px);
-        background-color: var(--sanitary-white);
-        border-top: 1px solid var(--hospital-border);
-        transition: var(--transition-bezier);
-        padding: 40px;
-        z-index: 1050;
-    }
-
-    /* Coordinación con legal.ts */
-    .nav-menu.nav-active {
-        left: 0;
-    }
-
-    .nav-menu__list {
-        flex-direction: column;
-        gap: 30px;
-        align-items: flex-start;
-    }
-
-    .nav-menu__link {
-        font-size: 1.1rem;
-        display: block;
-        width: 100%;
-    }
-    
-    /* Transformación a cruz controlada por la clase activa de TS */
-    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(2) {
-        opacity: 0;
-    }
-    .mobile-nav-toggle.toggle-active .mobile-nav-toggle__bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
 }
