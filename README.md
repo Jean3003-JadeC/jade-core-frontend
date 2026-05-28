@@ -6,6 +6,17 @@ Este repositorio constituye la capa de presentación (Frontend) que orquesta la 
 
 ---
 
+## 🌐 Demo del Proyecto
+¡Puedes ver la aplicación en funcionamiento en tiempo real!
+
+<div align="center">
+  <a href="https://TU_PAGINA_WEB_OFICIAL.com">
+    <img src="https://img.shields.io/badge/Visitar_Sitio_Web-000000?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Live Demo" />
+  </a>
+</div>
+
+---
+
 ## 🚀 Propuesta de Valor
 Jade Core materializa la **intervención clínica basada en evidencia** junto con la **automatización tecnológica avanzada**. Este frontend refleja una estética minimalista, profesional y "clínica", optimizada para una experiencia de usuario de alto rendimiento.
 
@@ -20,13 +31,13 @@ El proyecto está configurado con **Vite** para un desarrollo ágil y eficiente:
 ## 📂 Estructura del Proyecto
 ```text
 jade-core-frontend/
-├── public/                 # Assets estáticos
+├── public/               # Assets estáticos
 ├── src/
-│   ├── pages/              # Vistas de la aplicación
-│   ├── scripts/            # Lógica en TypeScript
-│   └── styles/             # Hojas de estilo
-├── main.ts                 # Punto de entrada principal
-├── index.html              # Landing page
-├── package.json            # Dependencias del proyecto
-├── tsconfig.json           # Configuración de TypeScript
-└── vite.config.ts          # Configuración del empaquetador Vite
+│   ├── pages/            # Vistas de la aplicación
+│   ├── scripts/          # Lógica en TypeScript
+│   └── styles/           # Hojas de estilo
+├── main.ts               # Punto de entrada principal
+├── index.html            # Landing page
+├── package.json          # Dependencias del proyecto
+├── tsconfig.json         # Configuración de TypeScript
+└── vite.config.ts        # Configuración del empaquetador Vite
